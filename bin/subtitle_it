@@ -14,22 +14,29 @@ require 'optparse'
 # NOTE: the option -p/--path= is given as an example, and should probably be replaced in your application.
 
 OPTIONS = {
-  :path     => '~'
+ # :path     => '~',
+  :delay    => nil
 }
 MANDATORY_OPTIONS = %w(  )
 
 parser = OptionParser.new do |opts|
   opts.banner = <<BANNER
-This application is wonderful because...
+SubtitleIt - Convert and Create subtitles.
 
-Usage: #{File.basename($0)} [options]
+Usage: #{File.basename($0)} [options] filein [fileout]
 
 Options are:
+
+  -d N --delay N  Fix the delay of the file.
 BANNER
   opts.separator ""
-  opts.on("-p", "--path=PATH", String,
-          "The root path for selecting files",
-          "Default: ~") { |OPTIONS[:path]| }
+  # opts.on("-p", "--path=PATH", String,
+  #         "The root path for selecting files",
+  #         "Default: ~") { |OPTIONS[:path]| }
+          
+  opts.on("-d", "--delay=DELAY", Float,
+          "Delay to add/remove") { |OPTIONS[:delay]| }
+          
   opts.on("-h", "--help",
           "Show this help message.") { puts opts; exit }
   opts.parse!(ARGV)
@@ -41,4 +48,28 @@ end
 
 path = OPTIONS[:path]
 
-# do stuff
+return if ARGV.empty?
+
+filein = ARGV[0].split('.')
+fileout == ARGV[1] ? ARGV[1] : ARGV[0]
+
+if OPTIONS[:delay]
+  return unless filein[1] == 'srt'  
+  ARGV[1] ||= ARGV[0] + "_new"
+  SubtitleIt.srt_delay(ARGV[0],ARGV[1])  
+else
+  sub = case filein[1]
+  when 'yml' then Ymlsub.new(filein[0], fileout)
+  when 'sub' then Subrip.new(filein[0], fileout)
+  when 'srt' then puts "If you want to adjust delay you should use -d VALUE"
+  else
+    puts "Dunno what to do with this file!"
+  end
+    
+  File.open("#{sub.fileout}.srt", 'w') {|f| f.write(sub.to_srt) }
+  
+end  
+    
+    
+    
+    

@@ -1,5 +1,0 @@
-module SubtitleIt
-  
-  
-  
-end
