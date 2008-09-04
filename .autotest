@@ -1,0 +1,19 @@
+# #
+# SMS AUTOTEST
+# 
+#require 'autotest/growl'
+#require 'autotest/html_report'
+# require 'autotest/kdenotify'
+require 'autotest/menu'
+#require 'autotest/pretty'
+require 'autotest/redgreen'
+# require 'autotest/snarl'
+require 'autotest/timestamp'
+
+
+class Autotest   
+  Autotest.add_hook :initialize do |at|
+    %w{.svn .hg .git .DS_store}.each {|exception|at.add_exception(exception)}
+  end 
+end
+
