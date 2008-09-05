@@ -1,0 +1,8 @@
+header:
+  title: godfather
+  author: warlley
+  version: 1.0
+  
+lines:
+  - ['00:01:00', '00:02:00', '-- GODFATHER --']
+  - ['00:03:00', '00:02:00', 'a whatever text']
