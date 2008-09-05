@@ -2,7 +2,7 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe Subline do
   before(:each) do
-    @sub =  Subline.new('03:23:41','3',"Astalavista, baby...")
+    @sub =  Subline.new('02:20:02','4',"Astalavista, baby...")
   end
   
   it "should initialize #{name}" do
@@ -10,12 +10,12 @@ describe Subline do
   end
   
   it "should have a nice date on" do
-    @sub.text_on.sec.should eql(41)
-    @sub.text_on.min.should eql(23)    
+    @sub.text_on.sec.should eql(2)
+    @sub.text_on.min.should eql(20)    
   end
   
-  it "should have minutes" do
-    @sub.text_on.min.should eql(23)
+  it "should have the seconds added from the first time" do
+    @sub.text_off.sec.should eql(44)
   end
 end
 

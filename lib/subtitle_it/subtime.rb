@@ -1,9 +1,9 @@
 module SubtitleIt
   class Subtime
-    attr_writer :sec
+    attr_accessor :sec_raw
     
     def initialize(str)      
-      @sec = parse_subtime(str)    
+      @sec_raw = parse_subtime(str)    
     end
         
     def parse_subtime(str)
@@ -22,24 +22,24 @@ module SubtitleIt
     end
     
     def hour
-      @sec / 3600
+      @sec_raw / 3600
     end
     
     def min
-      m = @sec / 60
+      m = @sec_raw / 60
       m % 60
     end
     
     def sec
-      @sec % 60
+      @sec_raw % 60
     end
     
     def +(other)
-       @sec += other.sec# : self.sec + other
+       @sec_raw = other.sec_raw 
     end
     
     def <=>(other)
-      self.sec <=> other.sec
+      self.sec_raw <=> other.sec_raw
     end
     include Comparable
   end

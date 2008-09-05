@@ -18,22 +18,14 @@ describe Subtime do
   end
 end
 
-describe Subtime,"2" do
-  before(:each) do
-    @subtime =  Subtime.new('11:22:33')
-  end
-  
+describe Subtime,"22" do
   it "should convert in hour" do
-    @subtime.hour.should eql(11)
+    @subtime =  Subtime.new('11:22:33')
+    @subtime.hour.should eql(11)    
+    @subtime.min.should eql(22)    
+    @subtime.sec.should eql(33)    
   end
-  
-  it "should convert in minutes" do
-    @subtime.min.should eql(22)
-  end
-  
-  it "should convert in seconds" do
-    @subtime.sec.should eql(33)
-  end
+
 end
 
 describe Subtime, ".other formats" do
@@ -48,6 +40,7 @@ describe Subtime, ".other formats" do
   
   it "should parse dot" do
     @subtime = Subtime.new('3')
+    @subtime.hour.should eql(0)
   end
   
   it "should parse dot" do
