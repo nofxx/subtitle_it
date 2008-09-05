@@ -59,10 +59,11 @@ if OPTIONS[:delay]
   ARGV[1] ||= ARGV[0] + "_new"
   SubtitleIt.srt_delay(ARGV[0],ARGV[1])  
 else
-  sub = case filein[1]
-  when 'yml' then Ymlsub.new(content, filein[0], fileout)
-  when 'sub' then Subrip.new(content, filein[0], fileout)
-  when 'srt' then puts "If you want to adjust delay you should use -d VALUE"
+  sub = Sub.new(content, filein.last) 
+  out = case filein.last
+  when 'yml' then sub.to_yml
+  when 'sub' then sub.to_sub
+  when 'srt' then sub.to_srt
   else
     puts "Dunno what to do with this file!"
   end

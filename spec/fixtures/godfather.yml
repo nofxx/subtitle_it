@@ -1,8 +1,11 @@
 header:
-  title: godfather
-  author: warlley
-  version: 1.0
+  title: sincity
+  authors: warlley, nofxx
+  version: 1.1
   
 lines:
-  - ['00:01:00', '00:02:00', '-- GODFATHER --']
-  - ['00:03:00', '00:02:00', 'a whatever text']
+  - ['00:05:26', '00:05:28', 'worth killing for...']
+  - ['00:06:00', '00:06:03', 'worth dying for...']
+  - ['00:07:00', '00:07:03', 'worth going to the hell for...']
+  
+  
