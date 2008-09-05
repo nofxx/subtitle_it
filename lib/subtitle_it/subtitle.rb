@@ -1,5 +1,14 @@
+require 'subtitle_it/formats/srt'
+require 'subtitle_it/formats/sub'
+require 'subtitle_it/formats/yml'
+require 'subtitle_it/formats/pseudo'
+
 module SubtitleIt
+  include Formats
+  
   class Subtitle
+
+    
     attr_reader :raw, :format, :lines
   
     def initialize(raw,format,framerate=23.976)
@@ -21,4 +30,6 @@ module SubtitleIt
     end
   
   end
+  
+
 end

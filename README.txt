@@ -1,32 +1,42 @@
-= subtitle_it
+= Subtitle It
 
-* FIX (url)
+Ruby tool to work with subtitle files.
 
-== DESCRIPTION:
 
-FIX (describe your package)
+== FEATURES:
 
-== FEATURES/PROBLEMS:
+* Converts to and from: yml/srt/sub/pseudo nice subtitle code
+* Fixes delays. (SrtResync)
 
-* FIX (list of features or problems)
 
 == SYNOPSIS:
 
-  FIX (code sample of usage)
+Bash tool:
+
+Will convert a srt to sub:
+  subtitle_it in.srt out.sub
+
+Will add a delay of 1 minute:
+  subtitle_it -d 60 in.srt
+  
 
 == REQUIREMENTS:
 
-* FIX (list of requirements)
+Rubygems:
+
+* chronic
+* yaml
+
 
 == INSTALL:
 
-* FIX (sudo gem install, anything else)
+* sudo gem install SubtitleIt
 
 == LICENSE:
 
 (The MIT License)
 
-Copyright (c) 2008 FIXME full name
+Copyright (c) 2008 Warlley Rezende, Marcos Piccinini
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the

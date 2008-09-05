@@ -1,6 +1,6 @@
 module SubtitleIt
-  class Sub
-    
+  module Formats
+        
     def parse_sub
     end
         

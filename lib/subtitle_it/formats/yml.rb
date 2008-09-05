@@ -1,5 +1,7 @@
+require 'yaml'
+
 module SubtitleIt
-  class Subtitle
+  module Formats
     
     def parse_yml
       @yaml = YAML::load(@raw)
