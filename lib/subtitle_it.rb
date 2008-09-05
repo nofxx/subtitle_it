@@ -1,5 +1,7 @@
 $:.unshift(File.dirname(__FILE__)) unless
-  $:.include?(File.dirname(__FILE__)) || $:.include?(File.expand_path(File.dirname(__FILE__)))
+$:.include?(File.dirname(__FILE__)) || $:.include?(File.expand_path(File.dirname(__FILE__)))
+
+require 'yaml'
 
 module SubtitleIt
   include Delay
@@ -7,20 +9,32 @@ module SubtitleIt
   class Sub
     attr_reader :filename
     
-    def initialize(inn,out)                  
+    def initialize(inn,out)
       @filename = inn
-      @fileout = out      
+      @fileout = out
     end
     
-
+    private
     
+    def parse_yml
+      @yaml_file = File.open(inn) { |yf| YAML::load(yl) }
+      
+      @title = @yaml_file['header']['title']
+      @author = @yaml_file['header']['author']
+      @version = @yaml_file['header']['version']
+    end
+        
   end
   
-
+  class SubLine
+    attr_accessor(:text_on, :text_off, :text)
+    
+    def initialize(text_on, text_off, text)
+      @text_on = text_on; @text_off = text_off; @text = text
+    end
+  end
   
   class Srt < Sub
-    
-    
     
   end
 
