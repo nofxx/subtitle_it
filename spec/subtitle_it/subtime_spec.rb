@@ -19,13 +19,12 @@ describe Subtime do
 end
 
 describe Subtime,"22" do
-  it "should convert in hour" do
+  it "should convert a big time" do
     @subtime =  Subtime.new('11:22:33')
     @subtime.hour.should eql(11)    
     @subtime.min.should eql(22)    
     @subtime.sec.should eql(33)    
   end
-
 end
 
 describe Subtime, ".other formats" do
