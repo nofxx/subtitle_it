@@ -5,7 +5,7 @@ module SubtitleIt
     
     def initialize(text_on, text_off, text)          
       @text_on, @text_off = filter(text_on, text_off)
-      @text_off = @text_on + @text_off.sec if @text_off < @text_on
+      @text_off.sec += @text_on.sec if @text_off < @text_on
       @text = text
     end
     
