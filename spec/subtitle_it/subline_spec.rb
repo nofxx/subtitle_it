@@ -3,11 +3,11 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 describe Subline do
 #  before(:each) do
     @sublines = {
-     :srt =>  Subline.new('00:03:01','00:03:03',"Astalavista, baby..."),
-     :yml =>    Subline.new('00:03:01','00:03:03',"Astalavista, baby..."),
-     :pseudo => Subline.new('03:01','03:03',"Astalavista, baby..."),
-     :pseudo_nice => Subline.new('03:01','3:03',"Astalavista, baby..."),     
-     :pseudo_cool => Subline.new('03:01','3',"Astalavista, baby...")
+     :srt =>  Subline.new('00:00:03','00:03:03',"Astalavista, baby..."),
+     :yml =>    Subline.new('00:00:03','00:03:03',"Astalavista, baby..."),
+     :pseudo => Subline.new('00:03','03:03',"Astalavista, baby..."),
+     :pseudo_nice => Subline.new('00:03','3:03',"Astalavista, baby..."),     
+     :pseudo_cool => Subline.new('00:03','3',"Astalavista, baby...")
       #]                  
     }
  # end
@@ -19,12 +19,12 @@ describe Subline do
   end
   
   it "should have a nice date on and off" do
-   sub.text_on.should be_kind_of(Time) 
-    sub.text_off.should be_kind_of(Time) 
+   sub.text_on.should be_kind_of(Subtime) 
+    sub.text_off.should be_kind_of(Subtime) 
   end
   
   it "should have minutes" do
-    sub.text_on.min.should eql(3)
+    sub.text_on.sec.should eql(3)
   end
   
 end

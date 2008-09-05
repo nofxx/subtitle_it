@@ -5,6 +5,7 @@ require 'rubygems'
 
 
 require 'subtitle_it/delay'
+require 'subtitle_it/subtime'
 require 'subtitle_it/subline'
 require 'subtitle_it/subtitle'
 
