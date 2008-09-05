@@ -22,6 +22,8 @@ module SubtitleIt
       @title = @yaml_file['header']['title']
       @author = @yaml_file['header']['author']
       @version = @yaml_file['header']['version']
+      
+      @text = @yaml_file['content'].collect { |l| SubLine.new(l[0], l[1], l[3]) }
     end
         
   end
