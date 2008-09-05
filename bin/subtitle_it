@@ -52,6 +52,7 @@ return if ARGV.empty?
 
 filein = ARGV[0].split('.')
 fileout == ARGV[1] ? ARGV[1] : ARGV[0]
+content = File.open(ARGV[0], 'r')
 
 if OPTIONS[:delay]
   return unless filein[1] == 'srt'  
@@ -59,8 +60,8 @@ if OPTIONS[:delay]
   SubtitleIt.srt_delay(ARGV[0],ARGV[1])  
 else
   sub = case filein[1]
-  when 'yml' then Ymlsub.new(filein[0], fileout)
-  when 'sub' then Subrip.new(filein[0], fileout)
+  when 'yml' then Ymlsub.new(content, filein[0], fileout)
+  when 'sub' then Subrip.new(content, filein[0], fileout)
   when 'srt' then puts "If you want to adjust delay you should use -d VALUE"
   else
     puts "Dunno what to do with this file!"
