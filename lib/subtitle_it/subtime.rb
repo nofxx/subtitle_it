@@ -7,7 +7,7 @@ module SubtitleIt
     end
         
     def parse_subtime(str)
-      return str if str.instance_of?(Fixnum)
+      str = str.to_s if str.respond_to?(:to_s)
       values = str.split(/:|,|\./).map { |s| s.to_i }
       case values.size
       when 1
@@ -26,8 +26,7 @@ module SubtitleIt
     end
     
     def min
-      m = @sec_raw / 60
-      m % 60
+      (@sec_raw / 60) % 60
     end
     
     def sec
@@ -35,7 +34,7 @@ module SubtitleIt
     end
     
     def +(other)
-       @sec_raw = other.sec_raw 
+       Subtime.new(self.sec_raw + other.sec_raw)
     end
     
     def <=>(other)

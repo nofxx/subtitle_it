@@ -15,7 +15,7 @@ describe Subline do
   end
   
   it "should have the seconds added from the first time" do
-    @sub.text_off.sec.should eql(44)
+    @sub.text_off.sec.should eql(6)
   end
 end
 
