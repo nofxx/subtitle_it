@@ -2,19 +2,17 @@ module SubtitleIt
   module Formats
         
     def parse_sub
-      sub = []#s = @raw.dup.readline#.to_s#.gsub("|","\n")
-      @raw.readlines.each do |l|
+      @raw.readlines.inject([]) do |i,l|
         text_on, text_off, text = l.gsub(/\{/,'').split("}")        
-        sub << Subline.new(text_on.to_i, text_off.to_i, text)
+        i << Subline.new(text_on.to_i, text_off.to_i, text.chomp)
       end
-      sub
     end
         
     def to_sub
       out = ""
       @lines.each do |l|
-        start = l.text_on.to_i / @framerate
-        stop = l.text_off.to_i / @framerate
+        start = l.text_on.to_i / @framerate / 100
+        stop = l.text_off.to_i / @framerate / 100
         out << "{%d}{%d}%s" % [start, stop,l.text.gsub("\n", "|")]
       end
       out

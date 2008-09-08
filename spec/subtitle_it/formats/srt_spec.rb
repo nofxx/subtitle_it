@@ -1,6 +1,21 @@
 require File.expand_path(File.dirname(__FILE__) + '/../../spec_helper')
 
 describe Formats, ".srt" do
+  describe "In" do
+    before(:each) do
+      srt = File.open(File.expand_path(File.dirname(__FILE__) + '/../../fixtures/godfather.srt')) 
+      @srt = Subtitle.new(srt,'srt') 
+    end  
+
+    it "should parse the sub to an array" do
+      @srt.lines.should be_instance_of(Array)
+    end
+    
+    it "should have N lines" do
+      @srt.should have(543).lines      
+    end
+  end
+    
   describe "Out" do
        
     before(:each) do

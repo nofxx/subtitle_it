@@ -22,7 +22,7 @@ describe Subtime do
   end 
   
   it "should have ms" do
-    @subtime.ds.should eql(4)        
+    @subtime.ms.should eql(400)        
   end
   
   it "should print nicely" do
@@ -30,17 +30,17 @@ describe Subtime do
   end
   
   it "should print nicely" do
-    @subtime.to_i.should eql(37234)
+    @subtime.to_i.should eql(3723400)
   end
 end
 
 describe Subtime,"22" do
   it "should convert a big time" do
-    @subtime =  Subtime.new('11:22:33.7')
+    @subtime =  Subtime.new('11:22:33.742')
     @subtime.hrs.should eql(11)    
     @subtime.min.should eql(22)    
     @subtime.sec.should eql(33)    
-    @subtime.ds.should eql(7)        
+    @subtime.ms.should eql(742)        
   end
   
   it "should print nicely" do

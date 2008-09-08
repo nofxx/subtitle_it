@@ -9,7 +9,7 @@ describe Formats, ".sub" do
     end  
 
     it "should parse the sub to an array" do
-      @sub.lines.should be_instance_of(Array)#eql("{26}{28}worth killing for...{0}{3}worth dying for...{0}{3}worth going to the hell for...")
+      @sub.lines.should be_instance_of(Array)
     end
     
     it "should have N lines" do
@@ -17,16 +17,20 @@ describe Formats, ".sub" do
     end
     
     it "should have a nic text on" do
-      @sub.lines[0].text_on.to_s.should eql('00:01:42.500')
+      @sub.lines[0].text_on.to_s.should eql('00:00:01.025')
     end
     
     it "should have a nice text out" do
-      @sub.lines[0].text_off.to_s.should eql('00:01:51.500')
+      @sub.lines[0].text_off.to_s.should eql('00:00:01.115')
     end
     
     it "should parse the sentece correctly" do
-      @sub.lines[0].text.should eql("You always say that.|The same thing every time.\n")
+      @sub.lines[0].text.should eql("You always say that.|The same thing every time.")
     end    
+    
+    it "should parse the sentece correctly" do
+      @sub.lines[2020].text.should eql("I'm tryin' real hard...")
+    end
   end
   
   

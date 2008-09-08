@@ -1,26 +1,24 @@
 module SubtitleIt
   class Subtime
-    attr_accessor :hrs, :min, :sec, :ds
-    # 10e–1 second =>	ds =>	decisecond
-    # 11ds => 00:00:01.100
-    # 1ds => 00:00:00.100
-    # 611ds => 00:01:01.100
+    attr_accessor :hrs, :min, :sec, :ms
         
     def initialize(sym)  
-      @hrs = @min = @sec = @ds = 0    
+      @hrs = @min = @sec = @ms = 0    
       parse_subtime(sym)    
     end
         
     def parse_subtime(sym)
       if sym.kind_of?(Numeric)
-        @hrs = sym / 36000
-        @min = sym / 600 % 600
-        @sec = sym / 10 % 60
-        @ds = sym % 10
+        @hrs = sym / 3600000
+        @min = sym / 60000 % 600
+        @sec = sym / 1000 % 60
+        @ms = sym % 1000
         return
       end
-      v = sym.split(/\.|,/)
-      @ds = v[1].to_i.reduce if v[1]      
+      v = sym.split(/\.|\,/)
+      if ms = v[1]  
+        @ms =  (("0.%d" % ms.to_i).to_f * 1000).to_i
+      end
       v = v[0].split(/:/).map { |s| s.to_i }      
       case v.size
       when 1
@@ -35,13 +33,12 @@ module SubtitleIt
     end
        
     def to_s
-      "%02d:%02d:%02d.%s" % [@hrs, @min, @sec, ("%03d" % @ds).reverse ]
+      "%02d:%02d:%02d.%s" % [@hrs, @min, @sec, ("%03d" % @ms) ]
     end
     
     def to_i
-      (@hrs * 3600 + @min * 60 + @sec) * 10 + @ds
+      (@hrs * 3600 + @min * 60 + @sec) * 1000 + @ms
     end
-  
     
     def +(other)
        Subtime.new(self.to_i + other.to_i)
