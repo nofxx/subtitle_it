@@ -1,10 +1,11 @@
 require File.expand_path(File.dirname(__FILE__) + '/../../spec_helper')
 
 describe Formats, ".srt" do
+  include SubFixtures
   describe "In" do
+    
     before(:each) do
-      srt = File.open(File.expand_path(File.dirname(__FILE__) + '/../../fixtures/godfather.srt')) 
-      @srt = Subtitle.new(srt,'srt') 
+      @srt = Subtitle.new(srt_fixture,'srt') 
     end  
 
     it "should parse the sub to an array" do
@@ -14,17 +15,28 @@ describe Formats, ".srt" do
     it "should have N lines" do
       @srt.should have(543).lines      
     end
+    
+    it "should parse time of" do
+      @srt.lines[0].text_on.to_s.should eql("00:01:43.680")
+    end
+    
+    it "should parse time of" do
+      @srt.lines[0].text_off.to_s.should eql("00:01:45.557")
+    end
+    
+    it "should parse text" do
+      @srt.lines[0].text.should eql("My dear children,")
+    end
   end
     
-  describe "Out" do
+  describe "Out!" do
        
     before(:each) do
-      yml = File.open(File.expand_path(File.dirname(__FILE__) + '/../../fixtures/sincity.yml')) 
-      @sub = Subtitle.new(yml,'yml')    
+      @sub = Subtitle.new(yml_fixture,'yml')    
     end  
   
     it "should dump the object as a SRT" do
       @sub.to_srt.should eql("0\n00:05:26.500 --> 00:05:28.500worth killing for...1\n00:06:00.400 --> 00:06:03.400worth dying for...2\n00:07:00.300 --> 00:07:03.300worth going to the hell for...")
     end
-  end  
+  end
 end

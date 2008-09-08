@@ -1,11 +1,11 @@
 require File.expand_path(File.dirname(__FILE__) + '/../../spec_helper')
 
 describe Formats, ".sub" do
+  include SubFixtures
   describe "Parse" do
-
+  
     before(:each) do
-      sub = File.open(File.expand_path(File.dirname(__FILE__) + '/../../fixtures/pulpfiction.sub')) 
-      @sub = Subtitle.new(sub,'sub') 
+      @sub = Subtitle.new(sub_fixture,'sub') 
     end  
 
     it "should parse the sub to an array" do
@@ -33,12 +33,10 @@ describe Formats, ".sub" do
     end
   end
   
-  
   describe "Out" do
 
     before(:each) do
-      yml = File.open(File.expand_path(File.dirname(__FILE__) + '/../../fixtures/sincity.yml')) 
-      @sub = Subtitle.new(yml,'yml')    
+      @sub = Subtitle.new(yml_fixture,'yml')    
     end  
 
     it "should dump the object as a SUB" do

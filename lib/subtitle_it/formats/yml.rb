@@ -1,8 +1,7 @@
 require 'yaml'
 
 module SubtitleIt
-  module Formats
-    
+  module Formats    
     def parse_yml
       @yaml = YAML::load(@raw)
       header = @yaml.delete('header')

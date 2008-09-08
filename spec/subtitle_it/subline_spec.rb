@@ -27,6 +27,4 @@ describe Subline, ".failures" do
       Subline.new('00:03:01','00:02:03',"Astalavista, baby...") 
     end.should_not raise_error 
   end
-  
-  
 end

@@ -22,7 +22,6 @@ module SubtitleIt
     end
     
     private
-    
     def lines=(lines)
       @lines = lines
     end  

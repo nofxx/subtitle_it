@@ -1,6 +1,5 @@
 module SubtitleIt
-  module Formats
-        
+  module Formats        
     def parse_sub
       @raw.readlines.inject([]) do |i,l|
         text_on, text_off, text = l.gsub(/\{/,'').split("}")        

@@ -37,7 +37,7 @@ module SubtitleIt
     end
     
     def to_i
-      (@hrs * 3600 + @min * 60 + @sec) * 1000 + @ms
+      to_s.to_msec
     end
     
     def +(other)
