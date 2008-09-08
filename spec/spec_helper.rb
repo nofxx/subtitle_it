@@ -26,4 +26,8 @@ module SubFixtures
   def rsb_fixture
     File.open(File.expand_path(File.dirname(__FILE__) + '/fixtures/pseudo.rsb')) 
   end 
+  
+  def xml_fixture
+    File.open(File.expand_path(File.dirname(__FILE__) + '/fixtures/movie.xml')) 
+  end  
 end

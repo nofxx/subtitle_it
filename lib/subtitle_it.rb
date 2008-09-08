@@ -8,9 +8,6 @@ require 'subtitle_it/subline'
 require 'subtitle_it/subtitle'
 
 module SubtitleIt
- def a
-   'hhh'
- end
 end
 
 class Numeric

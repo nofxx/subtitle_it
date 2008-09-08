@@ -11,7 +11,7 @@
 module SubtitleIt
   module Formats        
     def parse_sub
-      @raw.readlines.inject([]) do |i,l|
+      @raw.to_a.inject([]) do |i,l|
   			line_data = l.scan(/^\{([0-9]{1,})\}\{([0-9]{1,})\}(.+)$/)
   			line_data = line_data.at 0
   			text_on, text_off, text = line_data

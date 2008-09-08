@@ -1,0 +1,46 @@
+require File.expand_path(File.dirname(__FILE__) + '/../../spec_helper')
+
+describe Formats, ".xml" do
+  include SubFixtures
+  describe "In" do    
+    before(:each) do    
+      @xml = Subtitle.new(xml_fixture,'xml')    
+    end  
+        
+    it "should parse the sub to an array" do
+      @xml.lines.should be_instance_of(Array)
+    end
+    
+    it "should have N lines" do
+      @xml.should have(13).lines      
+    end
+    
+    it "should parse time of" do
+      @xml.lines[0].text_on.to_s.should eql("00:00:00.000")
+      @xml.lines[10].text_on.to_s.should eql("00:00:25.520")      
+    end
+    
+    it "should parse time of" do
+      @xml.lines[0].text_off.to_s.should eql("00:00:03.700")
+      @xml.lines[10].text_off.to_s.should eql("00:00:27.520")        
+    end
+    
+    it "should parse text" do
+      @xml.lines[0].text.should eql("I had just joined <span tts:fontSize=\"+2\" tts:fontFamily=\"monospaceSansSerif,proportionalSerif,TheOther\">Macromedia</span> in 1996,")
+    end    
+  end  
+  
+  describe "Out" do    
+    before(:each) do    
+      @sub = Subtitle.new(yml_fixture,'yml')    
+    end  
+        
+    it "should parse the sub to an array" do
+      @sub.to_xml.should be_instance_of(String)
+    end
+    
+    it "should equal..." do
+      @sub.to_xml.should eql("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<tt xml:lang=\"en\" xmlns=\"http://www.w3.org/2006/04/ttaf1\"  xmlns:tts=\"http://www.w3.org/2006/04/ttaf1#styling\">\n  <head>\n    <styling>\n      \n    </styling>\n  </head>\n  <body>\n    <div xml:lang=\"en\">\n      <p begin=\"00:05:26.500\" dur=\"00:00:02.000\">worth killing for...</p><p begin=\"00:06:00.400\" dur=\"00:00:03.000\">worth dying for...</p><p begin=\"00:07:00.300\" dur=\"00:00:03.000\">worth going to the hell for...</p><p begin=\"00:07:00.300\" dur=\"00:00:03.000\">worth going a | line...</p>                \n    </div>\n  </body>\n</tt>\n")
+    end
+  end
+end

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <tt xml:lang="en" xmlns="http://www.w3.org/2006/04/ttaf1"  xmlns:tts="http://www.w3.org/2006/04/ttaf1#styling">
+  <head>
+   <styling>
+      <style id="1" tts:textAlign="right"/>
+      <style id="2" tts:color="transparent"/>
+      <style id="3" style="2" tts:backgroundColor="white"/>
+      <style id="4" style="2 3" tts:fontSize="20"/>
+   </styling>
+  </head>
+  <body>
+   <div xml:lang="en">
+    <p begin="00:00:00.00" dur="00:00:03.07">I had just joined <span tts:fontFamily="monospaceSansSerif,proportionalSerif,TheOther"tts:fontSize="+2">Macromedia</span> in 1996,</p>
+    <p begin="00:00:03.07" dur="00:00:03.35">and we were trying to figure out what to do about the internet.</p>
+    <p begin="00:00:06.42" dur="00:00:03.15">And the company was in dire straights at the time.</p>
+    <p begin="00:00:09.57" dur="00:00:01.45">We were a CD-ROM authoring company,</p>
+    <p begin="00:00:11.42" dur="00:00:02.00">and the CD-ROM business was going away.</p>
+    <p begin="00:00:13.57" dur="00:00:02.50">One of the technologies I remember seeing was Flash.</p>
+    <p begin="00:00:16.47" dur="00:00:02.00">At the time, it was called <span tts:fontWeight="bold" tts:color="#ccc333">FutureSplash</span>.</p>
+    <p begin="00:00:18.50" dur="00:00:01.20">So this is where Flash got its start.</p>
+    <p begin="00:00:20.10" dur="00:00:03.00">This is smart sketch running on the <span tts:fontStyle="italic">EU-pin computer</span>,</p>
+    <p begin="00:00:23.52" dur="00:00:02.00">which was the first product that FutureWave did.</p>
+    <p begin="00:00:25.52" dur="00:00:02.00">So our vision for this product was to</p>
+    <p begin="00:00:27.52" dur="00:00:01.10">make drawing on the computer</p>
+    <p begin="00:00:29.02" dur="00:00:01.30" style="1">as <span tts:color="#ccc333">easy</span> as drawing on paper.</p>
+    </div>
+  </body>
+</tt>

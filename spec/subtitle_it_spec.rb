@@ -4,7 +4,8 @@ require File.dirname(__FILE__) + '/spec_helper.rb'
 # http://rspec.info/
 describe SubtitleIt do
   
-  it "should have lots of tests" do
-    pending "Be sure to write your specs"    
+  it "should instantiate " do
+    @sub = Subtitle.new("{12}{30}hey hey heypending", "sub")
+    @sub.should be_instance_of(Subtitle)
   end
 end

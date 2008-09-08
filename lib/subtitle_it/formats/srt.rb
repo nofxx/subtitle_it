@@ -11,7 +11,7 @@
 module SubtitleIt
   module Formats    
     def parse_srt 
-      @raw.read.split(/\n\n/).inject([]) do |final,line|
+      @raw.split(/\n\n/).inject([]) do |final,line|
         line = line.split(/\n/)
         line.delete_at(0)
         text_on,text_off = line[0].split('-->').map { |t| t.strip }

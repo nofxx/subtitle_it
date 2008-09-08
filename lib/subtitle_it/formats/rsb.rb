@@ -10,7 +10,7 @@
 module SubtitleIt
   module Formats
     def parse_rsb
-      inn = @raw.readlines
+      inn = @raw.to_a
       @title = inn.delete_at(0).split(':')[1] 
       @authors = inn.delete_at(0).split(':')[1] 
       @version = inn.delete_at(0).split(':')[1] 

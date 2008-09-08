@@ -5,13 +5,16 @@ Ruby tool to work with subtitle files.
 
 == FEATURES:
 
-* Converts to and from: yml/srt/sub/rsb nice subtitle code
+* Converts to and from: XML, SRT, SUB, YML, RSB and ASS
 * Fixes delays. (SrtResync)
 
 TODO:
 
+* Timed Text (TT) XML Format 
 * Compatibility with "sube" (http://github.com/vic/sube)
 * Download subtitles. (http://github.com/johanlunds/downsub/tree)
+* ASS Format (Yes, for the funny of it...)
+
 
 == SYNOPSIS:
 
@@ -40,6 +43,12 @@ It`s just a easy way, proof of concept to edit subtitles. Here is what it looks 
 MM:SS => N == TEXT | NEWLINE
 
 Create a template to check it out. 
+
+
+== OTHER TOOLS:
+
+Aegisub: http://www.malakith.net/aegiwiki/Main_Page
+
 
 == LICENSE:
 

@@ -1,0 +1,163 @@
+-- !ruby/object:SubtitleIt::Subtitle 
+format: xml
+fps: 23.976
+lines: 
+- !ruby/object:SubtitleIt::Subline 
+  text: I had just joined <span tts:fontSize="+2" tts:fontFamily="monospaceSansSerif,proportionalSerif,TheOther">Macromedia</span> in 1996,
+  text_off: !ruby/object:SubtitleIt::Subtime 
+    hrs: 0
+    min: 0
+    ms: 700
+    sec: 3
+  text_on: !ruby/object:SubtitleIt::Subtime 
+    hrs: 0
+    min: 0
+    ms: 0
+    sec: 0
+- !ruby/object:SubtitleIt::Subline 
+  text: and we were trying to figure out what to do about the internet.
+  text_off: !ruby/object:SubtitleIt::Subtime 
+    hrs: 0
+    min: 0
+    ms: 50
+    sec: 7
+  text_on: !ruby/object:SubtitleIt::Subtime 
+    hrs: 0
+    min: 0
+    ms: 700
+    sec: 3
+- !ruby/object:SubtitleIt::Subline 
+  text: And the company was in dire straights at the time.
+  text_off: !ruby/object:SubtitleIt::Subtime 
+    hrs: 0
+    min: 0
+    ms: 570
+    sec: 9
+  text_on: !ruby/object:SubtitleIt::Subtime 
+    hrs: 0
+    min: 0
+    ms: 420
+    sec: 6
+- !ruby/object:SubtitleIt::Subline 
+  text: We were a CD-ROM authoring company,
+  text_off: !ruby/object:SubtitleIt::Subtime 
+    hrs: 0
+    min: 0
+    ms: 20
+    sec: 11
+  text_on: !ruby/object:SubtitleIt::Subtime 
+    hrs: 0
+    min: 0
+    ms: 570
+    sec: 9
+- !ruby/object:SubtitleIt::Subline 
+  text: and the CD-ROM business was going away.
+  text_off: !ruby/object:SubtitleIt::Subtime 
+    hrs: 0
+    min: 0
+    ms: 420
+    sec: 13
+  text_on: !ruby/object:SubtitleIt::Subtime 
+    hrs: 0
+    min: 0
+    ms: 420
+    sec: 11
+- !ruby/object:SubtitleIt::Subline 
+  text: One of the technologies I remember seeing was Flash.
+  text_off: !ruby/object:SubtitleIt::Subtime 
+    hrs: 0
+    min: 0
+    ms: 70
+    sec: 16
+  text_on: !ruby/object:SubtitleIt::Subtime 
+    hrs: 0
+    min: 0
+    ms: 570
+    sec: 13
+- !ruby/object:SubtitleIt::Subline 
+  text: At the time, it was called <span tts:color="#ccc333" tts:fontWeight="bold">FutureSplash</span>.
+  text_off: !ruby/object:SubtitleIt::Subtime 
+    hrs: 0
+    min: 0
+    ms: 470
+    sec: 18
+  text_on: !ruby/object:SubtitleIt::Subtime 
+    hrs: 0
+    min: 0
+    ms: 470
+    sec: 16
+- !ruby/object:SubtitleIt::Subline 
+  text: So this is where Flash got its start.
+  text_off: !ruby/object:SubtitleIt::Subtime 
+    hrs: 0
+    min: 0
+    ms: 700
+    sec: 19
+  text_on: !ruby/object:SubtitleIt::Subtime 
+    hrs: 0
+    min: 0
+    ms: 500
+    sec: 18
+- !ruby/object:SubtitleIt::Subline 
+  text: This is smart sketch running on the <span tts:fontStyle="italic">EU-pin computer</span>,
+  text_off: !ruby/object:SubtitleIt::Subtime 
+    hrs: 0
+    min: 0
+    ms: 100
+    sec: 23
+  text_on: !ruby/object:SubtitleIt::Subtime 
+    hrs: 0
+    min: 0
+    ms: 100
+    sec: 20
+- !ruby/object:SubtitleIt::Subline 
+  text: which was the first product that FutureWave did.
+  text_off: !ruby/object:SubtitleIt::Subtime 
+    hrs: 0
+    min: 0
+    ms: 520
+    sec: 25
+  text_on: !ruby/object:SubtitleIt::Subtime 
+    hrs: 0
+    min: 0
+    ms: 520
+    sec: 23
+- !ruby/object:SubtitleIt::Subline 
+  text: So our vision for this product was to
+  text_off: !ruby/object:SubtitleIt::Subtime 
+    hrs: 0
+    min: 0
+    ms: 520
+    sec: 27
+  text_on: !ruby/object:SubtitleIt::Subtime 
+    hrs: 0
+    min: 0
+    ms: 520
+    sec: 25
+- !ruby/object:SubtitleIt::Subline 
+  text: make drawing on the computer
+  text_off: !ruby/object:SubtitleIt::Subtime 
+    hrs: 0
+    min: 0
+    ms: 620
+    sec: 28
+  text_on: !ruby/object:SubtitleIt::Subtime 
+    hrs: 0
+    min: 0
+    ms: 520
+    sec: 27
+- !ruby/object:SubtitleIt::Subline 
+  text: as <span tts:color="#ccc333">easy</span> as drawing on paper.
+  text_off: !ruby/object:SubtitleIt::Subtime 
+    hrs: 0
+    min: 0
+    ms: 500
+    sec: 30
+  text_on: !ruby/object:SubtitleIt::Subtime 
+    hrs: 0
+    min: 0
+    ms: 200
+    sec: 29
+raw: !ruby/object:File {}
+
+style:
