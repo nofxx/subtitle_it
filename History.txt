@@ -1,4 +1,20 @@
-== 0.0.1 2008-09-04
+== 0.1.0 2008-09-04
 
 * 1 major enhancement:
-  * Initial release
+  * Support yml
+ 
+== 0.2.0 2008-09-07
+
+* 1 major enhancement:
+  * Support sub
+
+== 0.3.0 2008-09-07
+
+* 2 major enhancement:
+  * Support srt
+  * subtitle_it tool
+  
+== 0.4.0 2008-09-07
+
+* 1 major enhancement:
+  * Adds yml generator

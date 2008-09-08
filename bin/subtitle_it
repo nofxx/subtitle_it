@@ -25,11 +25,13 @@ parser = OptionParser.new do |opts|
   opts.banner = <<BANNER
 SubtitleIt - Convert and Create subtitles.
 
-Usage: #{File.basename($0)} [options] filein [fileout]
+Usage: #{File.basename($0)} [options] file_in [file_out]
 
 Options are:
-  -c FORMAT --convert=FORMAT  Format to convert to
+  -c FORMAT --convert=FORMAT  Format to convert to: yml, srt or sub.
+       
   -d DELAY --delay=DELAY  Fix the delay of the file.
+  
 BANNER
   opts.separator ""
   # opts.on("-p", "--path=PATH", String,
@@ -50,40 +52,48 @@ BANNER
     puts opts; exit
   end
 end
-
-path = OPTIONS[:path]
-
+    t = Time.now
 if ARGV.empty?
   puts parser.banner
   exit
 end
-
+path = OPTIONS[:path]
 
 filein, filein_ext = ARGV[0].split('.')
 fileout, fileout_ext = ARGV[1] ? ARGV[1].split('.') : [filein, filein_ext]
-content = File.open(ARGV[0], 'r')
 
-if OPTIONS[:delay]
-  ARGV[1] ||= ARGV[0] + "_new"
-  SubtitleIt.srt_delay(ARGV[0],ARGV[1])  
-else
-  include SubtitleIt
-  puts "Working on file #{filein}..."
-  t = Time.now
-  sub = Subtitle.new(content, filein_ext) 
-  format = OPTIONS[:format]
-  format ||= fileout_ext unless fileout_ext == filein_ext
-  out = case format
-  when 'yml' then sub.to_yml
-  when 'sub' then sub.to_sub
-  when 'srt' then sub.to_srt
+if File.exists?(ARGV[0])
+  content = File.open(ARGV[0], 'r')
+  if OPTIONS[:delay]
+    ARGV[1] ||= ARGV[0] + "_new"
+    SubtitleIt.srt_delay(ARGV[0],ARGV[1])  
   else
-    puts "Dunno what to do with this file!"
-  end
+    include SubtitleIt
+    puts "Working on file #{filein}..."
+    sub = Subtitle.new(content, filein_ext) 
+    format = OPTIONS[:format]
+    format ||= fileout_ext unless fileout_ext == filein_ext
+    out = case format
+    when 'yml' then sub.to_yml
+    when 'sub' then sub.to_sub
+    when 'srt' then sub.to_srt
+    else
+      puts "Dunno what to do with this file!"
+      exit
+    end
+  end 
+else
+  out = <<GEN
+header:
+  title: #{ARGV[0]}
+  authors: FIXME    
+  version: FIXME
   
-  
-    
-  File.open("#{fileout}.#{OPTIONS[:format]}", 'w') {|f| f.write(out) }
-  
-  puts "Done. Total time: #{Time.now - t}"
-end 
+lines:
+  - ['00:05:26.5', '00:05:28.5', 'worth killing for...']
+GEN
+  OPTIONS[:format] = 'yml'
+end
+
+File.open("#{fileout}.#{OPTIONS[:format]}", 'w') {|f| f.write(out) }  
+puts "Done. Total time: #{Time.now - t}"
