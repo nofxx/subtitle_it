@@ -9,7 +9,6 @@ bin/subtitle_it
 config/hoe.rb
 config/requirements.rb
 lib/subtitle_it.rb
-lib/subtitle_it/delay.rb
 lib/subtitle_it/formats/ass.rb
 lib/subtitle_it/formats/rsb.rb
 lib/subtitle_it/formats/srt.rb

@@ -13,6 +13,9 @@ TODO:
 * Timed Text (TT) XML Format 
 * Compatibility with "sube" (http://github.com/vic/sube)
 * Download subtitles. (http://github.com/johanlunds/downsub/tree)
+* Download from http://www.opensubtitles.org
+* Fix delays
+* Convert 1 to 2 CD`s and versa-vice
 * ASS Format (Yes, for the funny of it...)
 
 
@@ -55,7 +58,6 @@ Aegisub: http://www.malakith.net/aegiwiki/Main_Page
 (The MIT License)
 
 Copyright (c) 2008 Warlley Rezende, Marcos Piccinini
-Delay code by Giovanni Rapagnani
 Parts of subrip code by Marcin (tiraeth) Chwedziak 
 
 Permission is hereby granted, free of charge, to any person obtaining

@@ -9,7 +9,8 @@ module SubtitleIt
   
   class Subtitle    
     attr_reader :raw, :format, :lines, :style
-  
+    EXTS = %w(srt sub smi txt ssa ass mpl xml yml rsb)
+    
     def initialize(dump, format, style=nil, fps=23.976)
       raise unless format =~ /^srt$|^sub|yml|txt|rsb|xml|ass/
       @raw = dump.kind_of?(String) ? dump : dump.read
