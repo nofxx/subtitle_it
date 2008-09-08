@@ -6,6 +6,8 @@
 #
 # Where N is ms / framerate / 1000 (ms -> s)
 #
+# parts of the code from 'simplesubtitler' from Marcin (tiraeth) Chwedziak 
+#
 module SubtitleIt
   module Formats        
     def parse_sub

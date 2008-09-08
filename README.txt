@@ -8,21 +8,38 @@ Ruby tool to work with subtitle files.
 * Converts to and from: yml/srt/sub/rsb nice subtitle code
 * Fixes delays. (SrtResync)
 
+TODO:
+
+* Compatibility with "sube" (http://github.com/vic/sube)
+* Download subtitles. (http://github.com/johanlunds/downsub/tree)
 
 == SYNOPSIS:
 
 Bash tool:
 
-Will convert a srt to sub:
+Convert a srt to sub:
   subtitle_it in.srt out.sub
 
-Will add a delay of 1 minute:
+Add a delay of 1 minute:
   subtitle_it -d 60 in.srt
+ 
+Create a template
+  subtitle_it unexistent.file 
   
 
 == INSTALL:
 
-* sudo gem install SubtitleIt
+ sudo gem install SubtitleIt
+
+
+== THE "Ruby Subtitle" Format - RSB
+
+It`s just a easy way, proof of concept to edit subtitles. Here is what it looks like:
+
+00:32 => 00:33 == Nice police work! | Thank you!
+MM:SS => N == TEXT | NEWLINE
+
+Create a template to check it out. 
 
 == LICENSE:
 
@@ -30,6 +47,7 @@ Will add a delay of 1 minute:
 
 Copyright (c) 2008 Warlley Rezende, Marcos Piccinini
 Delay code by Giovanni Rapagnani
+Parts of subrip code by Marcin (tiraeth) Chwedziak 
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the

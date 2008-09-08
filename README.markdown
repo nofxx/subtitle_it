@@ -2,15 +2,40 @@ h1. Subtitle It
 
 Ruby tool to work with subtitle files.
 
-h2. Features
+h1. FEATURES:
 
-* yml to srt
-* srt to yml
-* Fix delay. (SrtResync)
-* SubRip to .srt convertion
+* Converts to and from: yml/srt/sub/rsb nice subtitle code
+* Fixes delays. (SrtResync)
 
-h2. How to use
+h2. TODO:
 
-  subtitle_it -c srt subtitle.sub  # Converts a subrip to srt
+* Compatibility with "sube" (http://github.com/vic/sube)
+* Download subtitles. (http://github.com/johanlunds/downsub/tree)
 
-  subtitle_it file.yml  # Create a template if file.yml doesn`t exists
+h1. SYNOPSIS:
+
+Bash tool:
+
+Convert a srt to sub:
+  subtitle_it in.srt out.sub
+
+Add a delay of 1 minute:
+  subtitle_it -d 60 in.srt
+ 
+Create a template
+  subtitle_it unexistent.file 
+  
+
+h1. INSTALL:
+
+ sudo gem install SubtitleIt
+
+
+h1. THE "Ruby Subtitle" Format - RSB
+
+It`s just a easy way, proof of concept to edit subtitles. Here is what it looks like:
+
+00:32 => 00:33 == Nice police work! | Thank you!
+MM:SS => N == TEXT | NEWLINE
+
+Create a template to check it out.
