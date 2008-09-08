@@ -2,7 +2,6 @@
 History.txt
 License.txt
 Manifest.txt
-PostInstall.txt
 README.markdown
 README.txt
 Rakefile
@@ -11,7 +10,7 @@ config/hoe.rb
 config/requirements.rb
 lib/subtitle_it.rb
 lib/subtitle_it/delay.rb
-lib/subtitle_it/formats/pseudo.rb
+lib/subtitle_it/formats/rsb.rb
 lib/subtitle_it/formats/srt.rb
 lib/subtitle_it/formats/sub.rb
 lib/subtitle_it/formats/yml.rb
@@ -25,11 +24,12 @@ script/generate
 script/txt2html
 setup.rb
 spec/fixtures/godfather.srt
+spec/fixtures/pseudo.rsb
 spec/fixtures/pulpfiction.sub
 spec/fixtures/sincity.yml
 spec/spec.opts
 spec/spec_helper.rb
-spec/subtitle_it/formats/pseudo_spec.rb
+spec/subtitle_it/formats/rsb_spec.rb
 spec/subtitle_it/formats/srt_spec.rb
 spec/subtitle_it/formats/sub_spec.rb
 spec/subtitle_it/formats/yml_spec.rb
@@ -37,12 +37,7 @@ spec/subtitle_it/subline_spec.rb
 spec/subtitle_it/subtime_spec.rb
 spec/subtitle_it/subtitle_spec.rb
 spec/subtitle_it_spec.rb
+subtitle_it.gemspec
 tasks/deployment.rake
 tasks/environment.rake
 tasks/rspec.rake
-tasks/website.rake
-website/index.html
-website/index.txt
-website/javascripts/rounded_corners_lite.inc.js
-website/stylesheets/screen.css
-website/template.html.erb

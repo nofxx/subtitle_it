@@ -10,8 +10,9 @@ rescue LoadError
 end
 
 require 'optparse'
-
 require 'subtitle_it'
+
+include SubtitleIt
 # NOTE: the option -p/--path= is given as an example, and should probably be replaced in your application.
 
 OPTIONS = {
@@ -23,7 +24,7 @@ MANDATORY_OPTIONS = %w(  )
 
 parser = OptionParser.new do |opts|
   opts.banner = <<BANNER
-SubtitleIt - Convert and Create subtitles.
+SubtitleIt - Convert and create subtitles.
 
 Usage: #{File.basename($0)} [options] file_in [file_out]
 
@@ -45,7 +46,11 @@ BANNER
           "Delay to add/remove") { |OPTIONS[:delay]| }
           
   opts.on("-h", "--help",
-          "Show this help message.") { puts opts; exit }
+          "Show this help message.") { puts opts; exit }          
+
+  opts.on("-v", "--version",
+          "Show program version") { OPTIONS[:version] = true }          
+          
   opts.parse!(ARGV)
 
   if MANDATORY_OPTIONS && MANDATORY_OPTIONS.find { |option| OPTIONS[option.to_sym].nil? }
@@ -53,11 +58,16 @@ BANNER
   end
 end
     t = Time.now
+if OPTIONS[:version]
+  include SubtitleIt
+  puts a
+  exit
+end    
+
 if ARGV.empty?
   puts parser.banner
   exit
 end
-path = OPTIONS[:path]
 
 filein, filein_ext = ARGV[0].split('.')
 fileout, fileout_ext = ARGV[1] ? ARGV[1].split('.') : [filein, filein_ext]
@@ -90,10 +100,16 @@ header:
   version: FIXME
   
 lines:
-  - ['00:05:26.5', '00:05:28.5', 'worth killing for...']
+  - ['00:05:26.5', '2', 'worth killing for...']
 GEN
-  OPTIONS[:format] = 'yml'
+  OPTIONS[:format] = 'rsb'
 end
 
-File.open("#{fileout}.#{OPTIONS[:format]}", 'w') {|f| f.write(out) }  
-puts "Done. Total time: #{Time.now - t}"
+fout = "#{fileout}.#{OPTIONS[:format]}"
+
+if File.writable?(fout)
+  File.open(fout, 'w') {|f| f.write(out) }  
+  puts "Done. Total time: #{Time.now - t}"
+else
+  puts "Can`t write to #{fout}"
+end

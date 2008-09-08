@@ -18,3 +18,8 @@
 
 * 1 major enhancement:
   * Adds yml generator
+  
+== 0.5.1 2008-09-08
+
+* 1 major enhancement:
+  * Adds rsb support

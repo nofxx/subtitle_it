@@ -12,13 +12,13 @@ module SubtitleIt
     end
 
     def to_srt
-      out = ""
+      out = []
       @lines.each_with_index do |l,i|
-        out << "#{i}\n"
-        out << "%s --> %s\n" % [l.text_on.to_s, l.text_off.to_s]
-        out << l.text + "\n"
+        out << "#{i}"
+        out << "%s --> %s" % [l.text_on.to_s, l.text_off.to_s]
+        out << l.text
       end
-      out        
+      out.join("\n")
     end    
   end
 end

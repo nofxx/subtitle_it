@@ -1,14 +1,16 @@
 $:.unshift(File.dirname(__FILE__)) unless
 $:.include?(File.dirname(__FILE__)) || $:.include?(File.expand_path(File.dirname(__FILE__)))
-
 require 'rubygems'
-
+require 'subtitle_it/version'
 require 'subtitle_it/delay'
 require 'subtitle_it/subtime'
 require 'subtitle_it/subline'
 require 'subtitle_it/subtitle'
 
 module SubtitleIt
+ def a
+   'hhh'
+ end
 end
 
 class Numeric
@@ -34,7 +36,6 @@ class String
 end
 
 class Fixnum
-
   def to_time()
     # convert millisec to standard time format
     # 3600 * 1000 = ,000
@@ -46,5 +47,4 @@ class Fixnum
     p time_list if $DEBUG
     [ time_list.join(':'),msec ].join(',')
   end
-
 end

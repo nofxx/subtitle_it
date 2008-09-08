@@ -1,7 +1,7 @@
 require 'subtitle_it/formats/srt'
 require 'subtitle_it/formats/sub'
 require 'subtitle_it/formats/yml'
-require 'subtitle_it/formats/pseudo'
+require 'subtitle_it/formats/rsb'
 
 module SubtitleIt
   include Formats
@@ -10,7 +10,7 @@ module SubtitleIt
     attr_reader :raw, :format, :lines
   
     def initialize(raw,format,framerate=23.976)
-      raise unless format =~ /^srt$|^sub|yml|txt/
+      raise unless format =~ /^srt$|^sub|yml|txt|rsb/
       @framerate = framerate
       @raw = raw
       @format = format

@@ -22,4 +22,8 @@ module SubFixtures
   def yml_fixture
     File.open(File.expand_path(File.dirname(__FILE__) + '/fixtures/sincity.yml')) 
   end
+  
+  def rsb_fixture
+    File.open(File.expand_path(File.dirname(__FILE__) + '/fixtures/pseudo.rsb')) 
+  end 
 end
