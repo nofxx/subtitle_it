@@ -9,7 +9,7 @@ module SubtitleIt
       out = ""
       @lines.each_with_index do |l,i|
         out << "#{i}\n"
-        out << "%d2:%d2:%d2,000 --> %d2:%d2:%d2,000" % l.stamps#.flat
+        out << "%s --> %s" % [l.text_on.to_s, l.text_off.to_s]
         out << l.text
       end
       out        

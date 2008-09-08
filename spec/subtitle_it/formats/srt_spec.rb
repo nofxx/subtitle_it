@@ -9,7 +9,7 @@ describe Formats, ".srt" do
     end  
   
     it "should dump the object as a SRT" do
-      @sub.to_srt.should eql("0\n02:52:262,000 --> 02:52:282,000worth killing for...1\n02:62:02,000 --> 02:62:32,000worth dying for...2\n02:72:02,000 --> 02:72:32,000worth going to the hell for...")
+      @sub.to_srt.should eql("0\n00:05:26.500 --> 00:05:28.500worth killing for...1\n00:06:00.400 --> 00:06:03.400worth dying for...2\n00:07:00.300 --> 00:07:03.300worth going to the hell for...")
     end
   end  
 end

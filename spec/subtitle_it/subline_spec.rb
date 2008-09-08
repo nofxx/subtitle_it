@@ -12,6 +12,7 @@ describe Subline do
   it "should have a nice date on" do
     @sub.text_on.sec.should eql(2)
     @sub.text_on.min.should eql(20)    
+    @sub.text_on.sec.should eql(2)        
   end
   
   it "should have the seconds added from the first time" do

@@ -1,4 +1,3 @@
-
 module SubtitleIt
   class Subline
     attr_accessor :text_on, :text_off, :text
@@ -13,11 +12,6 @@ module SubtitleIt
       args.map do |arg|
         Subtime.new(arg)
       end
-    end
-    
-    def stamps
-      [@text_on.hour, @text_on.min, @text_on.sec, 
-      @text_off.hour, @text_off.min, @text_off.sec]
     end
   end
 end

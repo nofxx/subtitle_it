@@ -1,44 +1,54 @@
 module SubtitleIt
   class Subtime
-    attr_accessor :sec_raw
-    
-    def initialize(str)      
-      @sec_raw = parse_subtime(str)    
+    attr_accessor :hrs, :min, :sec, :ds
+    # 10e–1 second =>	ds =>	decisecond
+    # 11ds => 00:00:01.100
+    # 1ds => 00:00:00.100
+    # 611ds => 00:01:01.100
+        
+    def initialize(sym)  
+      @hrs = @min = @sec = @ds = 0    
+      parse_subtime(sym)    
     end
         
-    def parse_subtime(str)
-      str = str.to_s if str.respond_to?(:to_s)
-      values = str.split(/:|,|\./).map { |s| s.to_i }
-      case values.size
+    def parse_subtime(sym)
+      if sym.kind_of?(Numeric)
+        @hrs = sym / 36000
+        @min = sym / 600 % 600
+        @sec = sym / 10 % 60
+        @ds = sym % 10
+        return
+      end
+      v = sym.split(/\.|,/)
+      @ds = v[1].to_i.reduce if v[1]      
+      v = v[0].split(/:/).map { |s| s.to_i }      
+      case v.size
       when 1
-        values[0]
+        @sec = v.first
       when 2
-        values[0] * 60 + values[1]
+        @min, @sec = v
       when 3
-        values[0] * 3600 + values[1] * 60 + values[2]
+        @hrs, @min, @sec = v
       else
-        str.to_i
+        raise "Wrong time format"
       end
     end
-    
-    def hour
-      @sec_raw / 3600
+       
+    def to_s
+      "%02d:%02d:%02d.%s" % [@hrs, @min, @sec, ("%03d" % @ds).reverse ]
     end
     
-    def min
-      (@sec_raw / 60) % 60
+    def to_i
+      (@hrs * 3600 + @min * 60 + @sec) * 10 + @ds
     end
-    
-    def sec
-      @sec_raw % 60
-    end
+  
     
     def +(other)
-       Subtime.new(self.sec_raw + other.sec_raw)
+       Subtime.new(self.to_i + other.to_i)
     end
     
     def <=>(other)
-      self.sec_raw <=> other.sec_raw
+      self.to_i <=> other.to_i
     end
     include Comparable
   end

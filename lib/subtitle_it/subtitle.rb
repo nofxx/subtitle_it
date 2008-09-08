@@ -6,13 +6,11 @@ require 'subtitle_it/formats/pseudo'
 module SubtitleIt
   include Formats
   
-  class Subtitle
-
-    
+  class Subtitle    
     attr_reader :raw, :format, :lines
   
     def initialize(raw,format,framerate=23.976)
-      raise unless format =~ /srt|sub|yml|txt/
+      raise unless format =~ /^srt$|^sub|yml|txt/
       @framerate = framerate
       @raw = raw
       @format = format
@@ -27,9 +25,6 @@ module SubtitleIt
     
     def lines=(lines)
       @lines = lines
-    end
-  
+    end  
   end
-  
-
 end
