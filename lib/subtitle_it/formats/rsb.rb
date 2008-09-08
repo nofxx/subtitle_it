@@ -1,3 +1,12 @@
+# SubtitleIt
+# RSB - Ruby Subtitle
+#
+# 00:32 => 00:33 == Nice police work! | Thank you!
+# 00:53 => N == Howdy ho!
+# MM:SS => N == TEXT | NEWLINE
+#
+# Where N is the seconds to last.
+#
 module SubtitleIt
   module Formats
     def parse_rsb
@@ -21,5 +30,4 @@ module SubtitleIt
   end
 end
 
-# 00:32 => 00:33 == Nice police work!
-# 00:53 => 4 == Howdy ho!
+

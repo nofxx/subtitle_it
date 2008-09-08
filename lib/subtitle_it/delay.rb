@@ -1,6 +1,6 @@
 #!/usr/bin/ruby
-# author : sathyz@gmail.com
-#
+# author : Giovanni Rapagnani
+# sathyz@gmail.com
 module SubtitleIt
 
   def srt_delay(srt_file, delay)

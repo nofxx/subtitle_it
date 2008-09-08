@@ -1,3 +1,5 @@
+# SubtitleIt
+# Time class
 module SubtitleIt
   class Subtime
     attr_accessor :hrs, :min, :sec, :ms

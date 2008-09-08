@@ -5,7 +5,7 @@ Ruby tool to work with subtitle files.
 
 == FEATURES:
 
-* Converts to and from: yml/srt/sub/pseudo nice subtitle code
+* Converts to and from: yml/srt/sub/rsb nice subtitle code
 * Fixes delays. (SrtResync)
 
 
@@ -20,14 +20,6 @@ Will add a delay of 1 minute:
   subtitle_it -d 60 in.srt
   
 
-== REQUIREMENTS:
-
-Rubygems:
-
-* chronic
-* yaml
-
-
 == INSTALL:
 
 * sudo gem install SubtitleIt
@@ -37,6 +29,7 @@ Rubygems:
 (The MIT License)
 
 Copyright (c) 2008 Warlley Rezende, Marcos Piccinini
+Delay code by Giovanni Rapagnani
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the

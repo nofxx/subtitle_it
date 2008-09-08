@@ -17,11 +17,11 @@ describe Formats, ".sub" do
     end
     
     it "should have a nic text on" do
-      @sub.lines[0].text_on.to_s.should eql('00:00:01.025')
+      @sub.lines[110].text_on.to_s.should eql('00:10:44.936')
     end
     
     it "should have a nice text out" do
-      @sub.lines[0].text_off.to_s.should eql('00:00:01.115')
+      @sub.lines[110].text_off.to_s.should eql('00:10:49.941')
     end
     
     it "should parse the sentece correctly" do
@@ -40,7 +40,7 @@ describe Formats, ".sub" do
     end  
 
     it "should dump the object as a SUB" do
-      @sub.to_sub.should eql("{136}{137}worth killing for...\n{150}{151}worth dying for...\n{175}{176}worth going to the hell for...")
+      @sub.to_sub.should eql("{13}{13}worth killing for...\r\n{15}{15}worth dying for...\r\n{17}{17}worth going to the hell for...\r\n{17}{17}worth going a | line...")
     end
   end  
 end

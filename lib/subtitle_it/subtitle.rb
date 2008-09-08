@@ -9,9 +9,9 @@ module SubtitleIt
   class Subtitle    
     attr_reader :raw, :format, :lines
   
-    def initialize(raw,format,framerate=23.976)
+    def initialize(raw,format,fps=23.976)
       raise unless format =~ /^srt$|^sub|yml|txt|rsb/
-      @framerate = framerate
+      @fps = fps
       @raw = raw
       @format = format
       parse!

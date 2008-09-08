@@ -1,5 +1,7 @@
+# SubtitleIt
+# YML Dump
+#
 require 'yaml'
-
 module SubtitleIt
   module Formats    
     def parse_yml
