@@ -5,18 +5,22 @@ Ruby tool to work with subtitle files.
 
 == FEATURES:
 
-* Converts to and from: XML, SRT, SUB, YML, RSB and ASS
+* Converts to and from: SRT, SUB, XML(TT), YML, RSB and ASS
 * Fixes delays. (SrtResync)
 
 TODO:
 
-* Timed Text (TT) XML Format 
 * Compatibility with "sube" (http://github.com/vic/sube)
 * Download subtitles. (http://github.com/johanlunds/downsub/tree)
-* Download from http://www.opensubtitles.org
+* Download from http://trac.opensubtitles.org/projects/opensubtitles/wiki/XMLRPC
 * Fix delays
 * Convert 1 to 2 CD`s and versa-vice
 * ASS Format (Yes, for the funny of it...)
+
+
+== REQUIREMENTS:
+
+* hpricot
 
 
 == SYNOPSIS:

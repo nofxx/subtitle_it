@@ -24,7 +24,7 @@
 * 1 major enhancement:
   * Adds rsb support
   
-== 0.6.0 2008-09-09
+== 0.6.1 2008-09-09
 
 * 1 major enhancement:
   * Adds xml tt support  

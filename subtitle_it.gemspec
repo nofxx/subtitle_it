@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name = %q{subtitle_it}
-  s.version = "0.6.0"
+  s.version = "0.6.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Marcos Piccinini", "Warlley Rezende"]
@@ -21,9 +21,11 @@ For more information on subtitle_it, see http://github.com/nofxx/subtitle_it
   s.require_paths = ["lib"]
   s.rubyforge_project = %q{subtitle_it}
   s.rubygems_version = %q{1.2.0}
-  s.signing_key = %q{/Users/nofxx/.gem/gem-private_key.pem}
-  s.summary = %q{description of gem}
 
+  s.summary = %q{Ruby tool to work with subtitle files}
+  
+  s.add_dependency(%q<hpricot>, [">= 0.6"])
+  
   if s.respond_to? :specification_version then
     current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION
     s.specification_version = 2
