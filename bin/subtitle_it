@@ -11,10 +11,12 @@ end
 
 require 'optparse'
 
+require 'subtitle_it'
 # NOTE: the option -p/--path= is given as an example, and should probably be replaced in your application.
 
 OPTIONS = {
  # :path     => '~',
+  :format   => nil,
   :delay    => nil
 }
 MANDATORY_OPTIONS = %w(  )
@@ -26,13 +28,16 @@ SubtitleIt - Convert and Create subtitles.
 Usage: #{File.basename($0)} [options] filein [fileout]
 
 Options are:
-
-  -d N --delay N  Fix the delay of the file.
+  -c FORMAT --convert=FORMAT  Format to convert to
+  -d DELAY --delay=DELAY  Fix the delay of the file.
 BANNER
   opts.separator ""
   # opts.on("-p", "--path=PATH", String,
   #         "The root path for selecting files",
   #         "Default: ~") { |OPTIONS[:path]| }
+          
+  opts.on("-c", "--convert=FORMAT", String,
+          "Format to convert to") { |OPTIONS[:format]| }
           
   opts.on("-d", "--delay=DELAY", Float,
           "Delay to add/remove") { |OPTIONS[:delay]| }
@@ -48,30 +53,37 @@ end
 
 path = OPTIONS[:path]
 
-return if ARGV.empty?
+if ARGV.empty?
+  puts parser.banner
+  exit
+end
 
-filein = ARGV[0].split('.')
-fileout == ARGV[1] ? ARGV[1] : ARGV[0]
+
+filein, filein_ext = ARGV[0].split('.')
+fileout, fileout_ext = ARGV[1] ? ARGV[1].split('.') : [filein, filein_ext]
 content = File.open(ARGV[0], 'r')
 
 if OPTIONS[:delay]
-  return unless filein[1] == 'srt'  
   ARGV[1] ||= ARGV[0] + "_new"
   SubtitleIt.srt_delay(ARGV[0],ARGV[1])  
 else
-  sub = Sub.new(content, filein.last) 
-  out = case filein.last
+  include SubtitleIt
+  puts "Working on file #{filein}..."
+  t = Time.now
+  sub = Subtitle.new(content, filein_ext) 
+  format = OPTIONS[:format]
+  format ||= fileout_ext unless fileout_ext == filein_ext
+  out = case format
   when 'yml' then sub.to_yml
   when 'sub' then sub.to_sub
   when 'srt' then sub.to_srt
   else
     puts "Dunno what to do with this file!"
   end
-    
-  File.open("#{sub.fileout}.srt", 'w') {|f| f.write(sub.to_srt) }
   
-end  
+  
     
-    
-    
-    
+  File.open("#{fileout}.#{OPTIONS[:format]}", 'w') {|f| f.write(out) }
+  
+  puts "Done. Total time: #{Time.now - t}"
+end 

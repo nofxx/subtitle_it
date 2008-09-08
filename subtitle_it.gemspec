@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name = %q{subtitle_it}
-  s.version = "0.2.0"
+  s.version = "0.3.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["FIXME full name"]
@@ -16,7 +16,6 @@ Gem::Specification.new do |s|
   s.homepage = %q{http://subtitle_it.rubyforge.org}
   s.post_install_message = %q{
 For more information on subtitle_it, see http://github.com/nofxx/subtitle_it
-
 
 }
   s.rdoc_options = ["--main", "README.txt"]

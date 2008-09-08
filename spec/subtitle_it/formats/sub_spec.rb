@@ -40,7 +40,7 @@ describe Formats, ".sub" do
     end  
 
     it "should dump the object as a SUB" do
-      @sub.to_sub.should eql("{136}{137}worth killing for...{150}{151}worth dying for...{175}{176}worth going to the hell for...")
+      @sub.to_sub.should eql("{136}{137}worth killing for...\n{150}{151}worth dying for...\n{175}{176}worth going to the hell for...")
     end
   end  
 end

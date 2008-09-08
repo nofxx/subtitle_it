@@ -8,13 +8,11 @@ module SubtitleIt
     end
         
     def to_sub
-      out = ""
-      @lines.each do |l|
+      @lines.inject([]) do |i,l|
         start = l.text_on.to_i / @framerate / 100
         stop = l.text_off.to_i / @framerate / 100
-        out << "{%d}{%d}%s" % [start, stop,l.text.gsub("\n", "|")]
-      end
-      out
+        i << "{%d}{%d}%s" % [start, stop,l.text.gsub("\n", "|")]
+      end.join("\n")
     end    
   end 
 end
