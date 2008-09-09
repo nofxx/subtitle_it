@@ -94,22 +94,21 @@ if File.exists?(ARGV[0])
   end 
 else
   out = <<GEN
-header:
-  title: #{ARGV[0]}
-  authors: FIXME    
-  version: FIXME
-  
-lines:
-  - ['00:05:26.5', '2', 'worth killing for...']
+- title: #{ARGV[0]}
+- authors: FIXME 
+- version: FIXME
+00:05:26.500 => 00:05:28.500 == worth killing for...
+00:06:00.400 => 00:06:03.400 == worth dying for...
+00:07:00.300 => 00:07:03.300 == worth going to the hell for...
 GEN
   OPTIONS[:format] = 'rsb'
 end
 
 fout = "#{fileout}.#{OPTIONS[:format]}"
 
-if File.writable?(fout)
+if File.exists?(fout) && !File.writable?(fout)
+  puts "Can`t write to #{fout}"
+else
   File.open(fout, 'w') {|f| f.write(out) }  
   puts "Done. Total time: #{Time.now - t}"
-else
-  puts "Can`t write to #{fout}"
 end
