@@ -40,7 +40,21 @@ describe Formats, ".xml" do
     end
     
     it "should equal..." do
-      @sub.to_xml.should eql("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<tt xml:lang=\"en\" xmlns=\"http://www.w3.org/2006/04/ttaf1\"  xmlns:tts=\"http://www.w3.org/2006/04/ttaf1#styling\">\n  <head>\n    <styling>\n      \n    </styling>\n  </head>\n  <body>\n    <div xml:lang=\"en\">\n      <p begin=\"00:05:26.500\" dur=\"00:00:02.000\">worth killing for...</p><p begin=\"00:06:00.400\" dur=\"00:00:03.000\">worth dying for...</p><p begin=\"00:07:00.300\" dur=\"00:00:03.000\">worth going to the hell for...</p><p begin=\"00:07:00.300\" dur=\"00:00:03.000\">worth going a | line...</p>                \n    </div>\n  </body>\n</tt>\n")
+      @sub.to_xml.should eql("<?xml version=\"1.0\" encoding=\"UTF-8\"?>
+<tt xml:lang=\"en\" xmlns=\"http://www.w3.org/2006/04/ttaf1\"  xmlns:tts=\"http://www.w3.org/2006/04/ttaf1#styling\">
+  <head>
+    <styling>
+    </styling>
+  </head>
+  <body>
+    <div xml:lang=\"en\">
+      <p begin=\"00:05:26.500\" dur=\"00:00:02.000\">worth killing for...</p>
+      <p begin=\"00:06:00.400\" dur=\"00:00:03.000\">worth dying for...</p>
+      <p begin=\"00:07:00.300\" dur=\"00:00:03.000\">worth going to the hell for...</p>
+      <p begin=\"00:07:00.300\" dur=\"00:00:03.000\">worth going a | line...</p>                
+    </div>
+  </body>
+</tt>")
     end
   end
 end

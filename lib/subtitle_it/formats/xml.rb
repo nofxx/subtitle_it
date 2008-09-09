@@ -39,8 +39,8 @@ module SubtitleIt
     def xml_lines
       @lines.inject([]) do |i,l| 
         toff = l.text_off - l.text_on
-        i << "<p begin=\"#{l.text_on}\" dur=\"#{toff}\">#{l.text}</p>"
-      end
+        i << "      <p begin=\"#{l.text_on}\" dur=\"#{toff}\">#{l.text}</p>"
+      end.join("\n")
     end
         
     def to_xml
@@ -48,17 +48,17 @@ module SubtitleIt
 <?xml version="1.0" encoding="UTF-8"?>
 <tt xml:lang="en" xmlns="http://www.w3.org/2006/04/ttaf1"  xmlns:tts="http://www.w3.org/2006/04/ttaf1#styling">
   <head>
-    <styling>
-      #{@style}
+    <styling>#{@style + "\n" if @style}
     </styling>
   </head>
   <body>
     <div xml:lang="en">
-      #{xml_lines}                
+#{xml_lines}                
     </div>
   </body>
 </tt>
 XML
+    out.chomp
     end    
   end
 end

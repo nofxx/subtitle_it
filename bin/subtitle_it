@@ -1,8 +1,9 @@
 #!/usr/bin/env ruby
+#  SubtitleIt
 #
 #  Created on 2008-9-4.
 #  Copyright (c) 2008. All rights reserved.
-
+#
 begin
   require 'rubygems'
 rescue LoadError
@@ -13,10 +14,9 @@ require 'optparse'
 require 'subtitle_it'
 
 include SubtitleIt
-# NOTE: the option -p/--path= is given as an example, and should probably be replaced in your application.
 
 OPTIONS = {
- # :path     => '~',
+  :force    => false,
   :format   => nil,
   :delay    => nil
 }
@@ -30,26 +30,32 @@ Usage: #{File.basename($0)} [options] file_in [file_out]
 
 Options are:
   -c FORMAT --convert=FORMAT  Format to convert to: yml, srt or sub.
+      You don`t need to use this if fileout contains a extension.
+  
+  -f  --force     Force overwrite.
        
   -d DELAY --delay=DELAY  Fix the delay of the file.
   
+  -h  --help      Show this.
+  
+  -v  --version   Program version.
 BANNER
   opts.separator ""
-  # opts.on("-p", "--path=PATH", String,
-  #         "The root path for selecting files",
-  #         "Default: ~") { |OPTIONS[:path]| }
-          
+
   opts.on("-c", "--convert=FORMAT", String,
           "Format to convert to") { |OPTIONS[:format]| }
           
   opts.on("-d", "--delay=DELAY", Float,
           "Delay to add/remove") { |OPTIONS[:delay]| }
           
+  opts.on("-f", "--force", "Force overwrite") { OPTIONS[:force] = true }          
+          
   opts.on("-h", "--help",
           "Show this help message.") { puts opts; exit }          
-
+          
+  #FIXME: I gave up... I cant acess the version var from here... missing something.
   opts.on("-v", "--version",
-          "Show program version") { OPTIONS[:version] = true }          
+          "Show program version") {   puts 'SubtitleIt v0.6.3'; exit }          
           
   opts.parse!(ARGV)
 
@@ -57,12 +63,6 @@ BANNER
     puts opts; exit
   end
 end
-    t = Time.now
-if OPTIONS[:version]
-  include SubtitleIt
-  puts a
-  exit
-end    
 
 if ARGV.empty?
   puts parser.banner
@@ -71,28 +71,22 @@ end
 
 filein, filein_ext = ARGV[0].split('.')
 fileout, fileout_ext = ARGV[1] ? ARGV[1].split('.') : [filein, filein_ext]
-
-if File.exists?(ARGV[0])
+t = Time.now
+if File.exists?(ARGV[0]) && ( ARGV[1] || OPTIONS[:format] )
   content = File.open(ARGV[0], 'r')
   if OPTIONS[:delay]
     ARGV[1] ||= ARGV[0] + "_new"
     SubtitleIt.srt_delay(ARGV[0],ARGV[1])  
   else
-    include SubtitleIt
     puts "Working on file #{filein}..."
     sub = Subtitle.new(content, filein_ext) 
     format = OPTIONS[:format]
     format ||= fileout_ext unless fileout_ext == filein_ext
-    out = case format
-    when 'yml' then sub.to_yml
-    when 'sub' then sub.to_sub
-    when 'srt' then sub.to_srt
-    else
-      puts "Dunno what to do with this file!"
-      exit
-    end
+    out = sub.send :"to_#{format}" 
+    #TODO: rescue format not found....
   end 
 else
+  format = 'rsb'
   out = <<GEN
 - title: #{ARGV[0]}
 - authors: FIXME 
@@ -101,14 +95,13 @@ else
 00:06:00.400 => 00:06:03.400 == worth dying for...
 00:07:00.300 => 00:07:03.300 == worth going to the hell for...
 GEN
-  OPTIONS[:format] = 'rsb'
 end
 
-fout = "#{fileout}.#{OPTIONS[:format]}"
+fout = "#{fileout}.#{format}"
 
-if File.exists?(fout) && !File.writable?(fout)
-  puts "Can`t write to #{fout}"
+if File.exists?(fout) && !OPTIONS[:force] 
+    puts "File exists. #{fout}"
 else
   File.open(fout, 'w') {|f| f.write(out) }  
-  puts "Done. Total time: #{Time.now - t}"
+  puts "Done. Wrote: #{fout} in #{Time.now - t}s."
 end

@@ -6,6 +6,8 @@ README.markdown
 README.txt
 Rakefile
 bin/subtitle_it
+blu.rsb
+blua.rsb
 config/hoe.rb
 config/requirements.rb
 lib/subtitle_it.rb
@@ -15,6 +17,8 @@ lib/subtitle_it/formats/srt.rb
 lib/subtitle_it/formats/sub.rb
 lib/subtitle_it/formats/xml.rb
 lib/subtitle_it/formats/yml.rb
+lib/subtitle_it/movie.rb
+lib/subtitle_it/movie_hasher.rb
 lib/subtitle_it/subline.rb
 lib/subtitle_it/subtime.rb
 lib/subtitle_it/subtitle.rb

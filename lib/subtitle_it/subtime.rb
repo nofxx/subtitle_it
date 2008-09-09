@@ -9,6 +9,9 @@ module SubtitleIt
       parse_subtime(sym)    
     end
         
+    # parses string like '00:00:00,000'
+    # as well as an integer, representanting 
+    # the time in ms. 
     def parse_subtime(sym)
       if sym.kind_of?(Numeric)
         @hrs = sym / 3600000
@@ -33,13 +36,15 @@ module SubtitleIt
         raise "Wrong time format"
       end
     end
-       
-    def to_s
-      "%02d:%02d:%02d.%s" % [@hrs, @min, @sec, ("%03d" % @ms) ]
+    
+    # to_s(separator) => to_s(",") => 00:00:00,000
+    def to_s(sep='.')
+      "%02d:%02d:%02d#{sep}%03d" % [@hrs, @min, @sec,  @ms]
     end
     
+    # return time as a total in ms
     def to_i
-      to_s.to_msec
+      ( @hrs * 3600 + @min * 60 + @sec ) * 1000 + @ms
     end
     
     def +(other)
