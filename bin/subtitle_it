@@ -55,7 +55,7 @@ BANNER
           
   #FIXME: I gave up... I cant acess the version var from here... missing something.
   opts.on("-v", "--version",
-          "Show program version") {   puts 'SubtitleIt v0.6.3'; exit }          
+          "Show program version") {   puts 'SubtitleIt v0.6.5'; exit }          
           
   opts.parse!(ARGV)
 

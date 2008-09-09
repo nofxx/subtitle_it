@@ -6,8 +6,6 @@ README.markdown
 README.txt
 Rakefile
 bin/subtitle_it
-blu.rsb
-blua.rsb
 config/hoe.rb
 config/requirements.rb
 lib/subtitle_it.rb
