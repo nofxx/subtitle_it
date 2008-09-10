@@ -4,7 +4,7 @@ Ruby tool to work with subtitle files.
 
 h1. FEATURES:
 
-* Converts to and from: yml/srt/sub/rsb nice subtitle code
+* Converts to and from: SRT, SUB, XML(TT), YML, MPL2, RSB and ASS.
 * Fixes delays. (SrtResync)
 
 h2. TODO:
