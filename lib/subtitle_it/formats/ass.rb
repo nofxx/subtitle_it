@@ -1,5 +1,6 @@
 # SubtitleIt
 #  ASS - http://en.wikipedia.org/wiki/SubStation_Alpha
+#  http://www.malakith.net/aegiwiki/ASS
 #
 module SubtitleIt
   module Formats    

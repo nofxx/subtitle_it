@@ -5,6 +5,10 @@ require 'subtitle_it/version'
 require 'subtitle_it/subtime'
 require 'subtitle_it/subline'
 require 'subtitle_it/subtitle'
+require 'subtitle_it/subdown'
+require 'subtitle_it/substyle'
+require 'subtitle_it/movie'
+
 
 module SubtitleIt
 end

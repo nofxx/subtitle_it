@@ -1,5 +1,5 @@
 # SubtitleIt
-# SRT format
+# SRT - Subrip format
 #
 # N
 # 00:55:21,600 --> 00:55:27,197
@@ -32,3 +32,13 @@ module SubtitleIt
     end    
   end
 end
+
+#looks like subrip accepts some styling:
+#     sdict.add(new StyledFormat(ITALIC, "i", true));
+#     sdict.add(new StyledFormat(ITALIC, "/i", false));
+#     sdict.add(new StyledFormat(BOLD, "b", true));
+#     sdict.add(new StyledFormat(BOLD, "/b", false));
+#     sdict.add(new StyledFormat(UNDERLINE, "u", true));
+#     sdict.add(new StyledFormat(UNDERLINE, "/u", false));
+#     sdict.add(new StyledFormat(STRIKETHROUGH, "s", true));
+#     sdict.add(new StyledFormat(STRIKETHROUGH, "/s", false));

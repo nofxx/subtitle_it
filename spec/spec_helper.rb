@@ -30,4 +30,8 @@ module SubFixtures
   def xml_fixture
     File.open(File.expand_path(File.dirname(__FILE__) + '/fixtures/movie.xml')) 
   end  
+  
+  def mpl_fixture
+    File.open(File.expand_path(File.dirname(__FILE__) + '/fixtures/puplfiction.mpl')) 
+  end  
 end

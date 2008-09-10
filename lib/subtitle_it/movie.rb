@@ -1,5 +1,5 @@
 # downsub - github.com/johanlunds/downsub
-require 'down_sub/movie_hasher'
+require 'subtitle_it/movie_hasher'
 
 module SubtitleIt
   class Movie
@@ -10,12 +10,12 @@ module SubtitleIt
 
     def initialize(filename)
       @filename = filename
-      @hash = nil
+      @haxx = nil
       @info = {}
     end
 
-    def hash
-      @hash ||= MovieHasher::compute_hash(@filename)
+    def haxx
+      @haxx ||= MovieHasher::compute_haxx(@filename)
     end
 
     def size

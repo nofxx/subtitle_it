@@ -1,7 +1,8 @@
 # SubtitleIt
 # RSB - Ruby Subtitle
 #
-# 00:32 => 00:33 == Nice police work! | Thank you!
+# 00:32 => 00:33
+# Nice police work! | Thank you!
 # 00:53 => N == Howdy ho!
 # MM:SS => N == TEXT | NEWLINE
 #
@@ -29,5 +30,3 @@ module SubtitleIt
     end    
   end
 end
-
-

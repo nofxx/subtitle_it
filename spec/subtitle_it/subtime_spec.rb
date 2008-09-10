@@ -34,6 +34,17 @@ describe Subtime do
   end
 end
 
+describe "and the other way around" do
+  it "should print nicely" do
+    @subtime = Subtime.new(3723400)
+    @subtime.to_s.should eql('01:02:03.400')
+  end
+  
+end
+
+
+
+
 describe Subtime,"22" do
   it "should convert a big time" do
     @subtime =  Subtime.new('11:22:33.742')
@@ -51,20 +62,20 @@ end
 
 describe Subtime, ".other formats" do
   
-  it "should parse comma" do
+  it "should parse min:sec.ms" do
     @subtime = Subtime.new('01:03.4')
   end
 
-  it "should parse dot" do
+  it "should parse min:sec,ms" do
     @subtime = Subtime.new('01:03,3')
   end
   
-  it "should parse dot" do
+  it "should single as seconds hour should be nil" do
     @subtime = Subtime.new('3')
     @subtime.hrs.should eql(0)
   end
   
-  it "should parse dot" do
+  it "should parse min:sec" do
     @subtime = Subtime.new('01:03')
     @subtime.min.should eql(1)
   end
