@@ -70,12 +70,12 @@ Jubler: http://www.jubler.org/
 Aegisub: http://www.malakith.net/aegiwiki/Main_Page
 
 
-
 == LICENSE:
 
 (The MIT License)
 
-Copyright (c) 2008 Warlley Rezende, Marcos Piccinini
+Copyright (c) 2008 Marcos Piccinini, Johanlunds, Warlley Rezende
+
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the

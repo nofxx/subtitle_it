@@ -16,16 +16,16 @@ module SubtitleIt
       @authors = inn.delete_at(0).split(':')[1] 
       @version = inn.delete_at(0).split(':')[1] 
       inn.inject([]) do |final,line|
-        text_on,text_off = line.split('=>').map { |t| t.strip }
+        time_on,time_off = line.split('=>').map { |t| t.strip }
         text = line.split('==')[1].strip
-        final << Subline.new(text_on, text_off, text)
+        final << Subline.new(time_on, time_off, text)
       end
     end
     
     def to_rsb
       out = "- title: #{@title}\n- authors: #{@authors}\n- version: #{@version}\n"
       out << @lines.inject([]) do |i,l|
-        i << "%s => %s == %s" % [l.text_on.to_s, l.text_off.to_s, l.text]
+        i << "%s => %s == %s" % [l.time_on.to_s, l.time_off.to_s, l.text]
       end.join("\n")      
     end    
   end

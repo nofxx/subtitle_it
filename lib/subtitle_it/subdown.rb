@@ -8,20 +8,20 @@ require 'subtitle_it/subtitle'
 
 module SubtitleIt
   class Subdown
-    @@host = "http://www.opensubtitles.org/xml-rpc"
-    @@host_dev = "http://dev.opensubtitles.org/xml-rpc"
+    HOST = "http://www.opensubtitles.org/xml-rpc"
+    HOST_DEV = "http://dev.opensubtitles.org/xml-rpc"
 
-    @@user_agent = "SubtitleIt #{SubtitleIt::VERSION}"
+    USER_AGENT = "SubtitleIt #{SubtitleIt::VERSION::STRING}"
 
-    @@no_token = %w(ServerInfo LogIn)
+    NO_TOKEN = %w(ServerInfo LogIn)
 
-    def initialize(host = @@host)
+    def initialize(host = HOST)
       @client = XMLRPC::Client.new2(host)
       @token = nil
     end
 
     def log_in!
-      result = call('LogIn', '', '', '', @@user_agent)
+      result = call('LogIn', '', '', '', USER_AGENT)
       @token = result['token'].to_s
     end
 
@@ -55,8 +55,7 @@ module SubtitleIt
 
     def download_subtitle(sub)
       result = call('DownloadSubtitles', [sub.id])
-      sub.data = self.class.decode_and_unzip(result['data'][0]['data'])
-      
+      sub.data = self.class.decode_and_unzip(result['data'][0]['data'])     
     end
 
     def upload_subtitle(movie, subs)
@@ -73,7 +72,7 @@ module SubtitleIt
     private
 
       def call(method, *args)
-        unless @@no_token.include? method
+        unless NO_TOKEN.include? method
           raise 'Need to be logged in for this.' unless logged_in?
           args = [@token, *args]
         end

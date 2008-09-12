@@ -17,11 +17,11 @@ describe Formats, ".sub" do
     end
     
     it "should have a nic text on" do
-      @sub.lines[110].text_on.to_s.should eql('00:10:44.936')
+      @sub.lines[110].time_on.to_s.should eql('00:10:44.936')
     end
     
     it "should have a nice text out" do
-      @sub.lines[110].text_off.to_s.should eql('00:10:49.941')
+      @sub.lines[110].time_off.to_s.should eql('00:10:49.941')
     end
     
     it "should parse the sentece correctly" do

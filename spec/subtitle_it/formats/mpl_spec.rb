@@ -17,11 +17,11 @@ describe Formats, ".mpl" do
     end
     
     it "should parse time of" do
-      @mpl.lines[0].text_on.to_s.should eql("00:17:05.000")
+      @mpl.lines[0].time_on.to_s.should eql("00:17:05.000")
     end
     
     it "should parse time of" do
-      @mpl.lines[0].text_off.to_s.should eql("00:18:35.000")
+      @mpl.lines[0].time_off.to_s.should eql("00:18:35.000")
     end
     
     it "should parse text" do

@@ -16,13 +16,13 @@ describe Formats, ".xml" do
     end
     
     it "should parse time of" do
-      @xml.lines[0].text_on.to_s.should eql("00:00:00.000")
-      @xml.lines[10].text_on.to_s.should eql("00:00:25.520")      
+      @xml.lines[0].time_on.to_s.should eql("00:00:00.000")
+      @xml.lines[10].time_on.to_s.should eql("00:00:25.520")      
     end
     
     it "should parse time of" do
-      @xml.lines[0].text_off.to_s.should eql("00:00:03.700")
-      @xml.lines[10].text_off.to_s.should eql("00:00:27.520")        
+      @xml.lines[0].time_off.to_s.should eql("00:00:03.700")
+      @xml.lines[10].time_off.to_s.should eql("00:00:27.520")        
     end
     
     it "should parse text" do

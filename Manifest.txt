@@ -9,6 +9,8 @@ bin/subtitle_it
 config/hoe.rb
 config/requirements.rb
 lib/subtitle_it.rb
+lib/subtitle_it/bin.rb
+lib/subtitle_it/fixes.rb
 lib/subtitle_it/formats/ass.rb
 lib/subtitle_it/formats/mpl.rb
 lib/subtitle_it/formats/rsb.rb
@@ -16,6 +18,7 @@ lib/subtitle_it/formats/srt.rb
 lib/subtitle_it/formats/sub.rb
 lib/subtitle_it/formats/xml.rb
 lib/subtitle_it/formats/yml.rb
+lib/subtitle_it/generator.rb
 lib/subtitle_it/movie.rb
 lib/subtitle_it/movie_hasher.rb
 lib/subtitle_it/subdown.rb
@@ -39,6 +42,8 @@ spec/fixtures/puplfiction.mpl
 spec/fixtures/sincity.yml
 spec/spec.opts
 spec/spec_helper.rb
+spec/subtitle_it/bin_spec.rb
+spec/subtitle_it/fixes_spec.rb
 spec/subtitle_it/formats/ass_spec.rb
 spec/subtitle_it/formats/mpl_spec.rb
 spec/subtitle_it/formats/rsb_spec.rb
@@ -46,6 +51,7 @@ spec/subtitle_it/formats/srt_spec.rb
 spec/subtitle_it/formats/sub_spec.rb
 spec/subtitle_it/formats/xml_spec.rb
 spec/subtitle_it/formats/yml_spec.rb
+spec/subtitle_it/generator_spec.rb
 spec/subtitle_it/movie_hasher_spec.rb
 spec/subtitle_it/movie_spec.rb
 spec/subtitle_it/subdown_spec.rb

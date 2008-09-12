@@ -28,18 +28,18 @@ module SubtitleIt
       doc = Hpricot.XML(@raw)
      # p (doc/'tt'/'p').first[:dur]#inspect
       (doc/'tt'/'p').each do |line|
-        text_on = line[:begin]
-        text_off = line[:dur]
+        time_on = line[:begin]
+        time_off = line[:dur]
         text = line.innerHTML
-        final << Subline.new(text_on,text_off,text)
+        final << Subline.new(time_on,time_off,text)
       end
       final
     end
     
     def xml_lines
       @lines.inject([]) do |i,l| 
-        toff = l.text_off - l.text_on
-        i << "      <p begin=\"#{l.text_on}\" dur=\"#{toff}\">#{l.text}</p>"
+        toff = l.time_off - l.time_on
+        i << "      <p begin=\"#{l.time_on}\" dur=\"#{toff}\">#{l.text}</p>"
       end.join("\n")
     end
         

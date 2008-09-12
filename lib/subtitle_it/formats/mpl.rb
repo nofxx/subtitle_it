@@ -11,16 +11,16 @@ module SubtitleIt
       @raw.to_a.inject([]) do |i,l|
   			line_data = l.scan(/^\[([0-9]{1,})\]\[([0-9]{1,})\](.+)$/)
   			line_data = line_data.at 0
-  			text_on, text_off, text = line_data
-  			text_on, text_off = [text_on.to_i, text_off.to_i].map { |t| t.to_i * 1000 }	    
-        i << Subline.new(text_on, text_off, text.chomp)
+  			time_on, time_off, text = line_data
+  			time_on, time_off = [time_on.to_i, time_off.to_i].map { |t| t.to_i * 1000 }	    
+        i << Subline.new(time_on, time_off, text.chomp)
       end
     end
         
     def to_mpl
       @lines.inject([]) do |i,l|
-        start = l.text_on.to_i / 100
-        stop = l.text_off.to_i / 100
+        start = l.time_on.to_i / 100
+        stop = l.time_off.to_i / 100
         i << "[%d][%d]%s" % [start, stop, l.text]
       end.join("\n")
     end    

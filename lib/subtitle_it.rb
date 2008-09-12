@@ -8,7 +8,7 @@ require 'subtitle_it/subtitle'
 require 'subtitle_it/subdown'
 require 'subtitle_it/substyle'
 require 'subtitle_it/movie'
-
+require 'subtitle_it/bin'
 
 module SubtitleIt
 end

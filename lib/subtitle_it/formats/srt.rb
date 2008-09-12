@@ -14,10 +14,10 @@ module SubtitleIt
       @raw.split(/\n\n/).inject([]) do |final,line|
         line = line.split(/\n/)
         line.delete_at(0)
-        text_on,text_off = line[0].split('-->').map { |t| t.strip }
+        time_on,time_off = line[0].split('-->').map { |t| t.strip }
         line.delete_at(0)        
         text = line.join("|")
-        final << Subline.new(text_on, text_off, text)
+        final << Subline.new(time_on, time_off, text)
       end
     end
 
@@ -25,7 +25,7 @@ module SubtitleIt
       out = []
       @lines.each_with_index do |l,i|
         out << "#{i}"
-        out << "%s --> %s" % [l.text_on.to_s, l.text_off.to_s]
+        out << "%s --> %s" % [l.time_on.to_s, l.time_off.to_s]
         out << l.text.gsub("|","\n")
       end
       out.join("\n")

@@ -17,11 +17,11 @@ describe Formats, ".rsb" do
     end
 
     it "should parse time of" do
-      @rsb.lines[0].text_on.to_s.should eql("00:05:26.500")
+      @rsb.lines[0].time_on.to_s.should eql("00:05:26.500")
     end
     
     it "should parse time of" do
-      @rsb.lines[0].text_off.to_s.should eql("00:05:28.500")
+      @rsb.lines[0].time_off.to_s.should eql("00:05:28.500")
     end
     
     it "should parse text" do
