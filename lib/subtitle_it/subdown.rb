@@ -48,7 +48,7 @@ module SubtitleIt
       result = call('SearchSubtitles', [args])
       return [] unless result['data'] # if no results result['data'] == false
       result['data'].inject([]) do |subs, sub_info|
-        subs << Subtitle.new(sub_info)
+        subs << Subtitle.new({:info => sub_info})
         subs
       end
     end

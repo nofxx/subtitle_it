@@ -5,7 +5,7 @@ describe Formats, ".yml" do
     include SubFixtures
     
     before(:each) do    
-      @sub = Subtitle.new(nil, yml_fixture,'yml')    
+      @sub = Subtitle.new({:dump => yml_fixture, :format => 'yml'}) 
     end  
   
     it "should have author" do

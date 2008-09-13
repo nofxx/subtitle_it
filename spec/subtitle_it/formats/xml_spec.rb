@@ -4,7 +4,7 @@ describe Formats, ".xml" do
   include SubFixtures
   describe "In" do    
     before(:each) do    
-      @xml = Subtitle.new(nil, xml_fixture,'xml')    
+      @xml = Subtitle.new({:dump => xml_fixture, :format => 'xml'}) 
     end  
         
     it "should parse the sub to an array" do
@@ -32,7 +32,7 @@ describe Formats, ".xml" do
   
   describe "Out" do    
     before(:each) do    
-      @sub = Subtitle.new(nil, yml_fixture,'yml')    
+      @sub = Subtitle.new({:dump => yml_fixture, :format => 'yml'})  
     end  
         
     it "should parse the sub to an array" do

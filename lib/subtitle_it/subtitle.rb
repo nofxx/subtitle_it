@@ -10,28 +10,26 @@ module SubtitleIt
   
   MOVIE_EXTS = %w(3g2 3gp 3gp2 3gpp 60d ajp asf asx avchd avi bik bix box cam dat divx dmf dv dvr-ms evo flc fli flic flv flx gvi gvp h264 m1v m2p m2ts m2v m4e m4v mjp mjpeg mjpg mkv moov mov movhd movie movx mp4 mpe mpeg mpg mpv mpv2 mxf nsv nut ogg ogm omf ps qt ram rm rmvb swf ts vfw vid video viv vivo vob vro wm wmv wmx wrap wvx wx x264 xvid)
   SUB_EXTS = %w(srt sub smi txt ssa ass mpl xml yml rsb)
+  #TODO: create a lang class?
+  LANGS = {
+    :pb => 'Brazilian Portuguese',
+    :en => 'English'        
+  }
   
   class Subtitle    
     attr_reader :id, :raw, :format, :lines, :style, :info, :filename, :rating
     
-    def initialize(info=nil,dump=nil,format=nil)
-      if @info = info
-        @id       = info['IDSubtitleFile'].to_i
-        @filename = info['SubFileName'].to_s 
-        @format   = info['SubFormat'].to_s 
-        @rating   = info['SubRating'].to_f
+    def initialize(args = {})
+      if @info = args[:info]
+        @id       = @info['IDSubtitleFile'].to_i
+        @filename = @info['SubFileName'].to_s 
+        @format   = @info['SubFormat'].to_s 
+        @rating   = @info['SubRating'].to_f
       end
-      @fps=23.976      
-      parse_dump(dump,format) if dump
+      @fps = args[:fps] || 23.976      
+      parse_dump(args[:dump], args[:format]) if args[:dump]
     end
     
-    def parse_dump(dump,format)
-      raise unless format =~ /^srt$|sub|yml|txt|rsb|xml|ass|mpl/
-      @raw = dump.kind_of?(String) ? dump : dump.read
-      @format = format
-      parse!
-    end
-
     def style=(s)
       @style = s
     end
@@ -51,7 +49,14 @@ module SubtitleIt
 
     private
     
-    def parse!
+    def parse_dump(dump,format)
+      raise unless SUB_EXTS.include?(format)
+      @raw = dump.kind_of?(String) ? dump : dump.read
+      @format = format
+      parse_lines!
+    end
+    
+    def parse_lines!
       self.lines = send :"parse_#{@format}"      
     end
     

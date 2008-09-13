@@ -5,7 +5,7 @@ describe Formats, ".srt" do
   describe "In" do
     
     before(:each) do
-      @srt = Subtitle.new(nil, srt_fixture,'srt') 
+      @srt = Subtitle.new({:dump => srt_fixture, :format => 'srt'}) 
     end  
 
     it "should parse the sub to an array" do
@@ -32,7 +32,7 @@ describe Formats, ".srt" do
   describe "Out!" do
        
     before(:each) do
-      @sub = Subtitle.new(nil, yml_fixture,'yml')    
+      @sub = Subtitle.new({:dump => yml_fixture, :format => 'yml'}) 
     end  
   
     it "should dump the object as a SRT" do

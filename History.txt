@@ -35,3 +35,9 @@
   * Adds download opensubtitles support
   * Fixes various bugs (and adds another ones)
   * Adds MPL2 support
+
+== 0.7.5 2008-09-13
+
+* 2 major enhancement
+  * Support multiple file downloads
+  * subtitle_it worker code rewritten 

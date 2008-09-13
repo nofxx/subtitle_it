@@ -1,6 +1,6 @@
 = Subtitle It
 
-Ruby tool to work with subtitle files.
+Ruby tool to download, create, convert and fix subtitles.
 
 
 == FEATURES:
@@ -9,8 +9,10 @@ Ruby tool to work with subtitle files.
 * Download from opensubtitles.org
 * Fixes delays. (SrtResync)
 
+
 == TODO:
 
+* Support styles
 * Compatibility with "sube" (http://github.com/vic/sube)
 * Fix delays
 * Convert 1 to 2 CD`s and versa-vice
@@ -28,6 +30,8 @@ Bash tool:
 
 Convert a srt to sub:
   subtitle_it in.srt out.sub
+  or
+  subtitle_it -c sub in.srt
 
 Add a delay of 1 minute:
   subtitle_it -d 60 in.srt
@@ -38,7 +42,8 @@ Create a template
 
 == INSTALL:
 
- sudo gem install SubtitleIt
+ gem sources add http://gems.github.com
+ sudo gem install nofxx-subtitle_it
 
 
 == THE "Ruby Subtitle" Format - RSB

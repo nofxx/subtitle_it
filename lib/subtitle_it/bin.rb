@@ -6,8 +6,8 @@ module SubtitleIt
     def run!(file, format)
       raise unless format
       content = File.open(file, 'r')
-      puts "Working on file #{file}..."
-      sub = Subtitle.new(nil, content, Bin.get_extension(file))       
+      STDOUT.puts "Working on file #{file}..."
+      sub = Subtitle.new({ :dump => content, :format => Bin.get_extension(file) })
       dump = sub.send :"to_#{format}" 
       Bin::write_out(Bin.swap_extension(file, format), dump)
     end
@@ -19,13 +19,13 @@ module SubtitleIt
       @down = Subdown.new
       @down.log_in!
       res = @down.search_subtitles(@movie)
-      puts "Found #{res.length} result#{"s" if res.length > 1}. Choose one:\n"
-      res.sort.each_with_index { |r,i| puts print_option(r,i) }
-      puts "You can choose multiple ones, separated with spaces or a range separated with hifen."      
-      printf "Choose: "  
+      STDOUT.puts "Found #{res.length} result#{"s" if res.length > 1}. Choose one:\n"
+      res.sort.each_with_index { |r,i| STDOUT.puts print_option(r,i) }
+      STDOUT.puts "You can choose multiple ones, separated with spaces or a range separated with hifen."      
+      STDOUT.printf "Choose: "  
       choose = parse_input(STDIN.gets.chomp)
       choose = choose.map { |c| res[c.to_i-1] }     
-      puts "Downloading #{choose.length} subtitles..."
+      STDOUT.puts "Downloading #{choose.length} subtitles..."
       choose.each do |sub| 
         down_a_sub(sub, sub.format)
       end
@@ -64,24 +64,26 @@ module SubtitleIt
       @force = force
       @format = format
       
-      if File.exists?(argv[0]) # && ( argv[1] || format )              
-        @file_in = argv[0]
-        @file_in_ext = Bin.get_extension(@file_in)        
-        if argv[1]
-          @file_out = argv[1] 
-          @file_out_ext = Bin.get_extension(@file_out)
-          @format = @file_out_ext
-        end        
-        if MOVIE_EXTS.include? @file_in_ext
-          Subdownloader.new.run!(argv[0])        
-        elsif SUB_EXTS.include? @file_in_ext
-          Subwork.new.run!(@file_in, @format)
-        else
-          raise "Unknown file."
-        end
-      else
-#        generate_rsb
+      unless File.exists?(argv[0]) 
+        #        generate_rsb
+        return
       end
+      
+      @file_in = argv[0]
+      @file_in_ext = Bin.get_extension(@file_in)        
+      if argv[1]
+        @file_out = argv[1] 
+        @file_out_ext = Bin.get_extension(@file_out)
+        @format = @file_out_ext
+      end        
+      if MOVIE_EXTS.include? @file_in_ext
+        Subdownloader.new.run!(argv[0])        
+      elsif SUB_EXTS.include? @file_in_ext
+        Subwork.new.run!(@file_in, @format)
+      else
+        raise "Unknown file."
+      end
+
     rescue Exception => e
       puts e.message
       exit 1
@@ -100,10 +102,10 @@ module SubtitleIt
     
     def Bin.write_out(filename,dump)
       if File.exists?(filename) && !@force
-          puts "File exists. #{filename}"
+          STDOUT.puts "File exists. #{filename}"
       else
         File.open(filename, 'w') {|f| f.write(dump) }  
-        puts "Done. Wrote: #{filename}."
+        STDOUT.puts "Done. Wrote: #{filename}."
       end
     end
   end

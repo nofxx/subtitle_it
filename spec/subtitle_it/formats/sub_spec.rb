@@ -5,7 +5,7 @@ describe Formats, ".sub" do
   describe "Parse" do
   
     before(:each) do
-      @sub = Subtitle.new(nil, sub_fixture,'sub') 
+      @sub = Subtitle.new({:dump => sub_fixture, :format => 'sub'}) 
     end  
 
     it "should parse the sub to an array" do
@@ -36,7 +36,7 @@ describe Formats, ".sub" do
   describe "Out" do
 
     before(:each) do
-      @sub = Subtitle.new(nil, yml_fixture,'yml')    
+      @sub = Subtitle.new({:dump => yml_fixture, :format => 'yml'})    
     end  
 
     it "should dump the object as a SUB" do
