@@ -26,7 +26,7 @@ module SubtitleIt
       @lines.each_with_index do |l,i|
         out << "#{i}"
         out << "%s --> %s" % [l.time_on.to_s, l.time_off.to_s]
-        out << l.text.gsub("|","\n")
+        out << l.text.gsub("|","\n") + "\n"
       end
       out.join("\n")
     end    

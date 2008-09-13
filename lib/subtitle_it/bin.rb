@@ -34,8 +34,8 @@ module SubtitleIt
     
     def down_a_sub(sub, format)
       dump = @down.download_subtitle(sub)
-      movie_name = Bin.parse_file(@movie.filename)[0]
-      Bin::write_out("#{movie_name}.#{format}", dump)
+      movie_name = @movie.filename[0..-4]
+      Bin::write_out(movie_name + format, dump)
     end  
 
     def print_option(r, index)
@@ -83,7 +83,7 @@ module SubtitleIt
 #        generate_rsb
       end
     rescue Exception => e
-      puts e.message.inspect
+      puts e.message
       exit 1
     end
     
@@ -93,8 +93,9 @@ module SubtitleIt
     end
     
     def Bin.swap_extension(file,extension)
-      file[-3..-1] = extension
-      file
+      f = file.dup
+      f[-3..-1] = extension
+      f
     end
     
     def Bin.write_out(filename,dump)
