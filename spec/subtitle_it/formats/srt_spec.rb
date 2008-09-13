@@ -37,19 +37,19 @@ describe Formats, ".srt" do
   
     it "should dump the object as a SRT" do
       @sub.to_srt.should eql("1
-00:05:26.500 --> 00:05:28.500
+00:05:26,500 --> 00:05:28,500
 worth killing for...
 
 2
-00:06:00.400 --> 00:06:03.400
+00:06:00,400 --> 00:06:03,400
 worth dying for...
 
 3
-00:07:00.300 --> 00:07:03.300
+00:07:00,300 --> 00:07:03,300
 worth going to the hell for...
 
 4
-00:07:00.300 --> 00:07:03.300
+00:07:00,300 --> 00:07:03,300
 worth going a 
  line...\n")
     end
