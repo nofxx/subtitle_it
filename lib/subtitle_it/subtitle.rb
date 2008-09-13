@@ -12,13 +12,14 @@ module SubtitleIt
   SUB_EXTS = %w(srt sub smi txt ssa ass mpl xml yml rsb)
   
   class Subtitle    
-    attr_reader :id, :raw, :format, :lines, :style, :info, :filename
+    attr_reader :id, :raw, :format, :lines, :style, :info, :filename, :rating
     
-    def initialize(dump=nil,format=nil,info=nil)
+    def initialize(info=nil,dump=nil,format=nil)
       if @info = info
         @id       = info['IDSubtitleFile'].to_i
         @filename = info['SubFileName'].to_s 
         @format   = info['SubFormat'].to_s 
+        @rating   = info['SubRating'].to_f
       end
       @fps=23.976      
       parse_dump(dump,format) if dump
@@ -42,6 +43,11 @@ module SubtitleIt
     def data=(data)
       @raw = data
     end
+    
+    def <=>(other)
+      self.rating <=> other.rating
+    end
+    include Comparable
 
     private
     

@@ -5,7 +5,7 @@ describe Formats, ".mpl" do
   describe "In" do
     
     before(:each) do
-      @mpl = Subtitle.new(mpl_fixture,'mpl') 
+      @mpl = Subtitle.new(nil, mpl_fixture,'mpl') 
     end  
 
     it "should parse the sub to an array" do
@@ -32,7 +32,7 @@ describe Formats, ".mpl" do
   describe "Out!" do
        
     before(:each) do
-      @sub = Subtitle.new(yml_fixture,'yml')    
+      @sub = Subtitle.new(nil, yml_fixture,'yml')    
     end  
   
     it "should dump the object as a SRT" do

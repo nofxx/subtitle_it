@@ -10,6 +10,12 @@ module BinspecHelper
   def mock_subdown
     @mock_subdown = mock(Subdown)
   end
+  def mock_subtitle
+    @mock_subtitle = mock(Subtitle)
+  end  
+  def mock_file
+    @mock_file = mock(File)
+  end
 end
 
 describe Bin do
@@ -22,8 +28,17 @@ describe Bin do
   it "should call for movie" do
     Subdownloader.should_receive(:new)
     File.should_receive(:exists?).and_return(true)
+    File.should_receive(:open).and_return(mock_file)
     SubtitleIt::Bin::run!(["movie.avi"])
   end
+  
+  it "should call for subtitle" do
+    @subwork_mock = mock(Subwork, :run! => true)#.should_receive(:new)
+    @subwork_mock.should_receive(:new)
+    @subwork_mock.should_receive(:run!)
+    File.should_receive(:exists?).and_return(true)
+    SubtitleIt::Bin::run!(["movie.srt"])
+  end  
 end
   
 describe Subdownloader do    
@@ -43,9 +58,13 @@ describe Subdownloader do
     
   end
   
-  it "should parse files" do
-    Bin.parse_file("Lots.of.dots.happen").should eql(["Lots.of.dots", "happen"])
-    lambda { Bin.parse_file("Nodotstoo") }.should raise_error
+  it "should get extension files" do
+    Bin.get_extension("Lots.of.dots.happen").should eql("happen")
+    lambda { Bin.get_extension("Nodotstoo") }.should raise_error
+  end
+  
+  it "should swap extensions" do
+    Bin.swap_extension("foo.txt", "srt").should eql("foo.srt")
   end
   
   it "should parse user input" do    
@@ -67,8 +86,30 @@ describe Subdownloader do
       "SubAuthorComment" => 'Nice nice...'
       })
       @subd = Subdownloader.new
-      @subd.print_choice(@sub, 1).should eql("2) Resevoir Dogs / 1992 | Cool sub | Movie score: 10.0
+      @subd.print_option(@sub, 1).should eql("2) Resevoir Dogs / 1992 | Cool sub | Movie score: 10.0
    Lang: Eng | Format: SRT | Downloads: 310 | Rating: 9.5 | CDs: 2
    Comments: Nice nice... \n\n")        
+  end
+end
+
+describe Subwork do
+  include BinspecHelper
+  
+  it "should call a new subtitle" do
+    File.should_receive(:open).with("file.srt", "r").and_return(mock_file) 
+    File.should_receive(:open).with("file.sub", "w").and_return(true)     
+
+    Subtitle.should_receive(:new).and_return(mock_subtitle)
+    @mock_subtitle.should_receive(:to_sub).and_return('subbb')
+
+    Subwork.new.run!("file.srt", "sub")
+  end
+  
+  it "should not write if file exists" do
+    File.should_receive(:open).with("file.srt", "r").and_return(mock_file) 
+    File.should_receive(:exists?).and_return(true)
+    Subtitle.should_receive(:new).and_return(mock_subtitle)
+    @mock_subtitle.should_receive(:to_sub).and_return('subbb')
+    Subwork.new.run!("file.srt", "sub")
   end
 end

@@ -19,27 +19,29 @@ module SubtitleIt
   module Formats
     #between our formats, what changes can be reduced to a value
     def ratio
-     1
-      
+     1      
     end
-    
-       
+           
     def parse_sub
       @raw.to_a.inject([]) do |i,l|
   			line_data = l.scan(/^\{([0-9]{1,})\}\{([0-9]{1,})\}(.+)$/)
   			line_data = line_data.at 0
   			time_on, time_off, text = line_data
-  			time_on, time_off = [time_on.to_i, time_off.to_i].map { |t| (t.to_i/@fps*1000).to_i }	    
+  			time_on, time_off = [time_on.to_i, time_off.to_i].map do |t| 
+  			  (t.to_i / @fps * 1000 / ratio).to_i 
+  			end	    
         i << Subline.new(time_on, time_off, text.chomp)
       end
     end
         
     def to_sub
       @lines.inject([]) do |i,l|
-        start = l.time_on.to_i / 1000 * @fps * ratio
-        stop = l.time_off.to_i / 1000 * @fps * ratio
-        i << "{%d}{%d}%s" % [start, stop, l.text]
+        i << "{%d}{%d}%s" % [parse_time(l.time_on), parse_time(l.time_off), l.text]
       end.join("\r\n")
-    end    
+    end
+    
+    def parse_time(n)
+      n.to_i / 1000 * @fps * ratio
+    end
   end 
 end

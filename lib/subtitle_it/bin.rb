@@ -3,13 +3,13 @@
 module SubtitleIt  
   
   class Subwork   
-    def run!(file,ext,format)
-      filename = file + ext
-      content = File.open(filename, 'r')
-      puts "Working on file #{filename}..."
-      sub = Subtitle.new(content, ext)       
+    def run!(file, format)
+      raise unless format
+      content = File.open(file, 'r')
+      puts "Working on file #{file}..."
+      sub = Subtitle.new(nil, content, Bin.get_extension(file))       
       dump = sub.send :"to_#{format}" 
-      Bin::write_out(file+format, dump)
+      Bin::write_out(Bin.swap_extension(file, format), dump)
     end
   end
     
@@ -20,14 +20,13 @@ module SubtitleIt
       @down.log_in!
       res = @down.search_subtitles(@movie)
       puts "Found #{res.length} result#{"s" if res.length > 1}. Choose one:\n"
-      res.each_with_index { |r,i| puts print_choice(r,i) }
+      res.sort.each_with_index { |r,i| puts print_option(r,i) }
       puts "You can choose multiple ones, separated with spaces or a range separated with hifen."      
       printf "Choose: "  
       choose = parse_input(STDIN.gets.chomp)
       choose = choose.map { |c| res[c.to_i-1] }     
       puts "Downloading #{choose.length} subtitles..."
       choose.each do |sub| 
-        puts "#{sub.inspect}"
         down_a_sub(sub, sub.format)
       end
       @down.log_out!
@@ -39,7 +38,7 @@ module SubtitleIt
       Bin::write_out("#{movie_name}.#{format}", dump)
     end  
 
-    def print_choice(r, index)
+    def print_option(r, index)
       c = "#{index+1}) #{r.info["MovieName"]} / #{r.info["MovieYear"]} | #{r.info["SubFileName"]} | Movie score: #{r.info["MovieImdbRating"]}\n"
       c << "   Lang: #{r.info["SubLanguageID"].capitalize} | Format: #{r.info["SubFormat"].upcase} | Downloads: #{r.info["SubDownloadsCnt"]} | Rating: #{r.info["SubRating"]} | CDs: #{r.info["SubSumCD"]}\n"
       c << "   Comments: #{r.info["SubAuthorComment"]} \n\n"
@@ -61,15 +60,22 @@ module SubtitleIt
   class Bin   
 
     def Bin.run! argv, format=nil, force=false, delay=nil
-#      SubtitleIt::Bin.new.run!(argv, format, force, delay)
       raise unless argv
+      @force = force
+      @format = format
+      
       if File.exists?(argv[0]) # && ( argv[1] || format )              
-        @file_in, @file_in_ext = Bin::parse_file(argv[0])
-        @file_out, @fileout_ext = argv[1] ? Bin::parse_file(argv[1]) : [@file_in, @file_in_ext]
+        @file_in = argv[0]
+        @file_in_ext = Bin.get_extension(@file_in)        
+        if argv[1]
+          @file_out = argv[1] 
+          @file_out_ext = Bin.get_extension(@file_out)
+          @format = @file_out_ext
+        end        
         if MOVIE_EXTS.include? @file_in_ext
-          Subdownloader.new.run!(argv[0])
+          Subdownloader.new.run!(argv[0])        
         elsif SUB_EXTS.include? @file_in_ext
-          Subwork.new.run!(@file_in, @file_in_ext, format)
+          Subwork.new.run!(@file_in, @format)
         else
           raise "Unknown file."
         end
@@ -77,20 +83,22 @@ module SubtitleIt
 #        generate_rsb
       end
     rescue Exception => e
-      puts e.message
+      puts e.message.inspect
       exit 1
     end
     
-    def Bin.parse_file(file)
+    def Bin.get_extension(file)
       raise unless file =~ /\./
-      file = file.split('.')
-      ext = file.delete_at(-1)
-      file = file.join('.')
-      [file, ext]      
+      file.split(".").last
     end
     
-    def Bin.write_out(filename,dump,force=nil)
-      if File.exists?(filename) && !force
+    def Bin.swap_extension(file,extension)
+      file[-3..-1] = extension
+      file
+    end
+    
+    def Bin.write_out(filename,dump)
+      if File.exists?(filename) && !@force
           puts "File exists. #{filename}"
       else
         File.open(filename, 'w') {|f| f.write(dump) }  

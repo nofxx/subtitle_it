@@ -26,7 +26,6 @@ module SubtitleIt
     def parse_xml
       final = []
       doc = Hpricot.XML(@raw)
-     # p (doc/'tt'/'p').first[:dur]#inspect
       (doc/'tt'/'p').each do |line|
         time_on = line[:begin]
         time_off = line[:dur]

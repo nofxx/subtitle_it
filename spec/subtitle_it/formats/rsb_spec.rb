@@ -5,7 +5,7 @@ describe Formats, ".rsb" do
   describe "In" do
     
     before(:each) do
-      @rsb = Subtitle.new(rsb_fixture,'rsb') 
+      @rsb = Subtitle.new(nil, rsb_fixture,'rsb') 
     end  
 
     it "should parse the sub to an array" do
@@ -32,7 +32,7 @@ describe Formats, ".rsb" do
   describe "Out" do
     include SubFixtures
     before(:each) do     
-      @sub = Subtitle.new(yml_fixture,'yml')    
+      @sub = Subtitle.new(nil, yml_fixture,'yml')    
     end  
       
     it "should dump the object to rsb" do
