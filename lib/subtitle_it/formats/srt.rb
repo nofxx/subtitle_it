@@ -8,29 +8,30 @@
 #
 # Where N is the sub index number
 #
-module SubtitleIt
-  module Formats    
-    def parse_srt 
-      @raw.split(/\n\n/).inject([]) do |final,line|
-        line = line.split(/\n/)
-        line.delete_at(0)
-        time_on,time_off = line[0].split('-->').map { |t| t.strip }
-        line.delete_at(0)        
-        text = line.join("|")
-        final << Subline.new(time_on, time_off, text)
-      end
+module Formats    
+  include PlatformEndLine
+  def parse_srt
+    endl = endline( @raw )
+    @raw.split( endl*2 ).inject([]) do |final,line|
+      line = line.split(endl)
+      line.delete_at(0)
+      time_on,time_off = line[0].split('-->').map { |t| t.strip }
+      line.delete_at(0)        
+      text = line.join("|")
+      final << Subline.new(time_on, time_off, text)
     end
-
-    def to_srt
-      out = []
-      @lines.each_with_index do |l,i|
-        out << "#{i+1}"
-        out << "%s --> %s" % [l.time_on.to_s(','), l.time_off.to_s(',')]
-        out << l.text.gsub("|","\n") + "\n"
-      end
-      out.join("\n")
-    end    
   end
+
+  def to_srt
+    endl = endline( @raw )
+    out = []
+    @lines.each_with_index do |l,i|
+      out << "#{i+1}"
+      out << "%s --> %s" % [l.time_on.to_s(','), l.time_off.to_s(',')]
+      out << l.text.gsub("|", endl) + endl
+    end
+    out.join( endl )
+  end    
 end
 
 #looks like subrip accepts some styling:

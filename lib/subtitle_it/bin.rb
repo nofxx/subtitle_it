@@ -8,7 +8,7 @@ module SubtitleIt
       content = File.open(file, 'r')
       STDOUT.puts "Working on file #{file}..."
       sub = Subtitle.new({ :dump => content, :format => Bin.get_extension(file) })
-      dump = sub.send :"to_#{format}" 
+      dump = sub.send :"to_#{format}"
       Bin::write_out(Bin.swap_extension(file, format), dump)
     end
   end
@@ -58,7 +58,6 @@ module SubtitleIt
   end
 
   class Bin   
-
     def Bin.run! argv, format=nil, force=false, delay=nil
       raise unless argv
       @force = force
@@ -94,6 +93,13 @@ module SubtitleIt
       file.split(".").last
     end
     
+    def Bin.get_enc_platform(filename)
+      raise unless File.exist?(filename)
+      File.open(filename, 'r') do |fd| 
+        fd.gets =~ /\r\n/ ? "WIN" : "UNIX"
+      end
+    end
+
     def Bin.swap_extension(file,extension)
       f = file.dup
       f[-3..-1] = extension

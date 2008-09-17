@@ -41,3 +41,7 @@
 * 2 major enhancement
   * Support multiple file downloads
   * subtitle_it worker code rewritten 
+
+== 0.7.6 2008-09-17
+* 1 major enhancement:
+  * Fixes a bug (platform dependent end-of-line)

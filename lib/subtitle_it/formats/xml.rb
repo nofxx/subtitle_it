@@ -20,34 +20,37 @@
 #  </body>
 #</tt>
 require 'hpricot'
-module SubtitleIt
-  module Formats    
-    
-    def parse_xml
-      final = []
-      doc = Hpricot.XML(@raw)
-      (doc/'tt'/'p').each do |line|
-        time_on = line[:begin]
-        time_off = line[:dur]
-        text = line.innerHTML
-        final << Subline.new(time_on,time_off,text)
-      end
-      final
+module Formats    
+  include PlatformEndLine
+  
+  def parse_xml
+    final = []
+    doc = Hpricot.XML(@raw)
+    (doc/'tt'/'p').each do |line|
+      time_on, time_off = ['begin', 'dur'].map { |str| line[str.to_sym] }
+      text = line.innerHTML
+      final << Subline.new(time_on,time_off,text)
     end
-    
-    def xml_lines
-      @lines.inject([]) do |i,l| 
-        toff = l.time_off - l.time_on
-        i << "      <p begin=\"#{l.time_on}\" dur=\"#{toff}\">#{l.text}</p>"
-      end.join("\n")
+    return final
+  end
+  
+  def xml_lines
+    endl = endline( @raw )
+    line_ary = []
+    @lines.each do |l|
+      toff = l.time_off - l.time_on
+      line_ary << "      <p begin=\"#{l.time_on}\" dur=\"#{toff}\">#{l.text}</p>"
     end
-        
-    def to_xml
-      out = <<XML
+    return line_ary.join( endl ) + endl
+  end
+      
+  def to_xml
+    endl = endline( @raw )
+    out = <<XML
 <?xml version="1.0" encoding="UTF-8"?>
 <tt xml:lang="en" xmlns="http://www.w3.org/2006/04/ttaf1"  xmlns:tts="http://www.w3.org/2006/04/ttaf1#styling">
   <head>
-    <styling>#{@style + "\n" if @style}
+    <styling>#{@style + endl if @style}
     </styling>
   </head>
   <body>
@@ -57,7 +60,6 @@ module SubtitleIt
   </body>
 </tt>
 XML
-    out.chomp
-    end    
-  end
+  out.chomp
+  end    
 end

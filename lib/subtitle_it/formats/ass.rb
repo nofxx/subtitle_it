@@ -2,14 +2,12 @@
 #  ASS - http://en.wikipedia.org/wiki/SubStation_Alpha
 #  http://www.malakith.net/aegiwiki/ASS
 #
-module SubtitleIt
-  module Formats    
-    def parse_ass
+module Formats    
+  def parse_ass
 
-    end
-    
-    #not mine!
-    def to_ass
-    end    
   end
+  
+  #not mine!
+  def to_ass
+  end    
 end
