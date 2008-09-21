@@ -12,16 +12,16 @@ module BinspecHelper
   
   def mock_subtitle
     @mock_subtitle = mock(Subtitle, { 
-      :info => sub_info, :format => 'srt'
+      :info => sub_info, :format => 'srt', :<=> => 1
     })
   end
   
   def sub_info
     { 
-      "SubLanguageID" => 'eng',
-      "MovieName"     => 'Resevoir Dogs',
-      "MovieYear"     => '1992',
-      "SubFileName"   => 'Cool sub',
+      "SubLanguageID"   => 'eng',
+      "MovieName"       => 'Resevoir Dogs',
+      "MovieYear"       => '1992',
+      "SubFileName"     => 'Cool sub',
       "MovieImdbRating" => '10.0',
       "SubDownloadsCnt" => '310',
       "SubRating"       => '9.5',
@@ -60,24 +60,30 @@ end
   
 describe Subdownloader do    
   include BinspecHelper
+  
+  it "should print languages" do
+    STDOUT.should_receive(:puts).at_least(30).times 
+    SubtitleIt::Bin.print_languages    
+  end
 
   it "should download a subtitle" do
     Movie.should_receive(:new).and_return(mock_movie)
     Subdown.should_receive(:new).and_return(mock_subdown)#mock(Subdown))     
        
     STDIN.should_receive(:gets).and_return("1")    
-    STDOUT.should_receive(:puts).with("Found 1 result. Choose one:\n")
+    STDOUT.should_receive(:puts).with("Found 2 results. Choose one:\n")
     STDOUT.should_receive(:printf).with("Choose: ")    
     STDOUT.should_receive(:puts).with("You can choose multiple ones, separated with spaces or a range separated with hifen.")
     STDOUT.should_receive(:puts).with("Downloading 1 subtitles...")
     STDOUT.should_receive(:puts).with("1) Resevoir Dogs / 1992 | Cool sub | Movie score: 10.0\n   Lang: Eng | Format: SRT | Downloads: 310 | Rating: 9.5 | CDs: 2\n   Comments: Nice nice... \n\n")    
+    STDOUT.should_receive(:puts).with("2) Resevoir Dogs / 1992 | Cool sub | Movie score: 10.0\n   Lang: Eng | Format: SRT | Downloads: 310 | Rating: 9.5 | CDs: 2\n   Comments: Nice nice... \n\n")    
     STDOUT.should_receive(:puts).with("Done. Wrote: Beavis Butthead Do America.srt.")
 
     File.should_receive(:open).with("Beavis Butthead Do America.srt", "w").and_return(true)     
 
     @mock_subdown.should_receive(:log_in!).and_return(true)
     @mock_subdown.should_receive(:download_subtitle).and_return(mock_subtitle)
-    @mock_subdown.should_receive(:search_subtitles).and_return([mock_subtitle])        
+    @mock_subdown.should_receive(:search_subtitles).and_return([mock_subtitle, mock_subtitle])        
     @mock_subdown.should_receive(:log_out!).and_return(true)    
     
     Subdownloader.new.run! "file.avi"        

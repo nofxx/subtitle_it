@@ -14,11 +14,15 @@ module SubtitleIt
   end
     
   class Subdownloader
-    def run!(movie)
+    def run!(movie,lang=nil)
       @movie = Movie.new(movie)       
       @down = Subdown.new
       @down.log_in!
-      res = @down.search_subtitles(@movie)
+      res = @down.search_subtitles(@movie, lang)
+      if res.length == 0
+        STDOUT.puts "No results found."
+        return
+      end
       STDOUT.puts "Found #{res.length} result#{"s" if res.length > 1}. Choose one:\n"
       res.sort.each_with_index { |r,i| STDOUT.puts print_option(r,i) }
       STDOUT.puts "You can choose multiple ones, separated with spaces or a range separated with hifen."      
@@ -57,16 +61,19 @@ module SubtitleIt
     end    
   end
 
-  class Bin   
-    def Bin.run! argv, format=nil, force=false, delay=nil
+  class Bin  
+    
+       
+    def Bin.run! argv, lang=nil, format=nil, force=false, delay=nil
       raise unless argv
       @force = force
       @format = format
       
       unless File.exists?(argv[0]) 
-        #        generate_rsb
+        # TODO       generate_rsb
         return
       end
+      
       
       @file_in = argv[0]
       @file_in_ext = Bin.get_extension(@file_in)        
@@ -76,7 +83,7 @@ module SubtitleIt
         @format = @file_out_ext
       end        
       if MOVIE_EXTS.include? @file_in_ext
-        Subdownloader.new.run!(argv[0])        
+        Subdownloader.new.run!(argv[0], lang)        
       elsif SUB_EXTS.include? @file_in_ext
         Subwork.new.run!(@file_in, @format)
       else
@@ -104,6 +111,13 @@ module SubtitleIt
       f = file.dup
       f[-3..-1] = extension
       f
+    end
+    
+    def Bin.print_languages
+      STDOUT.puts "CODE |  LANGUAGE"
+      LANGS.each do |l|
+        STDOUT.puts "  #{l[0]}  | #{l[1]}"
+      end
     end
     
     def Bin.write_out(filename,dump)

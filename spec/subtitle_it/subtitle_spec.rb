@@ -35,11 +35,6 @@ describe Subtitle do
     it "should compare to another using rating" do
       @another_sub = Subtitle.new(attr_valid_subtitle.with(:info => { "SubRating" => 4.0} ))
       (@sub > @another_sub).should be_true
-    end
-      
-    
+    end      
   end
-  
-  
-  
 end

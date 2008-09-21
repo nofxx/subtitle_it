@@ -20,7 +20,7 @@ module SubtitleIt
         time, float = data.split(/\.|\,/)
         time = time.split(/:/).map { |s| s.to_i }
         @ms =  (("0.%d" % float.to_i).to_f * 1000).to_i if float
-  			@sec, @min, @hrs = time.reverse
+        @sec, @min, @hrs = time.reverse
       else raise "Format unknown."
       end 
       #FIXME: dunno what to do about this.. nil = problems with to_i

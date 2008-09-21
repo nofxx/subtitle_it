@@ -19,8 +19,10 @@ lib/subtitle_it/formats/sub.rb
 lib/subtitle_it/formats/xml.rb
 lib/subtitle_it/formats/yml.rb
 lib/subtitle_it/generator.rb
+lib/subtitle_it/languages.rb
 lib/subtitle_it/movie.rb
 lib/subtitle_it/movie_hasher.rb
+lib/subtitle_it/platform_endl.rb
 lib/subtitle_it/subdown.rb
 lib/subtitle_it/subline.rb
 lib/subtitle_it/substyle.rb

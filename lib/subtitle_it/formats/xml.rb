@@ -41,7 +41,7 @@ module Formats
       toff = l.time_off - l.time_on
       line_ary << "      <p begin=\"#{l.time_on}\" dur=\"#{toff}\">#{l.text}</p>"
     end
-    return line_ary.join( endl ) + endl
+    return line_ary.join( endl )
   end
       
   def to_xml
@@ -55,11 +55,11 @@ module Formats
   </head>
   <body>
     <div xml:lang="en">
-#{xml_lines}                
+#{xml_lines}
     </div>
   </body>
 </tt>
 XML
   out.chomp
-  end    
+  end
 end

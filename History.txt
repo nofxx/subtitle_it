@@ -31,7 +31,7 @@
   
 == 0.7.0 2008-09-10
 
-* 4 major enhancements:
+* 3 major enhancements:
   * Adds download opensubtitles support
   * Fixes various bugs (and adds another ones)
   * Adds MPL2 support
@@ -43,5 +43,11 @@
   * subtitle_it worker code rewritten 
 
 == 0.7.6 2008-09-17
+
 * 1 major enhancement:
   * Fixes a bug (platform dependent end-of-line)
+
+== 0.7.7 2008-09-20
+
+* 1 major enhancement:
+  * Add language search (subtitle_it -l <code> <movie>)

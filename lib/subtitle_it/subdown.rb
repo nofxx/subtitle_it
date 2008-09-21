@@ -38,9 +38,11 @@ module SubtitleIt
       call('ServerInfo')
     end
 
-    def search_subtitles(movie)
+    def search_subtitles(movie, lang='')
+      lang ||= ""
+      puts la
       args = {
-        'sublanguageid' => '',
+        'sublanguageid' => lang,
         'moviehash'     => movie.haxx,
         'moviebytesize' => movie.size
       }
@@ -54,7 +56,7 @@ module SubtitleIt
     end
 
     def download_subtitle(sub)
-      result = call('DownloadSubtitles', [sub.id])
+      result = call('DownloadSubtitles', [sub.osdb_id])
       sub.data = self.class.decode_and_unzip(result['data'][0]['data'])     
     end
 
@@ -67,6 +69,8 @@ module SubtitleIt
     end
 
     def subtitle_languages
+      LANGS.map { |l| l[0].to_s }
+      # TODO.. get the correct codes
     end
 
     private
@@ -80,11 +84,16 @@ module SubtitleIt
         result = @client.call(method, *args)
 #        $LOG.debug "Client#call #{method}, #{args.inspect}: #{result.inspect}"
         
-        if result['status'] && !((200...300) === result['status'].to_i)
-          raise 'Status not OK in result.'
+        if !self.class.result_status_ok?(result)
+          raise XMLRPC::FaultException.new(result['status'].to_i, result['status'][4..-1]) # 'status' of the form 'XXX Message'
         end
         
         result
+      end
+      
+      # Returns true if status is OK (ie. in range 200-299) or don't exists.
+      def self.result_status_ok?(result)
+        !result.key?('status') || (200...300) === result['status'].to_i
       end
 
       def prevent_session_expiration

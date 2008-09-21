@@ -29,19 +29,12 @@ SubtitleIt - Download, convert and create subtitles.
 Usage: #{File.basename($0)} [options] movie or file_in [file_out]
 
 Options are:
-  -c FORMAT --convert=FORMAT  Format to convert. Use this empty to
-        show all supported formats.  You don`t need to use this if 
-        fileout contains a extension.
-  
-  -f  --force     Force overwrite.
-       
-  -d DELAY --delay=DELAY  Fix the delay of the file.
-  
-  -h  --help      Show this.
-  
-  -v  --version   Program version.
+
 BANNER
   opts.separator ""
+  
+  opts.on("-l", "--language=LANGUAGE", String,
+          "Language to search subtitles for, try it empty to see the supported ones.") { |OPTIONS[:lang]| }
 
   opts.on("-c", "--convert=FORMAT", String,
           "Format to convert to") { |OPTIONS[:format]| }
@@ -68,6 +61,6 @@ if ARGV.empty?
   puts parser.banner
   exit
 else
-  SubtitleIt::Bin.run! ARGV, OPTIONS[:format], OPTIONS[:force], OPTIONS[:delay]
+  SubtitleIt::Bin.run! ARGV, OPTIONS[:lang], OPTIONS[:format], OPTIONS[:force], OPTIONS[:delay]
 end
 

@@ -54,39 +54,41 @@ describe Subdown do
     end
     
     it "should get subtitle languages" do
-      @down.subtitle_languages.should be_nil
+      @down.subtitle_languages.should be_instance_of(Array)
+      @down.subtitle_languages.length.should eql(51)
+      @down.subtitle_languages[0].should be_instance_of(String)
     end
-    
-    
+        
   end
 end
 
 #  REAL TESTS THAT USES THE INTERNET... DUNNO BETTER PRACTICE FOR THIS
 #   Mock is nice, but I would like to keep this here, who knows if
 #   Opensubtitle API changes.... any suggestions?
-#
-#describe Subdown, " - Wired tests" do
-  # before(:each) do
-  #   @down = Subdown.new
-  #   @movie = mock(Movie, :haxx => '09a2c497663259cb')
-  # end
-
-  # it "should get imdb info" do
-  #       @down.log_in!
-  #   @movie.should_receive('info=').with({"MovieYear"=>"2004", 
-  #     "MovieImdbID"=>"403358", 
-  #     "MovieName"=>"Nochnoy dozor", 
-  #     "MovieHash"=>"09a2c497663259cb"})
-  #   @down.imdb_info(@movie)
-  # end
-  # 
-  # it "should search subs info" do
-  #       @down.log_in!
-  #   @movie.stub!(:size).and_return(733589504)
-  #   res = @down.search_subtitles(@movie)
-  #   res.should be_instance_of(Array)
-  #   res.each do |r| 
-  #     r.should be_instance_of(Subtitle)
-  #   end
-  # end
+# 
+# # 
+# describe Subdown, " - Wired tests" do
+#   before(:each) do
+#     @down = Subdown.new
+#     @movie = mock(Movie, :haxx => '09a2c497663259cb')
+#     @down.log_in!
+#   end
+# 
+#   it "should get imdb info" do
+#     @movie.should_receive('info=').with({"MovieYear"=>"2004", 
+#       "MovieImdbID"=>"403358", 
+#       "MovieName"=>"Nochnoy dozor", 
+#       "MovieHash"=>"09a2c497663259cb"})
+#     @down.imdb_info(@movie)
+#   end
+#   
+#   it "should search subs info" do
+# 
+#     @movie.stub!(:size).and_return(733589504)
+#     res = @down.search_subtitles(@movie, 'pt')
+#     res.should be_instance_of(Array)
+#     res.each do |r| 
+#       r.should be_instance_of(Subtitle)
+#     end
+#   end
 # end

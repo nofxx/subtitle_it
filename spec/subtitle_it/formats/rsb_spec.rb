@@ -36,7 +36,7 @@ describe Formats, ".rsb" do
     end  
       
     it "should dump the object to rsb" do
-      @sub.to_rsb.should eql("- title: sincity\n- authors: \n- version: 1.1\n00:05:26.500 => 00:05:28.500 == worth killing for...\n00:06:00.400 => 00:06:03.400 == worth dying for...\n00:07:00.300 => 00:07:03.300 == worth going to the hell for...\n00:07:00.300 => 00:07:03.300 == worth going a | line...")
+      @sub.to_rsb.should eql("- title: sincity\n- authors: \n- version: 1.1\n00:05:26.500 => 00:05:28.500 == worth killing for...\n00:06:00.400 => 00:06:03.400 == worth dying for...\n00:07:00.300 => 00:07:03.300 == worth going to the hell for...\n00:07:00.300 => 00:07:03.300 == worth going a | line...\n")
     end
   end  
 end
