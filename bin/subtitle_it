@@ -28,10 +28,9 @@ SubtitleIt - Download, convert and create subtitles.
 
 Usage: #{File.basename($0)} [options] movie or file_in [file_out]
 
-Options are:
-
 BANNER
-  opts.separator ""
+
+  opts.separator " Options are:"
   
   opts.on("-l", "--language=LANGUAGE", String,
           "Language to search subtitles for, try it empty to see the supported ones.") { |OPTIONS[:lang]| }
@@ -58,7 +57,7 @@ BANNER
 end
 
 if ARGV.empty?
-  puts parser.banner
+  puts parser
   exit
 else
   SubtitleIt::Bin.run! ARGV, OPTIONS[:lang], OPTIONS[:format], OPTIONS[:force], OPTIONS[:delay]
