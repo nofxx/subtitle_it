@@ -79,7 +79,8 @@ Aegisub: http://www.malakith.net/aegiwiki/Main_Page
 
 (The MIT License)
 
-Copyright (c) 2008 Marcos Piccinini, Johanlunds, Warlley Rezende
+Copyright (c) 2008 Marcos Piccinini, Johanlunds, Warlley Rezende,
+Giovanni Rapagnani
 
 
 Permission is hereby granted, free of charge, to any person obtaining
