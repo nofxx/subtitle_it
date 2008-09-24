@@ -55,6 +55,13 @@ module SubtitleIt
     :vi =>  'Vietnamese',
     :ro =>  'Romanian',
     :pb =>  'Brazilian',
-    :ay =>  'Assyrian'      
+    :ay =>  'Assyrian',
+    :en =>  'English'
+  }
+
+  OPSUB_LANGS = {
+    # TODO : add the other languages id
+    :fr => 'fra',
+    :en => 'eng'
   }
 end

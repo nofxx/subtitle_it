@@ -32,8 +32,13 @@ BANNER
 
   opts.separator " Options are:"
   
-  opts.on("-l", "--language=LANGUAGE", String,
-          "Language to search subtitles for, try it empty to see the supported ones.") { |OPTIONS[:lang]| }
+  opts.on("-l", "--language [LANGUAGE]", String,
+          "Language to search subtitles for, try it empty to see the supported ones.") do |OPTIONS[:lang]|
+    if OPTIONS[:lang].nil?
+      puts Subdown.subtitle_languages
+      exit
+    end
+  end
 
   opts.on("-c", "--convert=FORMAT", String,
           "Format to convert to") { |OPTIONS[:format]| }

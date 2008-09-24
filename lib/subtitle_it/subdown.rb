@@ -40,9 +40,10 @@ module SubtitleIt
 
     def search_subtitles(movie, lang='')
       lang ||= ""
-      puts la
+      lang_id = Subdown.opsub_id(lang) unless lang == ""
+      puts "Searching for " + lang + " => id: " + lang_id.to_s unless lang == ""
       args = {
-        'sublanguageid' => lang,
+        'sublanguageid' => lang_id,
         'moviehash'     => movie.haxx,
         'moviebytesize' => movie.size
       }
@@ -68,9 +69,27 @@ module SubtitleIt
       movie.info = result['data'][movie.haxx] # TODO: Handle if no result for movie
     end
 
-    def subtitle_languages
-      LANGS.map { |l| l[0].to_s }
+#    def subtitle_languages
+#      LANGS.map { |l| l[0].to_s }
       # TODO.. get the correct codes
+#    end
+#
+    def Subdown.opsub_id( language )		# Get the Opensubtitle.org language id from the language string (e.g. 'French' returns 'fra' )
+      ary = LANGS.find do |sym_lang| 
+        sym_lang if sym_lang[1].downcase == language.downcase 
+      end
+      OPSUB_LANGS[ ary[0] ]
+    end
+    
+    def Subdown.subtitle_languages
+      lang_ary = []
+      OPSUB_LANGS.each_key do |key| 
+        lang_ary.push( LANGS[key] )
+      end
+      lang_ary.sort.inject( "" ) do |str, lang|
+        str += lang + " "
+	str
+      end
     end
 
     private
