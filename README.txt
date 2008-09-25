@@ -1,4 +1,9 @@
-= Subtitle It
+      __                                            __     
+    /    )          /          ,        /           /      
+----\--------------/__--_/_------_/_---/----__-----/---_/_-
+     \     /   /  /   ) /    /   /    /   /___)   /    /   
+_(____/___(___(__(___/_(_ __/___(_ __/___(___ _ _/_ __(_ __
+                                                           
 
 Ruby tool to download, create, convert and fix subtitles.
 
@@ -8,15 +13,14 @@ Ruby tool to download, create, convert and fix subtitles.
 * To and from: SRT, SUB, XML(TT), YML, MPL2, RSB and ASS.
 * Download from opensubtitles.org
 * Fixes delays. (SrtResync)
+* Compatibility with "sube" (http://github.com/vic/sube)
 
 
 == TODO:
 
-* Support styles
-* Compatibility with "sube" (http://github.com/vic/sube)
-* Fix delays
-* Convert 1 to 2 CD`s and versa-vice
-* ASS Format (Yes, for the funny of it...)
+Please visit:
+  
+* http://nofxx.lighthouseapp.com/projects/17299-subtitle_it
 
 
 == REQUIREMENTS:
@@ -51,7 +55,9 @@ Create a template
 It`s just a easy way, proof of concept to edit subtitles. Here is what it looks like:
 
 00:32 => 00:33 == Nice police work! | Thank you!
-MM:SS => N == TEXT | NEWLINE
+00:35 => 3 == Nice job!
+
+MM:SS => MM:SS or N == TEXT | NEWLINE
 
 Create a template to check it out. 
 
@@ -75,12 +81,17 @@ Jubler: http://www.jubler.org/
 Aegisub: http://www.malakith.net/aegiwiki/Main_Page
 
 
+== THANKS
+
+* Johanlunds - Opensubtitle.org code (to be used as a gem soon).
+* Marcin (tiraeth) Chwedziak - Sub format first implementation.
+
+
 == LICENSE:
 
 (The MIT License)
 
-Copyright (c) 2008 Marcos Piccinini, Johanlunds, Warlley Rezende,
-Giovanni Rapagnani
+Copyright (c) 2008 Marcos Piccinini, Giovanni Rapagnani, Warlley Rezende
 
 
 Permission is hereby granted, free of charge, to any person obtaining
