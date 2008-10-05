@@ -1,19 +1,30 @@
 # #
-# SMS AUTOTEST
-# 
-#require 'autotest/growl'
-#require 'autotest/html_report'
-# require 'autotest/kdenotify'
-require 'autotest/menu'
-#require 'autotest/pretty'
-require 'autotest/redgreen'
-# require 'autotest/snarl'
-require 'autotest/timestamp'
+# SMS C AUTOTEST
+#
+#
+Autotest.add_hook :initialize do |at|
+  ignore = %w[ .git burn www log plugins script tasks bin CHANGELOG FAQ MIT-LICENSE PERFORMANCE QUICKLINKS README ]
 
+  unless ENV['AUTOTEST'] == 'integration'
+    ignore << 'spec/integration'
+  end
 
-class Autotest   
-  Autotest.add_hook :initialize do |at|
-    %w{.svn .hg .git .DS_store}.each {|exception|at.add_exception(exception)}
-  end 
+  ignore.each do |exception|
+    at.add_exception(exception)
+  end
+
+  at.clear_mappings
+
+  at.add_mapping(%r{^spec/.+_spec\.rb$}) do |filename,_|
+    filename
+  end
+
+ # at.add_mapping(%r{^lib/active_sms/(.+)\.rb$}) do |_,match|
+ #   [ "spec/unit/#{match[1]}_spec.rb" ] +
+ #           at.files_matching(%r{^spec/integration/.+_spec\.rb$})
+ # end
+
+  # at.add_mapping(%r{^spec/spec_helper\.rb$}) do
+  #    at.files_matching(%r{^spec/.+_spec\.rb$})
+  #end
 end
-
