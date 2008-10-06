@@ -1,5 +1,5 @@
 # #
-# SMS C AUTOTEST
+# SUBTITLE IT AUTOTEST
 #
 #
 Autotest.add_hook :initialize do |at|
@@ -19,12 +19,12 @@ Autotest.add_hook :initialize do |at|
     filename
   end
 
- # at.add_mapping(%r{^lib/active_sms/(.+)\.rb$}) do |_,match|
- #   [ "spec/unit/#{match[1]}_spec.rb" ] +
- #           at.files_matching(%r{^spec/integration/.+_spec\.rb$})
- # end
+  at.add_mapping(%r{^lib/subtitle_it/(.+)\.rb$}) do |_,match|
+    [ "spec/subtitle_it/#{match[1]}_spec.rb" ] +
+            at.files_matching(%r{^spec/integration/.+_spec\.rb$})
+  end
 
-  # at.add_mapping(%r{^spec/spec_helper\.rb$}) do
-  #    at.files_matching(%r{^spec/.+_spec\.rb$})
-  #end
+  at.add_mapping(%r{^spec/spec_helper\.rb$}) do
+      at.files_matching(%r{^spec/.+_spec\.rb$})
+  end
 end
