@@ -1,36 +1,38 @@
 module SubtitleIt
-  #TODO: create a lang class?
-  # now I`m more lost.... opensubtitle uses a 3 chars like
+  #  opensubtitle uses a 3 chars like
   # Por => Portuguese
   # Cze => Czech ....
+  #
+  # LANGUAGE /  HUMAN NAME /  OPENSUBTITLE CODE
   LANGS = {
     :aa =>  'Afar',
     :ab =>  'Abkhazian',
     :af =>  'Afrikaans',
     :ak =>  'Akan',
+    :ay =>  'Assyrian',
     :sq =>  'Albanian',
     :am =>  'Amharic',
     :ar =>  'Arabic',
-    :pb =>  'Brazilian Portuguese',
+    :br =>  ['Brazilian', 'por'],
     :hy =>  'Armenian',
     :bs =>  'Bosnian',
     :bg =>  'Bulgarian',
     :ca =>  'Catalan',
-    :zh =>  'Chinese',
     :cs =>  'Czech',
     :da =>  'Danish',
     :nl =>  'Dutch',
+    :en =>  ['English','eng'],
     :et =>  'Estonian',
-    :fr =>  'French',
+    :fr =>  ['French', 'fra'],
     :de =>  'German',
-    :gl =>  'Galician',	
+    :gl =>  'Galician',
     :el =>  'Greek',
     :he =>  'Hebrew',
     :hi =>  'Hindi',
     :hr =>  'Croatian',
     :hu =>  'Hungarian',
     :is =>  'Icelandic',
-    :id =>  'Indonesian',	
+    :id =>  'Indonesian',
     :it =>  'Italian',
     :ja =>  'Japanese',
     :kk =>  'Kazakh',
@@ -54,14 +56,6 @@ module SubtitleIt
     :uk =>  'Ukrainian',
     :vi =>  'Vietnamese',
     :ro =>  'Romanian',
-    :pb =>  'Brazilian',
-    :ay =>  'Assyrian',
-    :en =>  'English'
-  }
-
-  OPSUB_LANGS = {
-    # TODO : add the other languages id
-    :fr => 'fra',
-    :en => 'eng'
+    :zh =>  'Chinese'
   }
 end

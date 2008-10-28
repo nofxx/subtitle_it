@@ -1,8 +1,8 @@
 #!/usr/bin/env ruby
 #  SubtitleIt
 #
-#  Created on 2008-9-4.
-#  Copyright (c) 2008. All rights reserved.
+#  Created on 2008-09-04.
+#  Copyleft (c) 2008. MIT License.
 #
 begin
   require 'rubygems'
@@ -31,7 +31,7 @@ Usage: #{File.basename($0)} [options] movie or file_in [file_out]
 BANNER
 
   opts.separator " Options are:"
-  
+
   opts.on("-l", "--language [LANGUAGE]", String,
           "Language to search subtitles for, try it empty to see the supported ones.") do |OPTIONS[:lang]|
     if OPTIONS[:lang].nil?
@@ -42,18 +42,18 @@ BANNER
 
   opts.on("-c", "--convert=FORMAT", String,
           "Format to convert to") { |OPTIONS[:format]| }
-          
+
   opts.on("-d", "--delay=DELAY", Float,
           "Delay to add/remove") { |OPTIONS[:delay]| }
-          
-  opts.on("-f", "--force", "Force overwrite") { OPTIONS[:force] = true }          
-          
+
+  opts.on("-f", "--force", "Force overwrite") { OPTIONS[:force] = true }
+
   opts.on("-h", "--help",
-          "Show this help message.") { puts opts; exit }          
-          
+          "Show this help message.") { puts opts; exit }
+
   opts.on("-v", "--version",
-          "Show program version") {   puts "SubtitleIt v#{SubtitleIt::VERSION::STRING}"; exit }          
-          
+          "Show program version") {   puts "SubtitleIt v#{SubtitleIt::VERSION::STRING}"; exit }
+
   opts.parse!(ARGV)
 
   if MANDATORY_OPTIONS && MANDATORY_OPTIONS.find { |option| OPTIONS[option.to_sym].nil? }
@@ -67,4 +67,3 @@ if ARGV.empty?
 else
   SubtitleIt::Bin.run! ARGV, OPTIONS[:lang], OPTIONS[:format], OPTIONS[:force], OPTIONS[:delay]
 end
-
