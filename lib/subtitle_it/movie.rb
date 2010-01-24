@@ -9,7 +9,6 @@ module SubtitleIt
 
     def initialize(filename)
       @filename = filename
-      @haxx = nil
       @info = {}
     end
 
@@ -18,7 +17,7 @@ module SubtitleIt
     end
 
     def size
-      File.size(@filename)
+      @size ||= File.size(@filename)
     end
   end
 end
