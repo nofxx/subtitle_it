@@ -1,9 +1,9 @@
-      __                                            __     
-    /    )          /          ,        /           /      
+      __                                            __
+    /    )          /          ,        /           /
 ----\--------------/__--_/_------_/_---/----__-----/---_/_-
-     \     /   /  /   ) /    /   /    /   /___)   /    /   
+     \     /   /  /   ) /    /   /    /   /___)   /    /
 _(____/___(___(__(___/_(_ __/___(_ __/___(___ _ _/_ __(_ __
-                                                           
+
 
 Ruby tool to download, create, convert and fix subtitles.
 
@@ -11,21 +11,9 @@ Ruby tool to download, create, convert and fix subtitles.
 == FEATURES:
 
 * To and from: SRT, SUB, XML(TT), YML, MPL2, RSB and ASS.
-* Download from opensubtitles.org
+* Automatic Download from opensubtitles.org
 * Fixes delays. (SrtResync)
 * Compatibility with "sube" (http://github.com/vic/sube)
-
-
-== TODO:
-
-Please visit:
-  
-* http://nofxx.lighthouseapp.com/projects/17299-subtitle_it
-
-
-== REQUIREMENTS:
-
-* hpricot
 
 
 == SYNOPSIS:
@@ -39,10 +27,10 @@ Convert a srt to sub:
 
 Add a delay of 1 minute:
   subtitle_it -d 60 in.srt
- 
+
 Create a template
-  subtitle_it unexistent.file 
-  
+  subtitle_it unexistent.file
+
 
 == INSTALL:
 
@@ -59,7 +47,7 @@ It`s just a easy way, proof of concept to edit subtitles. Here is what it looks 
 
 MM:SS => MM:SS or N == TEXT | NEWLINE
 
-Create a template to check it out. 
+Create a template to check it out.
 
 
 == DEV:
@@ -67,10 +55,10 @@ Create a template to check it out.
 To run tests:
 
   rake spec or autotest
-  
+
 Documentation => doc
 Subtitle examples => spec/fixtures
-  
+
 
 == SUBTITLE EDITORS:
 
@@ -85,6 +73,13 @@ Aegisub: http://www.malakith.net/aegiwiki/Main_Page
 
 * Johanlunds - Opensubtitle.org code (to be used as a gem soon).
 * Marcin (tiraeth) Chwedziak - Sub format first implementation.
+
+
+== TODO:
+
+Please visit:
+
+* http://github.com/nofxx/subtitle_it
 
 
 == LICENSE:
