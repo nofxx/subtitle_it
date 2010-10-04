@@ -9,7 +9,7 @@ require 'subtitle_it/languages'
 
 module SubtitleIt
   class Subdown
-    HOST = "http://www.opensubtitles.org/xml-rpc"
+    HOST = "http://api.opensubtitles.org/xml-rpc"
     HOST_DEV = "http://dev.opensubtitles.org/xml-rpc"
 
     USER_AGENT = "SubtitleIt #{SubtitleIt::VERSION::STRING}"
@@ -70,12 +70,13 @@ module SubtitleIt
       movie.info = result['data'][movie.haxx] # TODO: Handle if no result for movie
     end
 
-#    def subtitle_languages
-#      LANGS.map { |l| l[0].to_s }
-      # TODO.. get the correct codes
-#    end
+    def self.subtitle_languages
+      LANGS.map do |k, v|
+        "#{k} -> #{v}"
+      end.join("\n")
+    end
 #
-#    def Subdown.opsub_id( language )		# Get the Opensubtitle.org language id from the language string (e.g. 'French' returns 'fra' )
+#    def Subdown.opsub_id( language )   # Get the Opensubtitle.org language id from the language string (e.g. 'French' returns 'fra' )
 #      ary = LANGS.find do |sym_lang|
 #        sym_lang if sym_lang[1].downcase == language.downcase
 #      end

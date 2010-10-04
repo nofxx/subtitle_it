@@ -4,6 +4,7 @@
 #  Created on 2008-09-04.
 #  Copyleft (c) 2008. MIT License.
 #
+$LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
 begin
   require 'rubygems'
 rescue LoadError

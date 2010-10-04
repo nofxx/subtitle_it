@@ -4,6 +4,8 @@ module SubtitleIt
   # Cze => Czech ....
   #
   # LANGUAGE /  HUMAN NAME /  OPENSUBTITLE CODE
+  #
+  # Need to rewrite "Portuguese" => [:pt, :por, :whatever]
   LANGS = {
     :aa =>  'Afar',
     :ab =>  'Abkhazian',
@@ -58,4 +60,5 @@ module SubtitleIt
     :ro =>  'Romanian',
     :zh =>  'Chinese'
   }
+
 end
