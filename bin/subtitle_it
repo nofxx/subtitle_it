@@ -33,18 +33,19 @@ BANNER
   opts.separator " Options are:"
 
   opts.on("-l", "--language [LANGUAGE]", String,
-          "Language to search subtitles for, try it empty to see the supported ones.") do |OPTIONS[:lang]|
-    if OPTIONS[:lang].nil?
+          "Language to search subtitles for, try it empty to see the supported ones.") do |ol|
+    if ol.nil?
       puts Subdown.subtitle_languages
       exit
     end
+    OPTIONS[:lang] = ol
   end
 
   opts.on("-c", "--convert=FORMAT", String,
-          "Format to convert to") { |OPTIONS[:format]| }
+          "Format to convert to") { |of| OPTIONS[:format] = of }
 
   opts.on("-d", "--delay=DELAY", Float,
-          "Delay to add/remove") { |OPTIONS[:delay]| }
+          "Delay to add/remove") { |od| OPTIONS[:delay] = od }
 
   opts.on("-f", "--force", "Force overwrite") { OPTIONS[:force] = true }
 
