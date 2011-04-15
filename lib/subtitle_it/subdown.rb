@@ -12,6 +12,7 @@ module SubtitleIt
     HOST = "http://api.opensubtitles.org/xml-rpc"
     HOST_DEV = "http://dev.opensubtitles.org/xml-rpc"
 
+   # USER_AGENT = "SubDownloader #{SubtitleIt::VERSION::STRING}"
     USER_AGENT = "SubtitleIt #{SubtitleIt::VERSION::STRING}"
 
     NO_TOKEN = %w(ServerInfo LogIn)
@@ -40,11 +41,11 @@ module SubtitleIt
     end
 
     def search_subtitles(movie, lang_id=nil)
-      lang_name, lang_id = LANGS[:lang_id]
-      STDOUT.print "Searching for "
-      STDOUT.puts lang_id ? lang_name : "all languages."
+      lang_name, lang_code = LANGS[lang_id.to_sym] if lang_id
+      print "Searching for "
+      puts lang_id ? lang_name + "..." : "all languages."
       args = {
-        'sublanguageid' => lang_id,
+        'sublanguageid' => lang_name,
         'moviehash'     => movie.haxx,
         'moviebytesize' => movie.size
       }

@@ -13,37 +13,38 @@
 #
 # Where N is ms / framerate / 1000 (ms -> s)
 #
-# parts of the code from 'simplesubtitler' from Marcin (tiraeth) Chwedziak 
+# parts of the code from 'simplesubtitler' from Marcin (tiraeth) Chwedziak
 #
 module Formats
   include PlatformEndLine
   #between our formats, what changes can be reduced to a value
   def ratio
-   1      
+   1
   end
-	 
+
   def parse_sub
-    @raw.to_a.inject([]) do |i,l|
-		      line_data = l.scan(/^\{([0-9]{1,})\}\{([0-9]{1,})\}(.+)$/)
-		      line_data = line_data.at 0
-		      time_on, time_off, text = line_data
-		      time_on, time_off = [time_on.to_i, time_off.to_i].map do |t| 
-			(t.to_i / @fps * 1000 / ratio).to_i 
-		      end	    
-      i << Subline.new(time_on, time_off, text.chomp)
+    # FIXME: 1.8 and 1.9 way of working
+    @raw.send(@raw.respond_to?(:lines) ? :lines : :to_a).reduce([]) do |i,l|
+      line_data = l.scan(/^\{([0-9]{1,})\}\{([0-9]{1,})\}(.+)$/)
+      line_data = line_data.at 0
+      time_on, time_off, text = line_data
+      time_on, time_off = [time_on.to_i, time_off.to_i].map do |t|
+        (t.to_i / @fps * 1000 / ratio).to_i
+      end
+      i << Subline.new(time_on, time_off, text ? text.chomp : nil)
     end
   end
-      
+
   def to_sub
     endl = endline( @raw )
     line_ary = []
-    @lines.each do |l| 
+    @lines.each do |l|
       line_ary << "{%d}{%d}%s" % [parse_time(l.time_on), parse_time(l.time_off), l.text]
     end
     return line_ary.join( endl ) + endl
   end
-  
+
   def parse_time(n)
     n.to_i / 1000 * @fps * ratio
   end
-end 
+end

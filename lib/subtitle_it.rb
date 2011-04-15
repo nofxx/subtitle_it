@@ -20,3 +20,12 @@ class Numeric
     self / ( 10 ** Math::log10(self).to_i)
   end
 end
+
+if RUBY_PLATFORM >= "1.9"
+  class String
+    def to_a
+      self.lines.to_a
+    end
+  end
+end
+

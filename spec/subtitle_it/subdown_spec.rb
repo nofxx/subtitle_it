@@ -23,7 +23,7 @@ describe Subdown do
   end
 
   it "should log in!" do
-    XMLRPC::Client.should_receive(:new2).with('http://www.opensubtitles.org/xml-rpc').and_return(mock_xmlrpc)
+    XMLRPC::Client.should_receive(:new2).with('http://api.opensubtitles.org/xml-rpc').and_return(mock_xmlrpc)
     @mock_xmlrpc.should_receive(:call).with("LogIn", "", "", "", "SubtitleIt #{SubtitleIt::VERSION::STRING}").and_return({
       "status"=>"200 OK",
       "seconds"=>0.004,
@@ -36,7 +36,7 @@ describe Subdown do
   end
 
   it "should raise if connection sux" do
-    XMLRPC::Client.should_receive(:new2).with('http://www.opensubtitles.org/xml-rpc').and_return(mock_xmlrpc)
+    XMLRPC::Client.should_receive(:new2).with('http://api.opensubtitles.org/xml-rpc').and_return(mock_xmlrpc)
     @mock_xmlrpc.should_receive(:call).with("LogIn", "", "", "", "SubtitleIt #{SubtitleIt::VERSION::STRING}").and_return({
       "status"=>"404 FAIL",
       "seconds"=>0.004,
@@ -49,9 +49,9 @@ describe Subdown do
 
 
   describe "Logged in" do
-    before(:each) do
+    before do
       XMLRPC::Client.should_receive(:new2).
-        with('http://www.opensubtitles.org/xml-rpc').
+        with('http://api.opensubtitles.org/xml-rpc').
         and_return(mock_xmlrpc)
 
       @mock_xmlrpc.should_receive(:call).with("LogIn", "", "", "",
@@ -73,25 +73,23 @@ describe Subdown do
             { :result => 200 }
           )
 
-      STDOUT.should_receive(:print).with("Searching for ")
-      STDOUT.should_receive(:puts).with("all languages.")
-      @down.search_subtitles(mock_movie).
-        should eql([])
+      @down.should_receive(:print).with("Searching for ")
+      @down.should_receive(:puts).with("all languages.")
+      @down.search_subtitles(mock_movie).should eql([])
     end
 
-    it "should search for one languages" do
+    it "should search for one language" do
       @mock_xmlrpc.should_receive(:call).with("SearchSubtitles",
         "shkuj98gcvu5gp1b5tlo8uq525", [{
-          "sublanguageid"=>nil,
+          "sublanguageid"=>"Portuguese",
           "moviebytesize"=>81401,
           "moviehash"=>"09a2c497663259cb"}]).and_return(
             { :result => 200 }
           )
 
-      STDOUT.should_receive(:print).with("Searching for ")
-      STDOUT.should_receive(:puts).with("portuguese.")
-      @down.search_subtitles(mock_movie, "por").
-        should eql([])
+      @down.should_receive(:print).with("Searching for ")
+      @down.should_receive(:puts).with("Portuguese...")
+      @down.search_subtitles(mock_movie, "pt").should eql([])
     end
 
 #    it "should get subtitle languages" do
