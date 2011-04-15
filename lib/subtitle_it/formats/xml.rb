@@ -20,9 +20,9 @@
 #  </body>
 #</tt>
 require 'hpricot'
-module Formats    
+module Formats
   include PlatformEndLine
-  
+
   def parse_xml
     final = []
     doc = Hpricot.XML(@raw)
@@ -33,7 +33,7 @@ module Formats
     end
     return final
   end
-  
+
   def xml_lines
     endl = endline( @raw )
     line_ary = []
@@ -43,12 +43,12 @@ module Formats
     end
     return line_ary.join( endl )
   end
-      
+
   def to_xml
     endl = endline( @raw )
     out = <<XML
 <?xml version="1.0" encoding="UTF-8"?>
-<tt xml:lang="en" xmlns="http://www.w3.org/2006/04/ttaf1"  xmlns:tts="http://www.w3.org/2006/04/ttaf1#styling">
+<tt xml:lang="en" xmlns="http://www.w3.org/2006/10/ttaf1"  xmlns:tts="http://www.w3.org/2006/10/ttaf1#styling">
   <head>
     <styling>#{@style + endl if @style}
     </styling>
