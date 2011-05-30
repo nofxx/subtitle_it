@@ -5,23 +5,23 @@
 
 Gem::Specification.new do |s|
   s.name = %q{subtitle_it}
-  s.version = "1.5.0"
+  s.version = "1.9.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Marcos Piccinini"]
-  s.date = %q{2011-04-15}
+  s.date = %q{2011-05-30}
   s.default_executable = %q{subtitle_it}
   s.description = %q{Download, edit and create subtitles. Supports various formats.}
   s.email = %q{x@nofxx.com}
   s.executables = ["subtitle_it"]
   s.extra_rdoc_files = [
-    "README.txt"
+    "README.rdoc"
   ]
   s.files = [
+    ".rspec",
     "History.txt",
     "License.txt",
-    "Manifest.txt",
-    "README.txt",
+    "README.rdoc",
     "Rakefile",
     "VERSION",
     "bin/subtitle_it",
@@ -52,7 +52,6 @@ Gem::Specification.new do |s|
     "script/destroy",
     "script/generate",
     "script/txt2html",
-    "setup.rb",
     "spec/fixtures/godfather.srt",
     "spec/fixtures/huge.ass",
     "spec/fixtures/movie.xml",
@@ -89,27 +88,6 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.7}
   s.summary = %q{Download, edit and create subtitles.}
-  s.test_files = [
-    "spec/spec_helper.rb",
-    "spec/subtitle_it/bin_spec.rb",
-    "spec/subtitle_it/fixes_spec.rb",
-    "spec/subtitle_it/formats/ass_spec.rb",
-    "spec/subtitle_it/formats/mpl_spec.rb",
-    "spec/subtitle_it/formats/rsb_spec.rb",
-    "spec/subtitle_it/formats/srt_spec.rb",
-    "spec/subtitle_it/formats/sub_spec.rb",
-    "spec/subtitle_it/formats/xml_spec.rb",
-    "spec/subtitle_it/formats/yml_spec.rb",
-    "spec/subtitle_it/generator_spec.rb",
-    "spec/subtitle_it/movie_hasher_spec.rb",
-    "spec/subtitle_it/movie_spec.rb",
-    "spec/subtitle_it/subdown_spec.rb",
-    "spec/subtitle_it/subline_spec.rb",
-    "spec/subtitle_it/substyle_spec.rb",
-    "spec/subtitle_it/subtime_spec.rb",
-    "spec/subtitle_it/subtitle_spec.rb",
-    "spec/subtitle_it_spec.rb"
-  ]
 
   if s.respond_to? :specification_version then
     current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION
