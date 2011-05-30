@@ -8,15 +8,24 @@ _(____/___(___(__(___/_(_ __/___(_ __/___(___ _ _/_ __(_ __
 Ruby tool to download, create, convert and fix subtitles.
 
 
-== FEATURES:
+== FEATURES
 
+* Automatic Download on the terminal
 * To and from: SRT, SUB, XML(TT), YML, MPL2, RSB and ASS.
-* Automatic Download from opensubtitles.org
 * Fixes delays. (SrtResync)
 * Compatibility with "sube" (http://github.com/vic/sube)
 
 
-== SYNOPSIS:
+== SYNOPSIS
+
+Download subtitle:
+
+  subtitle_it Cool-Video.avi
+
+This will search all languages for the video. You can filter:
+
+  subtitle_it -l Eng Cool-Video.avi
+
 
 Bash tool:
 
@@ -32,7 +41,7 @@ Create a template
   subtitle_it unexistent.file
 
 
-== INSTALL:
+== INSTALL
 
  gem sources add http://gems.github.com
  sudo gem install nofxx-subtitle_it
@@ -40,7 +49,8 @@ Create a template
 
 == THE "Ruby Subtitle" Format - RSB
 
-It`s just a easy way, proof of concept to edit subtitles. Here is what it looks like:
+It`s just a easy way, proof of concept to edit subtitles.
+Here is what it looks like:
 
 00:32 => 00:33 == Nice police work! | Thank you!
 00:35 => 3 == Nice job!
@@ -50,7 +60,17 @@ MM:SS => MM:SS or N == TEXT | NEWLINE
 Create a template to check it out.
 
 
-== DEV:
+== Automatic Download
+
+* OpenSubtitles.org   -  WORK SubtitleIt Agent
+* addic7ed.com        -  EVIL NOAPI
+* legendas.tv         -  EVIL NOAPI
+
+
+*NOAPI = Mechanize playground...
+
+
+== DEV
 
 To run tests:
 
@@ -60,7 +80,7 @@ Documentation => doc
 Subtitle examples => spec/fixtures
 
 
-== SUBTITLE EDITORS:
+== SUBTITLE EDITORS
 
 Try those nice editors too, if SubtitleIt does not fit your need:
 
@@ -75,7 +95,7 @@ Aegisub: http://www.malakith.net/aegiwiki/Main_Page
 * Marcin (tiraeth) Chwedziak - Sub format first implementation.
 
 
-== TODO:
+== TODO
 
 Please visit:
 
