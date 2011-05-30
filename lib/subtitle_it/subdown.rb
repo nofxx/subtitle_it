@@ -23,7 +23,7 @@ module SubtitleIt
     end
 
     def log_in!
-      result = call('LogIn', '', '', '', USER_AGENT)
+      result = request('LogIn', '', '', '', USER_AGENT)
       @token = result['token'].to_s
     end
 
@@ -32,25 +32,25 @@ module SubtitleIt
     end
 
     def log_out!
-      call('LogOut')
+      request('LogOut')
       @token = nil
     end
 
     def server_info
-      call('ServerInfo')
+      request('ServerInfo')
     end
 
-    def search_subtitles(movie, lang_id=nil)
-      lang_name, lang_code = LANGS[lang_id.to_sym] if lang_id
-      print "Searching for "
-      puts lang_id ? lang_name + "..." : "all languages."
+    def search_subtitles(movie, lang_name=nil)
+      # lang_name, lang_code = LANGS[lang_id.to_sym] if lang_id
+      # print "Searching for "
+      # puts lang_id ? lang_name + "..." : "all languages."
       args = {
-        'sublanguageid' => lang_name,
+        'sublanguageid' => lang_name || "",
         'moviehash'     => movie.haxx,
         'moviebytesize' => movie.size
       }
 
-      result = call('SearchSubtitles', [args])
+      result = request('SearchSubtitles', [args])
       return [] unless result['data'] # if no results result['data'] == false
       result['data'].inject([]) do |subs, sub_info|
         subs << Subtitle.new({:info => sub_info})
@@ -59,7 +59,7 @@ module SubtitleIt
     end
 
     def download_subtitle(sub)
-      result = call('DownloadSubtitles', [sub.osdb_id])
+      result = request('DownloadSubtitles', [sub.osdb_id])
       sub.data = self.class.decode_and_unzip(result['data'][0]['data'])
     end
 
@@ -67,7 +67,7 @@ module SubtitleIt
     end
 
     def imdb_info(movie)
-      result = call('CheckMovieHash', [movie.haxx])
+      result = request('CheckMovieHash', [movie.haxx])
       movie.info = result['data'][movie.haxx] # TODO: Handle if no result for movie
     end
 
@@ -94,14 +94,17 @@ module SubtitleIt
 
     private
 
-    def call(method, *args)
+    def request(method, *args)
+
       unless NO_TOKEN.include? method
         raise 'Need to be logged in for this.' unless logged_in?
         args = [@token, *args]
       end
 
+            p method, args
       result = @client.call(method, *args)
-#        $LOG.debug "Client#call #{method}, #{args.inspect}: #{result.inspect}"
+      p result
+      # $LOG.debug "Client#call #{method}, #{args.inspect}: #{result.inspect}"
 
       unless self.class.result_status_ok?(result)
         raise XMLRPC::FaultException.new(result['status'].to_i, result['status'][4..-1]) # 'status' of the form 'XXX Message'
@@ -116,7 +119,7 @@ module SubtitleIt
     end
 
     def prevent_session_expiration
-      call('NoOperation')
+      request('NoOperation')
     end
 
     def self.decode_and_unzip(data)

@@ -80,7 +80,7 @@ Aegisub: http://www.malakith.net/aegiwiki/Main_Page
 Please visit:
 
 * http://github.com/nofxx/subtitle_it
-
+* Support http://www.podnapisi.net/
 
 == LICENSE:
 
