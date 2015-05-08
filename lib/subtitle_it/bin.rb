@@ -18,7 +18,7 @@ module SubtitleIt
       @movie = Movie.new(movie)
       @down = Subdown.new
       @down.log_in!
-      res = @down.search_subtitles(@movie, OPTIONS[:lang])
+      res = @down.search_subtitles(@movie, lang)
       if res.length == 0
         STDOUT.puts "No results found."
         return

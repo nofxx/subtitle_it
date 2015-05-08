@@ -3,38 +3,38 @@ require File.expand_path(File.dirname(__FILE__) + '/../../spec_helper')
 describe Formats, ".mpl" do
   include SubFixtures
   describe "In" do
-    
+
     before(:each) do
-      @mpl = Subtitle.new({:dump => mpl_fixture, :format => 'mpl'}) 
-    end  
+      @mpl = Subtitle.new({:dump => mpl_fixture, :format => 'mpl'})
+    end
 
     it "should parse the sub to an array" do
       @mpl.lines.should be_instance_of(Array)
     end
-    
+
     it "should have N lines" do
-      @mpl.should have(12).lines      
+      @mpl.lines.length.should == 12
     end
-    
+
     it "should parse time of" do
       @mpl.lines[0].time_on.to_s.should eql("00:17:05.000")
     end
-    
+
     it "should parse time of" do
       @mpl.lines[0].time_off.to_s.should eql("00:18:35.000")
     end
-    
+
     it "should parse text" do
       @mpl.lines[0].text.should eql("You always say that.|The same thing every time.")
     end
   end
-    
+
   describe "Out!" do
-       
+
     before(:each) do
-      @sub = Subtitle.new({:dump => yml_fixture, :format => 'yml'}) 
-    end  
-  
+      @sub = Subtitle.new({:dump => yml_fixture, :format => 'yml'})
+    end
+
     it "should dump the object as a SRT" do
       @sub.to_mpl.should eql("[3265][3285]worth killing for...
 [3604][3634]worth dying for...

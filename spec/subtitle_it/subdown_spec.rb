@@ -2,10 +2,10 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 module SubdownHelper
   def mock_xmlrpc(stubs={})
-    @mock_xmlrpc ||= mock(XMLRPC::Client, stubs)#, @auth=nil, @parser=nil, @user=nil, @timeout=30, @cookie=nil, @http=#<Net::HTTP www.opensubtitles.org:80 open=false>, @use_ssl=false, @http_last_response=nil, @port=80, @host="www.opensubtitles.org", @path="/xml-rpc", @http_header_extra=nil, @create=nil, @password=nil, @proxy_port=nil, @proxy_host=nil>
+    @mock_xmlrpc ||= double(XMLRPC::Client, stubs)#, @auth=nil, @parser=nil, @user=nil, @timeout=30, @cookie=nil, @http=#<Net::HTTP www.opensubtitles.org:80 open=false>, @use_ssl=false, @http_last_response=nil, @port=80, @host="www.opensubtitles.org", @path="/xml-rpc", @http_header_extra=nil, @create=nil, @password=nil, @proxy_port=nil, @proxy_host=nil>
   end
   def mock_movie
-    @mock_movie = mock(Movie, :haxx => '09a2c497663259cb', :size => 81401)
+    @mock_movie = double(Movie, :haxx => '09a2c497663259cb', :size => 81401)
   end
 end
 
@@ -14,7 +14,7 @@ describe Subdown do
   include SubdownHelper
 
   before(:each) do
-    @sub = mock(Subtitle)
+    @sub = double(Subtitle)
   end
 
   it "should initialize nicely" do
@@ -67,28 +67,24 @@ describe Subdown do
     it "should search for all languages" do
       @mock_xmlrpc.should_receive(:call).with("SearchSubtitles",
         "shkuj98gcvu5gp1b5tlo8uq525", [{
-          "sublanguageid"=>nil,
+          "sublanguageid"=>"",
           "moviebytesize"=>81401,
           "moviehash"=>"09a2c497663259cb"}]).and_return(
             { :result => 200 }
           )
 
-      @down.should_receive(:print).with("Searching for ")
-      @down.should_receive(:puts).with("all languages.")
       @down.search_subtitles(mock_movie).should eql([])
     end
 
     it "should search for one language" do
       @mock_xmlrpc.should_receive(:call).with("SearchSubtitles",
         "shkuj98gcvu5gp1b5tlo8uq525", [{
-          "sublanguageid"=>"Portuguese",
+          "sublanguageid"=>"pt",
           "moviebytesize"=>81401,
           "moviehash"=>"09a2c497663259cb"}]).and_return(
             { :result => 200 }
           )
 
-      @down.should_receive(:print).with("Searching for ")
-      @down.should_receive(:puts).with("Portuguese...")
       @down.search_subtitles(mock_movie, "pt").should eql([])
     end
 

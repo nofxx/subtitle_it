@@ -1,5 +1,5 @@
 require 'rspec'
-require 'rspec_spinner'
+require 'rspec/mocks'
 
 $:.unshift(File.dirname(__FILE__) + '/../lib')
 require 'subtitle_it'

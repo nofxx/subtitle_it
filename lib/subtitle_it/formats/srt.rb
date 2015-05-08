@@ -28,7 +28,8 @@ module Formats
     @lines.each_with_index do |l,i|
       out << "#{i+1}"
       out << "%s --> %s" % [l.time_on.to_s(','), l.time_off.to_s(',')]
-      out << (l.text ? l.text.gsub("|", endl) + endl : ' ' + endl)
+      out << l.text.gsub("|", endl) + endl
+      #out << (l.text ? l.text.gsub("|", endl) + endl : ' ' + endl)
     end
     out.join( endl )
   end

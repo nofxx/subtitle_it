@@ -41,9 +41,6 @@ module SubtitleIt
     end
 
     def search_subtitles(movie, lang_name=nil)
-      # lang_name, lang_code = LANGS[lang_id.to_sym] if lang_id
-      # print "Searching for "
-      # puts lang_id ? lang_name + "..." : "all languages."
       args = {
         'sublanguageid' => lang_name || "",
         'moviehash'     => movie.haxx,
@@ -101,10 +98,7 @@ module SubtitleIt
         args = [@token, *args]
       end
 
-            p method, args
       result = @client.call(method, *args)
-      p result
-      # $LOG.debug "Client#call #{method}, #{args.inspect}: #{result.inspect}"
 
       unless self.class.result_status_ok?(result)
         raise XMLRPC::FaultException.new(result['status'].to_i, result['status'][4..-1]) # 'status' of the form 'XXX Message'

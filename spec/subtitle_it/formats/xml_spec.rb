@@ -12,7 +12,7 @@ describe Formats, ".xml" do
     end
 
     it "should have N lines" do
-      @xml.should have(13).lines
+      @xml.lines.length.should == 13
     end
 
     it "should parse time of" do
