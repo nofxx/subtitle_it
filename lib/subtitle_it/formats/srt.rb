@@ -8,7 +8,7 @@
 #
 # Where N is the sub index number
 #
-module Formats    
+module Formats
   include PlatformEndLine
   def parse_srt
     endl = endline( @raw )
@@ -16,7 +16,7 @@ module Formats
       line = line.split(endl)
       line.delete_at(0)
       time_on,time_off = line[0].split('-->').map { |t| t.strip }
-      line.delete_at(0)        
+      line.delete_at(0)
       text = line.join("|")
       final << Subline.new(time_on, time_off, text)
     end
@@ -28,10 +28,10 @@ module Formats
     @lines.each_with_index do |l,i|
       out << "#{i+1}"
       out << "%s --> %s" % [l.time_on.to_s(','), l.time_off.to_s(',')]
-      out << l.text.gsub("|", endl) + endl
+      out << (l.text ? l.text.gsub("|", endl) + endl : ' ' + endl)
     end
     out.join( endl )
-  end    
+  end
 end
 
 #looks like subrip accepts some styling:
