@@ -23,9 +23,9 @@ module SubtitleIt
         STDOUT.puts "No results found."
         return
       end
-      STDOUT.puts "Found #{res.length} result#{"s" if res.length > 1}. Choose one:\n"
-      res.sort.each_with_index { |r,i| STDOUT.puts print_option(r,i) }
       STDOUT.puts "You can choose multiple ones, separated with spaces or a range separated with hifen."
+      STDOUT.puts "Found #{res.length.to_s.yellow} result#{"s" if res.length > 1}:\n"
+      res.sort.each_with_index { |r,i| STDOUT.puts print_option(r,i) }
       STDOUT.printf "Choose: "
       choose = parse_input(STDIN.gets.chomp)
       choose = choose.map { |c| res[c.to_i-1] }
@@ -46,9 +46,7 @@ module SubtitleIt
     end
 
     def print_option(r, index)
-      c = "#{index+1}) #{r.info["MovieName"]} / #{r.info["MovieYear"]} | #{r.info["SubFileName"]} | Movie score: #{r.info["MovieImdbRating"]}\n"
-      c << "   Lang: #{r.info["SubLanguageID"].capitalize} | Format: #{r.info["SubFormat"].upcase} | Downloads: #{r.info["SubDownloadsCnt"]} | Rating: #{r.info["SubRating"]} | CDs: #{r.info["SubSumCD"]}\n"
-      c << "   Comments: #{r.info["SubAuthorComment"]} \n\n"
+      "  #{(index+1).to_s.yellow}. #{r.info["SubLanguageID"].capitalize.green} | #{r.info["SubFormat"].upcase.blue} | #{r.info["MovieName"].cyan} / #{r.info["MovieYear"].cyan} | #{r.info["SubRating"].yellow} | CDs: #{r.info["SubSumCD"]}"
     end
 
     def parse_input(input)
@@ -125,10 +123,10 @@ module SubtitleIt
 
     def Bin.write_out(filename,dump)
       if File.exists?(filename) && !@force
-          STDOUT.puts "File exists. #{filename}"
+        STDOUT.puts "File exists. #{filename}".red
       else
         File.open(filename, 'w') {|f| f.write(dump) }
-        STDOUT.puts "Done. Wrote: #{filename}."
+        STDOUT.puts "Done: #{filename}.".yellow
       end
     end
   end

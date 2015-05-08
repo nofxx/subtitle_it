@@ -72,13 +72,13 @@ describe Subdownloader do
     Subtitle.should_receive(:new).and_return(mock_subtitle)
 
     STDIN.should_receive(:gets).and_return("1")
-    STDOUT.should_receive(:puts).with("Found 2 results. Choose one:\n")
-    STDOUT.should_receive(:printf).with("Choose: ")
     STDOUT.should_receive(:puts).with("You can choose multiple ones, separated with spaces or a range separated with hifen.")
+    STDOUT.should_receive(:puts).with("Found #{"2".yellow} results:\n")
+    STDOUT.should_receive(:printf).with("Choose: ")
+    STDOUT.should_receive(:puts).with("  #{"1".yellow}. #{"Eng".green} | #{"SRT".blue} | #{"Resevoir Dogs".cyan} / #{"1992".cyan} | #{"9.5".yellow} | CDs: 2")
+    STDOUT.should_receive(:puts).with("  #{"2".yellow}. #{"Eng".green} | #{"SRT".blue} | #{"Resevoir Dogs".cyan} / #{"1992".cyan} | #{"9.5".yellow} | CDs: 2")
     STDOUT.should_receive(:puts).with("Downloading 1 subtitle...")
-    STDOUT.should_receive(:puts).with("1) Resevoir Dogs / 1992 | Cool sub | Movie score: 10.0\n   Lang: Eng | Format: SRT | Downloads: 310 | Rating: 9.5 | CDs: 2\n   Comments: Nice nice... \n\n")
-    STDOUT.should_receive(:puts).with("2) Resevoir Dogs / 1992 | Cool sub | Movie score: 10.0\n   Lang: Eng | Format: SRT | Downloads: 310 | Rating: 9.5 | CDs: 2\n   Comments: Nice nice... \n\n")
-    STDOUT.should_receive(:puts).with("Done. Wrote: Beavis Butthead Do America.srt.")
+    STDOUT.should_receive(:puts).with("Done: Beavis Butthead Do America.srt.".yellow)
 
     File.should_receive(:open).with("Beavis Butthead Do America.srt", "w").and_return(true)
 
@@ -107,9 +107,7 @@ describe Subdownloader do
   it "should print choice" do
     @sub = double(Subtitle, :info => sub_info)
       @subd = Subdownloader.new
-      @subd.print_option(@sub, 1).should eql("2) Resevoir Dogs / 1992 | Cool sub | Movie score: 10.0
-   Lang: Eng | Format: SRT | Downloads: 310 | Rating: 9.5 | CDs: 2
-   Comments: Nice nice... \n\n")
+      @subd.print_option(@sub, 1).should eql("  #{"2".yellow}. #{"Eng".green} | #{"SRT".blue} | #{"Resevoir Dogs".cyan} / #{"1992".cyan} | #{"9.5".yellow} | CDs: 2")
   end
 end
 
@@ -121,7 +119,7 @@ describe Subwork do
     File.should_receive(:open).with("file.sub", "w").and_return(true)
 
     STDOUT.should_receive(:puts).with("Working on file file.srt...")
-    STDOUT.should_receive(:puts).with('Done. Wrote: file.sub.')
+    STDOUT.should_receive(:puts).with('Done: file.sub.'.yellow)
 
     Subtitle.should_receive(:new).and_return(mock_subtitle)
     @mock_subtitle.should_receive(:to_sub).and_return('subbb')
@@ -134,7 +132,7 @@ describe Subwork do
     File.should_receive(:exists?).and_return(true)
 
     STDOUT.should_receive(:puts).with("Working on file file.srt...")
-    STDOUT.should_receive(:puts).with("File exists. file.sub")
+    STDOUT.should_receive(:puts).with("File exists. file.sub".red)
 
     Subtitle.should_receive(:new).and_return(mock_subtitle)
     @mock_subtitle.should_receive(:to_sub).and_return('subbb')

@@ -1,3 +1,4 @@
+require 'colorize'
 require 'rspec'
 require 'rspec/mocks'
 
