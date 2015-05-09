@@ -10,7 +10,7 @@
   </head>
   <body>
    <div xml:lang="en">
-    <p begin="00:00:00.00" dur="00:00:03.07">I had just joined <span tts:fontFamily="monospaceSansSerif,proportionalSerif,TheOther"tts:fontSize="+2">Macromedia</span> in 1996,</p>
+    <p begin="00:00:00.00" dur="00:00:03.07">I had just joined <span tts:fontFamily="monospaceSansSerif,proportionalSerif,TheOther" tts:fontSize="+2">Macromedia</span> in 1996,</p>
     <p begin="00:00:03.07" dur="00:00:03.35">and we were trying to figure out what to do about the internet.</p>
     <p begin="00:00:06.42" dur="00:00:03.15">And the company was in dire straights at the time.</p>
     <p begin="00:00:09.57" dur="00:00:01.45">We were a CD-ROM authoring company,</p>

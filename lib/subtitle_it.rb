@@ -1,6 +1,7 @@
 $:.unshift(File.dirname(__FILE__)) unless
 $:.include?(File.dirname(__FILE__)) || $:.include?(File.expand_path(File.dirname(__FILE__)))
-require 'rubygems'
+require 'yaml'
+
 require 'subtitle_it/version'
 require 'subtitle_it/languages'
 require 'subtitle_it/subtime'
@@ -17,7 +18,7 @@ end
 
 class Numeric
   def reduce
-    self / ( 10 ** Math::log10(self).to_i)
+    self / 10 ** Math::log10(self).to_i
   end
 end
 
@@ -28,4 +29,3 @@ if RUBY_PLATFORM >= "1.9"
     end
   end
 end
-

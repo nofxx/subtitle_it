@@ -19,16 +19,17 @@
 #    </div>
 #  </body>
 #</tt>
-require 'hpricot'
+require 'nokogiri'
+
 module Formats
   include PlatformEndLine
 
   def parse_xml
     final = []
-    doc = Hpricot.XML(@raw)
+    doc = Nokogiri::XML.parse(@raw)
     (doc/'tt'/'p').each do |line|
       time_on, time_off = ['begin', 'dur'].map { |str| line[str.to_sym] }
-      text = line.innerHTML
+      text = line.inner_html
       final << Subline.new(time_on,time_off,text)
     end
     return final
