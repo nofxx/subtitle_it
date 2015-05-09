@@ -12,8 +12,7 @@ module SubtitleIt
     HOST = "http://api.opensubtitles.org/xml-rpc"
     HOST_DEV = "http://dev.opensubtitles.org/xml-rpc"
 
-   # USER_AGENT = "SubDownloader #{SubtitleIt::VERSION::STRING}"
-    USER_AGENT = "SubtitleIt #{SubtitleIt::VERSION::STRING}"
+    USER_AGENT = "SubtitleIt #{SubtitleIt::VERSION}"
 
     NO_TOKEN = %w(ServerInfo LogIn)
 

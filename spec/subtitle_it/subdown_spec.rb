@@ -24,7 +24,7 @@ describe Subdown do
 
   it "should log in!" do
     expect(XMLRPC::Client).to receive(:new2).with('http://api.opensubtitles.org/xml-rpc').and_return(mock_xmlrpc)
-    expect(@mock_xmlrpc).to receive(:call).with("LogIn", "", "", "", "SubtitleIt #{SubtitleIt::VERSION::STRING}").and_return({
+    expect(@mock_xmlrpc).to receive(:call).with("LogIn", "", "", "", "SubtitleIt #{SubtitleIt::VERSION").and_return({
       "status"=>"200 OK",
       "seconds"=>0.004,
       "token"=>"shkuj98gcvu5gp1b5tlo8uq525"
@@ -37,7 +37,7 @@ describe Subdown do
 
   it "should raise if connection sux" do
     expect(XMLRPC::Client).to receive(:new2).with('http://api.opensubtitles.org/xml-rpc').and_return(mock_xmlrpc)
-    expect(@mock_xmlrpc).to receive(:call).with("LogIn", "", "", "", "SubtitleIt #{SubtitleIt::VERSION::STRING}").and_return({
+    expect(@mock_xmlrpc).to receive(:call).with("LogIn", "", "", "", "SubtitleIt #{SubtitleIt::VERSION}").and_return({
       "status"=>"404 FAIL",
       "seconds"=>0.004,
       "token"=>""
@@ -55,7 +55,7 @@ describe Subdown do
         and_return(mock_xmlrpc)
 
       expect(@mock_xmlrpc).to receive(:call).with("LogIn", "", "", "",
-        "SubtitleIt #{SubtitleIt::VERSION::STRING}").and_return({
+        "SubtitleIt #{SubtitleIt::VERSION}").and_return({
           "status"=>"200 OK",
           "seconds"=>0.004,
           "token"=>"shkuj98gcvu5gp1b5tlo8uq525"

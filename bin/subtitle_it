@@ -50,7 +50,7 @@ BANNER
           "Show this help message.") { puts opts; exit }
 
   opts.on("-v", "--version",
-          "Show program version") {   puts "SubtitleIt v#{SubtitleIt::VERSION::STRING}"; exit }
+          "Show program version") { puts "SubtitleIt v#{SubtitleIt::VERSION}"; exit }
 
   opts.parse!(ARGV)
 
