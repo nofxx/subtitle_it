@@ -14,38 +14,39 @@ module SubtitleIt
   end
 
   class Subdownloader
-    def run!(movie,lang=nil)
+    def run!(movie,lang=nil, dst_format=nil)
       @movie = Movie.new(movie)
       @down = Subdown.new
       @down.log_in!
-      res = @down.search_subtitles(@movie, OPTIONS[:lang])
+      res = @down.search_subtitles(@movie, lang)
       if res.length == 0
         STDOUT.puts "No results found."
         return
       end
-      STDOUT.puts "Found #{res.length} result#{"s" if res.length > 1}. Choose one:\n"
-      res.sort.each_with_index { |r,i| STDOUT.puts print_option(r,i) }
       STDOUT.puts "You can choose multiple ones, separated with spaces or a range separated with hifen."
+      STDOUT.puts "Found #{res.length.to_s.yellow} result#{"s" if res.length > 1}:\n"
+      res.sort.each_with_index { |r,i| STDOUT.puts print_option(r,i) }
       STDOUT.printf "Choose: "
       choose = parse_input(STDIN.gets.chomp)
       choose = choose.map { |c| res[c.to_i-1] }
       STDOUT.puts "Downloading #{choose.length} subtitle#{'s' if choose.length > 1}..."
       choose.each do |sub|
-        down_a_sub(sub, sub.format)
+        down_a_sub(sub, sub.format, dst_format)
       end
       @down.log_out!
     end
 
-    def down_a_sub(sub, format)
+    def down_a_sub(sub, format, dst_format)
+      dst_format ||= format
       dump = @down.download_subtitle(sub)
+      sub = Subtitle.new({ :dump => dump, :format => format })
+      dump = sub.send :"to_#{dst_format}" if format != dst_format
       movie_name = @movie.filename[0..-4]
-      Bin::write_out(movie_name + format, dump)
+      Bin::write_out(movie_name + dst_format, dump)
     end
 
     def print_option(r, index)
-      c = "#{index+1}) #{r.info["MovieName"]} / #{r.info["MovieYear"]} | #{r.info["SubFileName"]} | Movie score: #{r.info["MovieImdbRating"]}\n"
-      c << "   Lang: #{r.info["SubLanguageID"].capitalize} | Format: #{r.info["SubFormat"].upcase} | Downloads: #{r.info["SubDownloadsCnt"]} | Rating: #{r.info["SubRating"]} | CDs: #{r.info["SubSumCD"]}\n"
-      c << "   Comments: #{r.info["SubAuthorComment"]} \n\n"
+      "  #{(index+1).to_s.yellow}. #{r.info["SubLanguageID"].capitalize.green} | #{r.info["SubFormat"].upcase.blue} | #{r.info["MovieName"].cyan} / #{r.info["MovieYear"].cyan} | #{r.info["SubRating"].yellow} | CDs: #{r.info["SubSumCD"]}"
     end
 
     def parse_input(input)
@@ -83,7 +84,7 @@ module SubtitleIt
         @format = @file_out_ext
       end
       if MOVIE_EXTS.include? @file_in_ext
-        Subdownloader.new.run!(argv[0], lang)
+        Subdownloader.new.run!(@file_in, lang, @format)
       elsif SUB_EXTS.include? @file_in_ext
         Subwork.new.run!(@file_in, @format)
       else
@@ -122,10 +123,10 @@ module SubtitleIt
 
     def Bin.write_out(filename,dump)
       if File.exists?(filename) && !@force
-          STDOUT.puts "File exists. #{filename}"
+        STDOUT.puts "File exists. #{filename}".red
       else
         File.open(filename, 'w') {|f| f.write(dump) }
-        STDOUT.puts "Done. Wrote: #{filename}."
+        STDOUT.puts "Done: #{filename}.".yellow
       end
     end
   end

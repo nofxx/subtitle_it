@@ -1,2 +1,0 @@
---require rspec_spinner --format RspecSpinner::Bar
-

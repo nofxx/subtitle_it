@@ -13,7 +13,7 @@ describe Formats, ".sub" do
     end
 
     it "should have N lines" do
-      @sub.should have(2025).lines
+      @sub.lines.length.should == 2025
     end
 
     it "should have a nic text on" do

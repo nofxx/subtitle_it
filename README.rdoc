@@ -1,8 +1,8 @@
-      __                                            __
-    /    )          /          ,        /           /
-----\--------------/__--_/_------_/_---/----__-----/---_/_-
-     \     /   /  /   ) /    /   /    /   /___)   /    /
-_(____/___(___(__(___/_(_ __/___(_ __/___(___ _ _/_ __(_ __
+        __                                            __
+      /    )          /          ,        /           /
+  ----\--------------/__--_/_------_/_---/----__-----/---_/_-
+       \     /   /  /   ) /    /   /    /   /___)   /    /
+  _(____/___(___(__(___/_(_ __/___(_ __/___(___ _ _/_ __(_ __
 
 
 Ruby tool to download, create, convert and fix subtitles.
@@ -26,6 +26,9 @@ This will search all languages for the video. You can filter:
 
   subtitle_it -l Eng Cool-Video.avi
 
+You can use -c option. It convert subtitles to given format:
+
+  subtitle_it -l Eng -c srt Cool-Video.avi
 
 Bash tool:
 
@@ -43,8 +46,7 @@ Create a template
 
 == INSTALL
 
- gem sources add http://gems.github.com
- sudo gem install nofxx-subtitle_it
+ gem install nofxx-subtitle_it
 
 
 == THE "Ruby Subtitle" Format - RSB
