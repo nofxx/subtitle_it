@@ -1,6 +1,10 @@
+$LOAD_PATH.push File.expand_path('../lib', __FILE__)
+require 'namie/version'
+
 Gem::Specification.new do |s|
   s.name = 'subtitle_it'
-  s.version = '1.9.0'
+  s.version     = Namie::VERSION
+  s.platform    = Gem::Platform::RUBY
 
   s.authors = ["Marcos Piccinini"]
   s.email = 'x@nofxx.com'
@@ -11,12 +15,14 @@ Gem::Specification.new do |s|
   s.homepage = 'http://github.com/nofxx/subtitle_it'
   s.description = 'Download, edit and create subtitles. Supports various formats.'
   s.summary = 'Download, edit and create subtitles.'
+  s.license     = 'MIT'
 
-  s.files = `git ls-files -z`.split("\x0")
-  s.executables  = s.files.grep(%r{^bin/}) { |f| File.basename(f) }
-  s.test_files = s.files.grep(%r{^(test|spec|features)/})
-  s.extra_rdoc_files = s.files.grep(%r{^(rdoc)/})
+  s.files         = `git ls-files`.split("\n")
+  s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
   s.require_paths = ['lib']
+
+  s.executables  = s.files.grep(%r{^bin/}) { |f| File.basename(f) }
+  # s.extra_rdoc_files = s.files.grep(%r{^(rdoc)/})
 
   s.add_dependency 'colorize'
   s.add_dependency 'nokogiri'
