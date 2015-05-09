@@ -6,6 +6,6 @@ describe SubtitleIt do
   
   it "should instantiate " do
     @sub = Subtitle.new({:dump => "{12}{30}hey hey heypending", :format => "sub"})
-    @sub.should be_instance_of(Subtitle)
+    expect(@sub).to be_instance_of(Subtitle)
   end
 end

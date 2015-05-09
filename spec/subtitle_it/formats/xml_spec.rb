@@ -8,25 +8,25 @@ describe Formats, ".xml" do
     end
 
     it "should parse the sub to an array" do
-      @xml.lines.should be_instance_of(Array)
+      expect(@xml.lines).to be_instance_of(Array)
     end
 
     it "should have N lines" do
-      @xml.lines.length.should == 13
+      expect(@xml.lines.length).to eq(13)
     end
 
     it "should parse time of" do
-      @xml.lines[0].time_on.to_s.should eql("00:00:00.000")
-      @xml.lines[10].time_on.to_s.should eql("00:00:25.520")
+      expect(@xml.lines[0].time_on.to_s).to eql("00:00:00.000")
+      expect(@xml.lines[10].time_on.to_s).to eql("00:00:25.520")
     end
 
     it "should parse time of" do
-      @xml.lines[0].time_off.to_s.should eql("00:00:03.700")
-      @xml.lines[10].time_off.to_s.should eql("00:00:27.520")
+      expect(@xml.lines[0].time_off.to_s).to eql("00:00:03.700")
+      expect(@xml.lines[10].time_off.to_s).to eql("00:00:27.520")
     end
 
     it "should parse text" do
-      @xml.lines[0].text.should eql("I had just joined <span tts:fontFamily=\"monospaceSansSerif,proportionalSerif,TheOther\" tts:fontSize=\"+2\">Macromedia</span> in 1996,")
+      expect(@xml.lines[0].text).to eql("I had just joined <span tts:fontFamily=\"monospaceSansSerif,proportionalSerif,TheOther\" tts:fontSize=\"+2\">Macromedia</span> in 1996,")
     end
   end
 
@@ -36,11 +36,11 @@ describe Formats, ".xml" do
     end
 
     it "should parse the sub to an array" do
-      @sub.to_xml.should be_instance_of(String)
+      expect(@sub.to_xml).to be_instance_of(String)
     end
 
     it "should equal..." do
-      @sub.to_xml.should eql("<?xml version=\"1.0\" encoding=\"UTF-8\"?>
+      expect(@sub.to_xml).to eql("<?xml version=\"1.0\" encoding=\"UTF-8\"?>
 <tt xml:lang=\"en\" xmlns=\"http://www.w3.org/2006/10/ttaf1\"  xmlns:tts=\"http://www.w3.org/2006/10/ttaf1#styling\">
   <head>
     <styling>

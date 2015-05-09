@@ -9,27 +9,27 @@ describe Formats, ".sub" do
     end
 
     it "should parse the sub to an array" do
-      @sub.lines.should be_instance_of(Array)
+      expect(@sub.lines).to be_instance_of(Array)
     end
 
     it "should have N lines" do
-      @sub.lines.length.should == 2025
+      expect(@sub.lines.length).to eq(2025)
     end
 
     it "should have a nic text on" do
-      @sub.lines[110].time_on.to_s.should eql('00:10:44.936')
+      expect(@sub.lines[110].time_on.to_s).to eql('00:10:44.936')
     end
 
     it "should have a nice text out" do
-      @sub.lines[110].time_off.to_s.should eql('00:10:49.941')
+      expect(@sub.lines[110].time_off.to_s).to eql('00:10:49.941')
     end
 
     it "should parse the sentece correctly" do
-      @sub.lines[0].text.should eql("You always say that.|The same thing every time.")
+      expect(@sub.lines[0].text).to eql("You always say that.|The same thing every time.")
     end
 
     it "should parse the sentece correctly" do
-      @sub.lines[2020].text.should eql("I'm tryin' real hard...")
+      expect(@sub.lines[2020].text).to eql("I'm tryin' real hard...")
     end
   end
 
@@ -40,7 +40,7 @@ describe Formats, ".sub" do
     end
 
     it "should dump the object as a SUB" do
-      @sub.to_sub.should eql("{7816}{7864}worth killing for...
+      expect(@sub.to_sub).to eql("{7816}{7864}worth killing for...
 {8631}{8703}worth dying for...
 {10069}{10141}worth going to the hell for...
 {10069}{10141}worth going a | line...\n")

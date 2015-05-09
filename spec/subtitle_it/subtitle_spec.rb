@@ -18,12 +18,12 @@ describe Subtitle do
 
   it "should instantiate" do
     @sub = Subtitle.new(attr_valid_subtitle)
-    @sub.rating.should eql(9.5)
+    expect(@sub.rating).to eql(9.5)
   end
 
   it "should fill lines" do
     @sub = Subtitle.new(attr_valid_subtitle.with({:dump => "{10}{20} Hello", :format => "sub"}))
-    @sub.lines[0].text.should eql(' Hello')
+    expect(@sub.lines[0].text).to eql(' Hello')
   end
 
 
@@ -34,7 +34,7 @@ describe Subtitle do
 
     it "should compare to another using rating" do
       @another_sub = Subtitle.new(attr_valid_subtitle.with(:info => { "SubRating" => 4.0} ))
-      (@sub > @another_sub).should == true
+      expect(@sub > @another_sub).to eq(true)
     end
   end
 end

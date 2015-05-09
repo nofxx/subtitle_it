@@ -6,20 +6,20 @@ describe Movie do
   end
   
   it "should initialize nicely" do
-    @movie.info.should be_instance_of(Hash)
-    @movie.filename.should eql("pulpfiction")
+    expect(@movie.info).to be_instance_of(Hash)
+    expect(@movie.filename).to eql("pulpfiction")
   end
   
   it "should call for a hash" do
-    File.should_receive(:open).with("pulpfiction", "rb")
-    File.should_receive(:size).with('pulpfiction').and_return(13141)
+    expect(File).to receive(:open).with("pulpfiction", "rb")
+    expect(File).to receive(:size).with('pulpfiction').and_return(13141)
     #TODO.. how to mock this?
     #MovieHasher.should_receive(:compute_hash)
-    @movie.haxx.should eql('0000000000003355')
+    expect(@movie.haxx).to eql('0000000000003355')
   end
   
   it "should call for size" do
-    File.should_receive(:size).with('pulpfiction')
+    expect(File).to receive(:size).with('pulpfiction')
     @movie.size
   end  
 end

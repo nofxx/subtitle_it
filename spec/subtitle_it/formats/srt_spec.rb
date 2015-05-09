@@ -9,23 +9,23 @@ describe Formats, ".srt" do
     end
 
     it "should parse the sub to an array" do
-      @srt.lines.should be_instance_of(Array)
+      expect(@srt.lines).to be_instance_of(Array)
     end
 
     it "should have N lines" do
-      @srt.lines.length.should == 543
+      expect(@srt.lines.length).to eq(543)
     end
 
     it "should parse time of" do
-      @srt.lines[0].time_on.to_s.should eql("00:01:43.680")
+      expect(@srt.lines[0].time_on.to_s).to eql("00:01:43.680")
     end
 
     it "should parse time of" do
-      @srt.lines[0].time_off.to_s.should eql("00:01:45.557")
+      expect(@srt.lines[0].time_off.to_s).to eql("00:01:45.557")
     end
 
     it "should parse text" do
-      @srt.lines[0].text.should eql("My dear children,")
+      expect(@srt.lines[0].text).to eql("My dear children,")
     end
   end
 
@@ -36,7 +36,7 @@ describe Formats, ".srt" do
     end
 
     it "should dump the object as a SRT" do
-      @sub.to_srt.should eql("1
+      expect(@sub.to_srt).to eql("1
 00:05:26,500 --> 00:05:28,500
 worth killing for...
 

@@ -18,43 +18,43 @@ describe Subdown do
   end
 
   it "should initialize nicely" do
-    XMLRPC::Client.should_receive(:new2)
+    expect(XMLRPC::Client).to receive(:new2)
     @down = Subdown.new
   end
 
   it "should log in!" do
-    XMLRPC::Client.should_receive(:new2).with('http://api.opensubtitles.org/xml-rpc').and_return(mock_xmlrpc)
-    @mock_xmlrpc.should_receive(:call).with("LogIn", "", "", "", "SubtitleIt #{SubtitleIt::VERSION::STRING}").and_return({
+    expect(XMLRPC::Client).to receive(:new2).with('http://api.opensubtitles.org/xml-rpc').and_return(mock_xmlrpc)
+    expect(@mock_xmlrpc).to receive(:call).with("LogIn", "", "", "", "SubtitleIt #{SubtitleIt::VERSION::STRING}").and_return({
       "status"=>"200 OK",
       "seconds"=>0.004,
       "token"=>"shkuj98gcvu5gp1b5tlo8uq525"
       })
     @down = Subdown.new
-    @down.should_not be_logged_in
+    expect(@down).not_to be_logged_in
     @down.log_in!
-    @down.should be_logged_in
+    expect(@down).to be_logged_in
   end
 
   it "should raise if connection sux" do
-    XMLRPC::Client.should_receive(:new2).with('http://api.opensubtitles.org/xml-rpc').and_return(mock_xmlrpc)
-    @mock_xmlrpc.should_receive(:call).with("LogIn", "", "", "", "SubtitleIt #{SubtitleIt::VERSION::STRING}").and_return({
+    expect(XMLRPC::Client).to receive(:new2).with('http://api.opensubtitles.org/xml-rpc').and_return(mock_xmlrpc)
+    expect(@mock_xmlrpc).to receive(:call).with("LogIn", "", "", "", "SubtitleIt #{SubtitleIt::VERSION::STRING}").and_return({
       "status"=>"404 FAIL",
       "seconds"=>0.004,
       "token"=>""
       })
     @down = Subdown.new
-    lambda { @down.log_in! }.should raise_error
-    @down.should_not be_logged_in
+    expect { @down.log_in! }.to raise_error
+    expect(@down).not_to be_logged_in
   end
 
 
   describe "Logged in" do
     before do
-      XMLRPC::Client.should_receive(:new2).
+      expect(XMLRPC::Client).to receive(:new2).
         with('http://api.opensubtitles.org/xml-rpc').
         and_return(mock_xmlrpc)
 
-      @mock_xmlrpc.should_receive(:call).with("LogIn", "", "", "",
+      expect(@mock_xmlrpc).to receive(:call).with("LogIn", "", "", "",
         "SubtitleIt #{SubtitleIt::VERSION::STRING}").and_return({
           "status"=>"200 OK",
           "seconds"=>0.004,
@@ -65,7 +65,7 @@ describe Subdown do
     end
 
     it "should search for all languages" do
-      @mock_xmlrpc.should_receive(:call).with("SearchSubtitles",
+      expect(@mock_xmlrpc).to receive(:call).with("SearchSubtitles",
         "shkuj98gcvu5gp1b5tlo8uq525", [{
           "sublanguageid"=>"",
           "moviebytesize"=>81401,
@@ -73,11 +73,11 @@ describe Subdown do
             { :result => 200 }
           )
 
-      @down.search_subtitles(mock_movie).should eql([])
+      expect(@down.search_subtitles(mock_movie)).to eql([])
     end
 
     it "should search for one language" do
-      @mock_xmlrpc.should_receive(:call).with("SearchSubtitles",
+      expect(@mock_xmlrpc).to receive(:call).with("SearchSubtitles",
         "shkuj98gcvu5gp1b5tlo8uq525", [{
           "sublanguageid"=>"pt",
           "moviebytesize"=>81401,
@@ -85,7 +85,7 @@ describe Subdown do
             { :result => 200 }
           )
 
-      @down.search_subtitles(mock_movie, "pt").should eql([])
+      expect(@down.search_subtitles(mock_movie, "pt")).to eql([])
     end
 
 #    it "should get subtitle languages" do

@@ -9,11 +9,11 @@ describe Formats, ".yml" do
     end  
   
     it "should have author" do
-      @sub.to_yml.should match(/author: warlley, nofxx/)
+      expect(@sub.to_yml).to match(/author: warlley, nofxx/)
     end
     
     it "should have version" do
-      @sub.to_yml.should match(/version: 1.1/)
+      expect(@sub.to_yml).to match(/version: 1.1/)
     end
     
   end  
