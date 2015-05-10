@@ -1,5 +1,4 @@
 require File.expand_path(File.dirname(__FILE__) + '/../../spec_helper')
 
-describe Formats, ".ass" do
-
+describe Formats, '.ass' do
 end

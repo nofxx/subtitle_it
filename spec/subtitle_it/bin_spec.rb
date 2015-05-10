@@ -1,42 +1,48 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 module BinspecHelper
-  def mock_xmlrpc(stubs={});    @mock_xmlrpc ||= double(XMLRPC::Client, stubs);  end
-  def mock_subdown;             @mock_subdown = double(Subdown);  end
-  def mock_file;                @mock_file = double(File);  end
+  def mock_xmlrpc(stubs = {})
+    @mock_xmlrpc ||= double(XMLRPC::Client, stubs)
+  end
+
+  def mock_subdown
+    @mock_subdown = double(Subdown)
+  end
+
+  def mock_file
+    @mock_file = double(File)
+  end
 
   def mock_movie
-    @mock_movie = double(Movie, {:filename => "Beavis Butthead Do America.avi",
-      :haxx => '09a2c497663259cb' })
+    @mock_movie = double(Movie, filename: 'Beavis Butthead Do America.avi',
+                                haxx: '09a2c497663259cb')
   end
 
   def mock_subtitle
-    @mock_subtitle = double(Subtitle, {
-      :info => sub_info, :format => 'srt', :<=> => 1
-    })
+    @mock_subtitle = double(Subtitle,       :info => sub_info, :format => 'srt', :<=> => 1)
   end
 
   def sub_info
     {
-      "SubLanguageID"   => 'eng',
-      "MovieName"       => 'Resevoir Dogs',
-      "MovieYear"       => '1992',
-      "SubFileName"     => 'Cool sub',
-      "MovieImdbRating" => '10.0',
-      "SubDownloadsCnt" => '310',
-      "SubRating"       => '9.5',
-      "SubFormat"       => 'srt',
-      "SubSumCD"        => '2',
-      "SubAuthorComment" => 'Nice nice...'
-      }
+      'SubLanguageID'   => 'eng',
+      'MovieName'       => 'Resevoir Dogs',
+      'MovieYear'       => '1992',
+      'SubFileName'     => 'Cool sub',
+      'MovieImdbRating' => '10.0',
+      'SubDownloadsCnt' => '310',
+      'SubRating'       => '9.5',
+      'SubFormat'       => 'srt',
+      'SubSumCD'        => '2',
+      'SubAuthorComment' => 'Nice nice...'
+    }
   end
 end
 
 describe Bin do
   include BinspecHelper
 
-  it "should require ARGV" do
-    expect { Bin::run!(nil) }.to raise_error
+  it 'should require ARGV' do
+    expect { Bin.run!(nil) }.to raise_error
   end
 
   # Having a hard time testing the command line tool...
@@ -61,81 +67,81 @@ end
 describe Subdownloader do
   include BinspecHelper
 
-  it "should print languages" do
+  it 'should print languages' do
     expect(STDOUT).to receive(:puts).at_least(30).times
     SubtitleIt::Bin.print_languages
   end
 
-  it "should download a subtitle" do
+  it 'should download a subtitle' do
     expect(Movie).to receive(:new).and_return(mock_movie)
     expect(Subdown).to receive(:new).and_return(mock_subdown)
     expect(Subtitle).to receive(:new).and_return(mock_subtitle)
 
-    expect(STDIN).to receive(:gets).and_return("1")
-    expect(STDOUT).to receive(:puts).with("You can choose multiple ones, separated with spaces or a range separated with hifen.")
-    expect(STDOUT).to receive(:puts).with("Found #{"2".yellow} results:\n")
-    expect(STDOUT).to receive(:printf).with("Choose: ")
-    expect(STDOUT).to receive(:puts).with("  #{"1".yellow}. #{"Eng".green} | #{"SRT".blue} | #{"Resevoir Dogs".cyan} / #{"1992".cyan} | #{"9.5".yellow} | CDs: 2")
-    expect(STDOUT).to receive(:puts).with("  #{"2".yellow}. #{"Eng".green} | #{"SRT".blue} | #{"Resevoir Dogs".cyan} / #{"1992".cyan} | #{"9.5".yellow} | CDs: 2")
-    expect(STDOUT).to receive(:puts).with("Downloading 1 subtitle...")
-    expect(STDOUT).to receive(:puts).with("Done: Beavis Butthead Do America.srt.".yellow)
+    expect(STDIN).to receive(:gets).and_return('1')
+    expect(STDOUT).to receive(:puts).with('You can choose multiple ones, separated with spaces or a range separated with hifen.')
+    expect(STDOUT).to receive(:puts).with("Found #{'2'.yellow} results:\n")
+    expect(STDOUT).to receive(:printf).with('Choose: ')
+    expect(STDOUT).to receive(:puts).with("  #{'1'.yellow}. #{'Eng'.green} | #{'SRT'.blue} | #{'Resevoir Dogs'.cyan} / #{'1992'.cyan} | #{'9.5'.yellow} | CDs: 2")
+    expect(STDOUT).to receive(:puts).with("  #{'2'.yellow}. #{'Eng'.green} | #{'SRT'.blue} | #{'Resevoir Dogs'.cyan} / #{'1992'.cyan} | #{'9.5'.yellow} | CDs: 2")
+    expect(STDOUT).to receive(:puts).with('Downloading 1 subtitle...')
+    expect(STDOUT).to receive(:puts).with('Done: Beavis Butthead Do America.srt.'.yellow)
 
-    expect(File).to receive(:open).with("Beavis Butthead Do America.srt", "w").and_return(true)
+    expect(File).to receive(:open).with('Beavis Butthead Do America.srt', 'w').and_return(true)
 
     expect(@mock_subdown).to receive(:log_in!).and_return(true)
     expect(@mock_subdown).to receive(:download_subtitle).and_return(mock_subtitle)
     expect(@mock_subdown).to receive(:search_subtitles).and_return([mock_subtitle, mock_subtitle])
     expect(@mock_subdown).to receive(:log_out!).and_return(true)
 
-    Subdownloader.new.run! "file.avi"
+    Subdownloader.new.run! 'file.avi'
   end
 
-  it "should get extension files" do
-    expect(Bin.get_extension("Lots.of.dots.happen")).to eql("happen")
-    expect { Bin.get_extension("Nodotstoo") }.to raise_error
+  it 'should get extension files' do
+    expect(Bin.get_extension('Lots.of.dots.happen')).to eql('happen')
+    expect { Bin.get_extension('Nodotstoo') }.to raise_error
   end
 
-  it "should swap extensions" do
-    expect(Bin.swap_extension("foo.txt", "srt")).to eql("foo.srt")
+  it 'should swap extensions' do
+    expect(Bin.swap_extension('foo.txt', 'srt')).to eql('foo.srt')
   end
 
-  it "should parse user input" do
+  it 'should parse user input' do
     @subd = Subdownloader.new
-    expect(@subd.parse_input("1 2-5 7 8-10 15")).to eql([1, 2, 3, 4, 5, 7, 8, 9, 10, 15])
+    expect(@subd.parse_input('1 2-5 7 8-10 15')).to eql([1, 2, 3, 4, 5, 7, 8, 9, 10, 15])
   end
 
-  it "should print choice" do
-    @sub = double(Subtitle, :info => sub_info)
-      @subd = Subdownloader.new
-      expect(@subd.print_option(@sub, 1)).to eql("  #{"2".yellow}. #{"Eng".green} | #{"SRT".blue} | #{"Resevoir Dogs".cyan} / #{"1992".cyan} | #{"9.5".yellow} | CDs: 2")
+  it 'should print choice' do
+    @sub = double(Subtitle, info: sub_info)
+    @subd = Subdownloader.new
+    expect(@subd.print_option(@sub, 1)).to eql("  #{'2'.yellow}. #{'Eng'.green} | #{'SRT'.blue} | #{'Resevoir Dogs'.cyan} / #{'1992'.cyan} | #{'9.5'.yellow} | CDs: 2")
   end
 end
 
 describe Subwork do
   include BinspecHelper
 
-  it "should call a new subtitle" do
-    expect(File).to receive(:open).with("file.srt", "r").and_return(mock_file)
-    expect(File).to receive(:open).with("file.sub", "w").and_return(true)
+  it 'should call a new subtitle' do
+    expect(File).to receive(:open).with('file.srt', 'r').and_return(mock_file)
+    expect(File).to receive(:open).with('file.sub', 'w').and_return(true)
 
-    expect(STDOUT).to receive(:puts).with("Working on file file.srt...")
+    expect(STDOUT).to receive(:puts).with('Working on file file.srt...')
     expect(STDOUT).to receive(:puts).with('Done: file.sub.'.yellow)
 
     expect(Subtitle).to receive(:new).and_return(mock_subtitle)
     expect(@mock_subtitle).to receive(:to_sub).and_return('subbb')
 
-    Subwork.new.run!("file.srt", "sub")
+    Subwork.new.run!('file.srt', 'sub')
   end
 
-  it "should not write if file exists" do
-    expect(File).to receive(:open).with("file.srt", "r").and_return(mock_file)
+  it 'should not write if file exists' do
+    expect(File).to receive(:open).with('file.srt', 'r').and_return(mock_file)
     expect(File).to receive(:exists?).and_return(true)
 
-    expect(STDOUT).to receive(:puts).with("Working on file file.srt...")
-    expect(STDOUT).to receive(:puts).with("File exists. file.sub".red)
+    expect(STDOUT).to receive(:puts).with('Working on file file.srt...')
+    expect(STDOUT).to receive(:puts).with('File exists. file.sub'.red)
 
     expect(Subtitle).to receive(:new).and_return(mock_subtitle)
     expect(@mock_subtitle).to receive(:to_sub).and_return('subbb')
-    Subwork.new.run!("file.srt", "sub")
+    Subwork.new.run!('file.srt', 'sub')
   end
 end

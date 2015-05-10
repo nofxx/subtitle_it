@@ -2,7 +2,7 @@ require 'colorize'
 require 'rspec'
 require 'rspec/mocks'
 
-$:.unshift(File.dirname(__FILE__) + '/../lib')
+$LOAD_PATH.unshift(File.dirname(__FILE__) + '/../lib')
 require 'subtitle_it'
 include SubtitleIt
 
@@ -32,7 +32,6 @@ module SubFixtures
   end
 end
 
-
 # ##
 # rSpec Hash additions.
 #
@@ -46,7 +45,7 @@ class Hash
   #   { :a => 1, :b => 2, :c => 3 }.except(:a)
   #   => { :b => 2, :c => 3 }
   def except(*keys)
-    self.reject { |k,v| keys.include?(k || k.to_sym) }
+    reject { |k, _v| keys.include?(k || k.to_sym) }
   end
   ##
   # Override some keys.
@@ -54,7 +53,7 @@ class Hash
   #   { :a => 1, :b => 2, :c => 3 }.with(:a => 4)
   #   => { :a => 4, :b => 2, :c => 3 }
   def with(overrides = {})
-    self.merge overrides
+    merge overrides
   end
   ##
   # Returns a Hash with only the pairs identified by +keys+.
@@ -62,6 +61,6 @@ class Hash
   #   { :a => 1, :b => 2, :c => 3 }.only(:a)
   #   => { :a => 1 }
   def only(*keys)
-    self.reject { |k,v| !keys.include?(k || k.to_sym) }
+    reject { |k, _v| !keys.include?(k || k.to_sym) }
   end
 end

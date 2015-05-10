@@ -1,41 +1,39 @@
 require File.expand_path(File.dirname(__FILE__) + '/../../spec_helper')
 
-describe Formats, ".srt" do
+describe Formats, '.srt' do
   include SubFixtures
-  describe "In" do
-
+  describe 'In' do
     before(:each) do
-      @srt = Subtitle.new({:dump => srt_fixture, :format => 'srt'})
+      @srt = Subtitle.new(dump: srt_fixture, format: 'srt')
     end
 
-    it "should parse the sub to an array" do
+    it 'should parse the sub to an array' do
       expect(@srt.lines).to be_instance_of(Array)
     end
 
-    it "should have N lines" do
+    it 'should have N lines' do
       expect(@srt.lines.length).to eq(543)
     end
 
-    it "should parse time of" do
-      expect(@srt.lines[0].time_on.to_s).to eql("00:01:43.680")
+    it 'should parse time of' do
+      expect(@srt.lines[0].time_on.to_s).to eql('00:01:43.680')
     end
 
-    it "should parse time of" do
-      expect(@srt.lines[0].time_off.to_s).to eql("00:01:45.557")
+    it 'should parse time of' do
+      expect(@srt.lines[0].time_off.to_s).to eql('00:01:45.557')
     end
 
-    it "should parse text" do
-      expect(@srt.lines[0].text).to eql("My dear children,")
+    it 'should parse text' do
+      expect(@srt.lines[0].text).to eql('My dear children,')
     end
   end
 
-  describe "Out!" do
-
+  describe 'Out!' do
     before(:each) do
-      @sub = Subtitle.new({:dump => yml_fixture, :format => 'yml'})
+      @sub = Subtitle.new(dump: yml_fixture, format: 'yml')
     end
 
-    it "should dump the object as a SRT" do
+    it 'should dump the object as a SRT' do
       expect(@sub.to_srt).to eql("1
 00:05:26,500 --> 00:05:28,500
 worth killing for...
