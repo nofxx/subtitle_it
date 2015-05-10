@@ -1,11 +1,5 @@
 module SubtitleIt
   class Substyle
-    #TODO
-    
-    
-    
-    
-    
-    
-  end  
+    # TODO
+  end
 end

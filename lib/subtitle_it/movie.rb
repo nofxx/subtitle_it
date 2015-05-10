@@ -3,7 +3,6 @@ require 'subtitle_it/movie_hasher'
 
 module SubtitleIt
   class Movie
-
     attr_reader :filename
     attr_accessor :info
 
@@ -13,7 +12,7 @@ module SubtitleIt
     end
 
     def haxx
-      @haxx ||= MovieHasher::compute_haxx(@filename)
+      @haxx ||= MovieHasher.compute_haxx(@filename)
     end
 
     def size

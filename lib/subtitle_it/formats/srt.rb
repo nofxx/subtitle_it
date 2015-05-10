@@ -10,31 +10,34 @@
 #
 module Formats
   include PlatformEndLine
+
+  def endl
+    endline(@raw)
+  end
+
   def parse_srt
-    endl = endline( @raw )
-    @raw.split( endl*2 ).inject([]) do |final,line|
+    @raw.split(endl * 2).inject([]) do |final, line|
       line = line.split(endl)
       line.delete_at(0)
-      time_on,time_off = line[0].split('-->').map { |t| t.strip }
+      time_on, time_off = line[0].split('-->').map(&:strip)
       line.delete_at(0)
-      text = line.join("|")
+      text = line.join('|')
       final << Subline.new(time_on, time_off, text)
     end
   end
 
   def to_srt
-    endl = endline( @raw )
     out = []
-    @lines.each_with_index do |l,i|
-      out << "#{i+1}"
-      out << "%s --> %s" % [l.time_on.to_s(','), l.time_off.to_s(',')]
-      out << (l.text ? l.text.gsub("|", endl) + endl : ' ' + endl)
+    @lines.each_with_index do |l, i|
+      out << "#{i + 1}"
+      out << '%s --> %s' % [l.time_on.to_s(','), l.time_off.to_s(',')]
+      out << (l.text ? l.text.gsub('|', endl) : ' ') + endl
     end
-    out.join( endl )
+    out.join(endl)
   end
 end
 
-#looks like subrip accepts some styling:
+# looks like subrip accepts some styling:
 #     sdict.add(new StyledFormat(ITALIC, "i", true));
 #     sdict.add(new StyledFormat(ITALIC, "/i", false));
 #     sdict.add(new StyledFormat(BOLD, "b", true));

@@ -1,9 +1,9 @@
 module SubtitleIt
   #   class Generate
-  #     def generate_rsb(filename)      
+  #     def generate_rsb(filename)
   #       dump = <<GEN
   # - title: #{argv[0]}
-  # - authors: FIXME 
+  # - authors: FIXME
   # - version: FIXME
   # 00:05:26.500 => 00:05:28.500 == worth killing for...
   # 00:06:00.400 => 00:06:03.400 == worth dying for...

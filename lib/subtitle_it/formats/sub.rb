@@ -1,6 +1,6 @@
 # SubtitleIt
 # MPSub, MicroDVD or VOBSub format
-#TODO: tricky.. detect which format we got.
+# TODO: tricky.. detect which format we got.
 #
 # {1025}{1115}You always say that.|The same thing every time.
 # {1118}{1177}"l'm throug h, never again,|too dangerous."
@@ -17,14 +17,14 @@
 #
 module Formats
   include PlatformEndLine
-  #between our formats, what changes can be reduced to a value
+  # between our formats, what changes can be reduced to a value
   def ratio
-   1
+    1
   end
 
   def parse_sub
     # FIXME: 1.8 and 1.9 way of working
-    @raw.send(@raw.respond_to?(:lines) ? :lines : :to_a).reduce([]) do |i,l|
+    @raw.send(@raw.respond_to?(:lines) ? :lines : :to_a).reduce([]) do |i, l|
       line_data = l.scan(/^\{([0-9]{1,})\}\{([0-9]{1,})\}(.+)$/)
       line_data = line_data.at 0
       time_on, time_off, text = line_data
@@ -36,12 +36,12 @@ module Formats
   end
 
   def to_sub
-    endl = endline( @raw )
+    endl = endline(@raw)
     line_ary = []
     @lines.each do |l|
-      line_ary << "{%d}{%d}%s" % [parse_time(l.time_on), parse_time(l.time_off), l.text]
+      line_ary << '{%d}{%d}%s' % [parse_time(l.time_on), parse_time(l.time_off), l.text]
     end
-    return line_ary.join( endl ) + endl
+    line_ary.join(endl) + endl
   end
 
   def parse_time(n)

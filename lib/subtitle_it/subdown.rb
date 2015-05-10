@@ -9,8 +9,8 @@ require 'subtitle_it/languages'
 
 module SubtitleIt
   class Subdown
-    HOST = "http://api.opensubtitles.org/xml-rpc"
-    HOST_DEV = "http://dev.opensubtitles.org/xml-rpc"
+    HOST = 'http://api.opensubtitles.org/xml-rpc'
+    HOST_DEV = 'http://dev.opensubtitles.org/xml-rpc'
 
     USER_AGENT = "SubtitleIt #{SubtitleIt::VERSION}"
 
@@ -39,9 +39,9 @@ module SubtitleIt
       request('ServerInfo')
     end
 
-    def search_subtitles(movie, lang_name=nil)
+    def search_subtitles(movie, lang_name = nil)
       args = {
-        'sublanguageid' => lang_name || "",
+        'sublanguageid' => lang_name || '',
         'moviehash'     => movie.haxx,
         'moviebytesize' => movie.size
       }
@@ -49,7 +49,7 @@ module SubtitleIt
       result = request('SearchSubtitles', [args])
       return [] unless result['data'] # if no results result['data'] == false
       result['data'].inject([]) do |subs, sub_info|
-        subs << Subtitle.new({:info => sub_info})
+        subs << Subtitle.new(info: sub_info)
         subs
       end
     end
@@ -59,7 +59,7 @@ module SubtitleIt
       sub.data = self.class.decode_and_unzip(result['data'][0]['data'])
     end
 
-    def upload_subtitle(movie, subs)
+    def upload_subtitle(_movie, _subs)
     end
 
     def imdb_info(movie)
@@ -72,35 +72,34 @@ module SubtitleIt
         "#{k} -> #{v}"
       end.join("\n")
     end
-#
-#    def Subdown.opsub_id( language )   # Get the Opensubtitle.org language id from the language string (e.g. 'French' returns 'fra' )
-#      ary = LANGS.find do |sym_lang|
-#        sym_lang if sym_lang[1].downcase == language.downcase
-#      end
-#      OPSUB_LANGS[ ary[0] ]
-#    end
+    #
+    #    def Subdown.opsub_id( language )   # Get the Opensubtitle.org language id from the language string (e.g. 'French' returns 'fra' )
+    #      ary = LANGS.find do |sym_lang|
+    #        sym_lang if sym_lang[1].downcase == language.downcase
+    #      end
+    #      OPSUB_LANGS[ ary[0] ]
+    #    end
 
-#    def Subdown.subtitle_languages
-#      lang_ary = []
-#      OPSUB_LANGS.each_key do |key|
-#        lang_ary.push( LANGS[key] )
-#      end
-#      lang_ary.sort.inject( "" ) { |str, lang| str << lang + " " }
-#    end
+    #    def Subdown.subtitle_languages
+    #      lang_ary = []
+    #      OPSUB_LANGS.each_key do |key|
+    #        lang_ary.push( LANGS[key] )
+    #      end
+    #      lang_ary.sort.inject( "" ) { |str, lang| str << lang + " " }
+    #    end
 
     private
 
     def request(method, *args)
-
       unless NO_TOKEN.include? method
-        raise 'Need to be logged in for this.' unless logged_in?
+        fail 'Need to be logged in for this.' unless logged_in?
         args = [@token, *args]
       end
 
       result = @client.call(method, *args)
 
       unless self.class.result_status_ok?(result)
-        raise XMLRPC::FaultException.new(result['status'].to_i, result['status'][4..-1]) # 'status' of the form 'XXX Message'
+        fail XMLRPC::FaultException.new(result['status'].to_i, result['status'][4..-1]) # 'status' of the form 'XXX Message'
       end
 
       result
