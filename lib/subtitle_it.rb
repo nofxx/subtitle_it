@@ -1,5 +1,5 @@
-$:.unshift(File.dirname(__FILE__)) unless
-$:.include?(File.dirname(__FILE__)) || $:.include?(File.expand_path(File.dirname(__FILE__)))
+$LOAD_PATH.unshift(File.dirname(__FILE__)) unless
+$LOAD_PATH.include?(File.dirname(__FILE__)) || $LOAD_PATH.include?(File.expand_path(File.dirname(__FILE__)))
 require 'yaml'
 
 require 'subtitle_it/version'
@@ -18,14 +18,14 @@ end
 
 class Numeric
   def reduce
-    self / 10 ** Math::log10(self).to_i
+    self / 10**Math.log10(self).to_i
   end
 end
 
-if RUBY_PLATFORM >= "1.9"
+if RUBY_PLATFORM >= '1.9'
   class String
     def to_a
-      self.lines.to_a
+      lines.to_a
     end
   end
 end

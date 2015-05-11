@@ -50,7 +50,7 @@ describe Bin do
   #
   # it "should call for movie" do
   #   Subdownloader.should_receive(:new)
-  #   File.should_receive(:exists?).and_return(true)
+  #   File.should_receive(:exist?).and_return(true)
   #   File.should_receive(:open).and_return(mock_file)
   #   SubtitleIt::Bin::run!(["movie.avi"])
   # end
@@ -59,7 +59,7 @@ describe Bin do
   #   @subwork_mock = mock(Subwork, :run! => true)#.should_receive(:new)
   #   @subwork_mock.should_receive(:new)
   #   @subwork_mock.should_receive(:run!)
-  #   File.should_receive(:exists?).and_return(true)
+  #   File.should_receive(:exist?).and_return(true)
   #   SubtitleIt::Bin::run!(["movie.srt"])
   # end
 end
@@ -133,12 +133,12 @@ describe Subwork do
     Subwork.new.run!('file.srt', 'sub')
   end
 
-  it 'should not write if file exists' do
+  it 'should not write if file exist' do
     expect(File).to receive(:open).with('file.srt', 'r').and_return(mock_file)
-    expect(File).to receive(:exists?).and_return(true)
+    expect(File).to receive(:exist?).and_return(true)
 
     expect(STDOUT).to receive(:puts).with('Working on file file.srt...')
-    expect(STDOUT).to receive(:puts).with('File exists. file.sub'.red)
+    expect(STDOUT).to receive(:puts).with('File exist: file.sub'.red)
 
     expect(Subtitle).to receive(:new).and_return(mock_subtitle)
     expect(@mock_subtitle).to receive(:to_sub).and_return('subbb')

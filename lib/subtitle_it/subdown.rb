@@ -8,6 +8,7 @@ require 'subtitle_it/subtitle'
 require 'subtitle_it/languages'
 
 module SubtitleIt
+  # Download subtitles
   class Subdown
     HOST = 'http://api.opensubtitles.org/xml-rpc'
     HOST_DEV = 'http://dev.opensubtitles.org/xml-rpc'
@@ -64,7 +65,7 @@ module SubtitleIt
 
     def imdb_info(movie)
       result = request('CheckMovieHash', [movie.haxx])
-      movie.info = result['data'][movie.haxx] # TODO: Handle if no result for movie
+      movie.info = result['data'][movie.haxx] # TODO: Handle if movie 404
     end
 
     def self.subtitle_languages
@@ -73,7 +74,9 @@ module SubtitleIt
       end.join("\n")
     end
     #
-    #    def Subdown.opsub_id( language )   # Get the Opensubtitle.org language id from the language string (e.g. 'French' returns 'fra' )
+    # Get the Opensubtitle.org language id from the language string
+    # (e.g. 'French' returns 'fra' )
+    #    def Subdown.opsub_id( language )
     #      ary = LANGS.find do |sym_lang|
     #        sym_lang if sym_lang[1].downcase == language.downcase
     #      end
@@ -99,7 +102,9 @@ module SubtitleIt
       result = @client.call(method, *args)
 
       unless self.class.result_status_ok?(result)
-        fail XMLRPC::FaultException.new(result['status'].to_i, result['status'][4..-1]) # 'status' of the form 'XXX Message'
+        # 'status' of the form 'XXX Message'
+        fail XMLRPC::FaultException.new(result['status'].to_i,
+                                        result['status'][4..-1])
       end
 
       result
