@@ -1,9 +1,9 @@
 $LOAD_PATH.push File.expand_path('../lib', __FILE__)
-require 'namie/version'
+require 'subtitle_it/version'
 
 Gem::Specification.new do |s|
   s.name = 'subtitle_it'
-  s.version     = Namie::VERSION
+  s.version     = SubtitleIt::VERSION
   s.platform    = Gem::Platform::RUBY
 
   s.authors = ["Marcos Piccinini"]
