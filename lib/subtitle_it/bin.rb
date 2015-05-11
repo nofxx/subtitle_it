@@ -115,7 +115,7 @@ module SubtitleIt
         STDOUT.puts "File exist: #{filename}".red
       else
         File.open(filename, 'w') { |f| f.write(dump) }
-        STDOUT.puts "Done: #{filename}.".yellow
+        STDOUT.puts "Done: #{filename}".yellow
       end
     end
   end
