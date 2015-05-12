@@ -84,7 +84,7 @@ describe Subdownloader do
     expect(STDOUT).to receive(:puts).with("  #{'1'.yellow}. #{'Eng'.green} | #{'SRT'.blue} | #{'Resevoir Dogs'.cyan} / #{'1992'.cyan} | #{'9.5'.yellow} | CDs: 2")
     expect(STDOUT).to receive(:puts).with("  #{'2'.yellow}. #{'Eng'.green} | #{'SRT'.blue} | #{'Resevoir Dogs'.cyan} / #{'1992'.cyan} | #{'9.5'.yellow} | CDs: 2")
     expect(STDOUT).to receive(:puts).with('Downloading 1 subtitle...')
-    expect(STDOUT).to receive(:puts).with('Done: Beavis Butthead Do America.srt.'.yellow)
+    expect(STDOUT).to receive(:puts).with('Done: Beavis Butthead Do America.srt'.yellow)
 
     expect(File).to receive(:open).with('Beavis Butthead Do America.srt', 'w').and_return(true)
 
@@ -125,7 +125,7 @@ describe Subwork do
     expect(File).to receive(:open).with('file.sub', 'w').and_return(true)
 
     expect(STDOUT).to receive(:puts).with('Working on file file.srt...')
-    expect(STDOUT).to receive(:puts).with('Done: file.sub.'.yellow)
+    expect(STDOUT).to receive(:puts).with('Done: file.sub'.yellow)
 
     expect(Subtitle).to receive(:new).and_return(mock_subtitle)
     expect(@mock_subtitle).to receive(:to_sub).and_return('subbb')

@@ -52,7 +52,7 @@ module SubtitleIt
       choose = input.split(' ').map do |c|
         if c =~ /-/
           numbers = c.split('-').map(&:to_i)
-          new_range = (numbers[0]..numbers[1]).to_a
+          (numbers[0]..numbers[1]).to_a
         else
           c.to_i
         end
@@ -67,10 +67,8 @@ module SubtitleIt
       @force = force
       @format = format
 
-      unless File.exist?(argv[0])
-        # TODO: generate_rsb
-        return
-      end
+      # TODO: generate_rsb
+      return unless File.exist?(argv[0])
 
       @file_in = argv[0]
       @file_in_ext = Bin.get_extension(@file_in)
@@ -79,6 +77,7 @@ module SubtitleIt
         @file_out_ext = Bin.get_extension(@file_out)
         @format = @file_out_ext
       end
+
       if MOVIE_EXTS.include? @file_in_ext
         Subdownloader.new.run!(@file_in, lang, @format)
       elsif SUB_EXTS.include? @file_in_ext

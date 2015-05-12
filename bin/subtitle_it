@@ -39,10 +39,10 @@ BANNER
   end
 
   opts.on("-c", "--convert=FORMAT", String,
-          "Format to convert to") { |of| OPTIONS[:format] = of }
+          "Format to convert to") { |o| OPTIONS[:format] = o }
 
   opts.on("-d", "--delay=DELAY", Float,
-          "Delay to add/remove") { |od| OPTIONS[:delay] = od }
+          "Delay to add/remove") { |o| OPTIONS[:delay] = o }
 
   opts.on("-f", "--force", "Force overwrite") { OPTIONS[:force] = true }
 
