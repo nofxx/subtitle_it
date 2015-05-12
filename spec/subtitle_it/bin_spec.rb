@@ -75,18 +75,17 @@ describe Subdownloader do
   it 'should download a subtitle' do
     expect(Movie).to receive(:new).and_return(mock_movie)
     expect(Subdown).to receive(:new).and_return(mock_subdown)
-    expect(Subtitle).to receive(:new).and_return(mock_subtitle)
 
     expect(STDIN).to receive(:gets).and_return('1')
-    expect(STDOUT).to receive(:puts).with('You can choose multiple ones, separated with spaces or a range separated with hifen.')
+    expect(STDOUT).to receive(:puts).with(/You can choose multiple ones/)
     expect(STDOUT).to receive(:puts).with("Found #{'2'.yellow} results:\n")
-    expect(STDOUT).to receive(:printf).with('Choose: ')
+    expect(STDOUT).to receive(:print).with(/Choose/)
     expect(STDOUT).to receive(:puts).with("  #{'1'.yellow}. #{'Eng'.green} | #{'SRT'.blue} | #{'Resevoir Dogs'.cyan} / #{'1992'.cyan} | #{'9.5'.yellow} | CDs: 2")
     expect(STDOUT).to receive(:puts).with("  #{'2'.yellow}. #{'Eng'.green} | #{'SRT'.blue} | #{'Resevoir Dogs'.cyan} / #{'1992'.cyan} | #{'9.5'.yellow} | CDs: 2")
     expect(STDOUT).to receive(:puts).with('Downloading 1 subtitle...')
-    expect(STDOUT).to receive(:puts).with('Done: Beavis Butthead Do America.srt'.yellow)
+    expect(STDOUT).to receive(:puts).with('Done: Beavis Butthead Do America.eng.srt'.yellow)
 
-    expect(File).to receive(:open).with('Beavis Butthead Do America.srt', 'w').and_return(true)
+    expect(File).to receive(:open).with('Beavis Butthead Do America.eng.srt', 'w').and_return(true)
 
     expect(@mock_subdown).to receive(:log_in!).and_return(true)
     expect(@mock_subdown).to receive(:download_subtitle).and_return(mock_subtitle)
@@ -95,6 +94,10 @@ describe Subdownloader do
 
     Subdownloader.new.run! 'file.avi'
   end
+
+  # it 'should download and convert a subtitle' do
+  #   expect(Subtitle).to receive(:new).and_return(mock_subtitle)
+  # end
 
   it 'should get extension files' do
     expect(Bin.get_extension('Lots.of.dots.happen')).to eql('happen')

@@ -5,7 +5,7 @@ module SubtitleIt
     def run!(file, format)
       fail unless format
       content = File.open(file, 'r')
-      STDOUT.puts "Working on file #{file}..."
+      puts "Working on file #{file}..."
       sub = Subtitle.new(dump: content, format: Bin.get_extension(file))
       dump = sub.send :"to_#{format}"
       Bin.write_out(Bin.swap_extension(file, format), dump)
@@ -17,35 +17,41 @@ module SubtitleIt
       @movie = Movie.new(movie)
       @down = Subdown.new
       @down.log_in!
-      res = @down.search_subtitles(@movie, lang)
+      res = @down.search_subtitles(@movie, lang).sort
       if res.length == 0
-        STDOUT.puts 'No results found.'
+        puts 'No results found.'
         return
       end
-      STDOUT.puts 'You can choose multiple ones, separated with spaces or a range separated with hifen.'
-      STDOUT.puts "Found #{res.length.to_s.yellow} result#{'s' if res.length > 1}:\n"
-      res.sort.each_with_index { |r, i| STDOUT.puts print_option(r, i) }
-      STDOUT.printf 'Choose: '
+      puts 'You can choose multiple ones separated with spaces '\
+                  'or a range separated with a hifen.'
+      puts "Found #{res.size.to_s.yellow} result#{'s' if res.size > 1}:\n"
+      res.each_with_index { |r, i| puts print_option(r, i) }
+      STDOUT.print "Choose (1-#{res.size}): "
       choose = parse_input(STDIN.gets.chomp)
       choose = choose.map { |c| res[c.to_i - 1] }
-      STDOUT.puts "Downloading #{choose.length} subtitle#{'s' if choose.length > 1}..."
+      puts "Downloading #{choose.size} subtitle#{'s' if choose.size > 1}..."
       choose.each do |sub|
-        down_a_sub(sub, sub.format, dst_format)
+        down_a_sub(sub, dst_format)
       end
       @down.log_out!
     end
 
-    def down_a_sub(sub, format, dst_format)
-      dst_format ||= format
+    def down_a_sub(sub, dst_format)
+      dst_format ||= sub.format
       dump = @down.download_subtitle(sub)
-      sub = Subtitle.new(dump: dump, format: format)
-      dump = sub.send :"to_#{dst_format}" if format != dst_format
-      movie_name = @movie.filename[0..-4]
-      Bin.write_out(movie_name + dst_format, dump)
+      if sub.format != dst_format
+        subt = Subtitle.new(dump: dump, format: dst_format)
+        dump = subt.send :"to_#{dst_format}"
+      end
+      fname = @movie.filename[0..-4] + sub.info['SubLanguageID']
+      Bin.write_out("#{fname}.#{dst_format}", dump)
     end
 
     def print_option(r, index)
-      "  #{(index + 1).to_s.yellow}. #{r.info['SubLanguageID'].capitalize.green} | #{r.info['SubFormat'].upcase.blue} | #{r.info['MovieName'].cyan} / #{r.info['MovieYear'].cyan} | #{r.info['SubRating'].yellow} | CDs: #{r.info['SubSumCD']}"
+      "  #{(index + 1).to_s.yellow}. #{r.info['SubLanguageID'].capitalize.green}"\
+      " | #{r.info['SubFormat'].upcase.blue} | #{r.info['MovieName'].cyan}"\
+      " / #{r.info['MovieYear'].cyan} | #{r.info['SubRating'].yellow}"\
+      " | CDs: #{r.info['SubSumCD']}"
     end
 
     def parse_input(input)
@@ -83,12 +89,8 @@ module SubtitleIt
       elsif SUB_EXTS.include? @file_in_ext
         Subwork.new.run!(@file_in, @format)
       else
-        fail 'Unknown file.'
+        fail "Unknown file type '#{@file_in_ext}'."
       end
-
-    rescue Exception => e
-      puts e.message
-      exit 1
     end
 
     def self.get_extension(file)
@@ -103,18 +105,18 @@ module SubtitleIt
     end
 
     def self.print_languages
-      STDOUT.puts 'CODE |  LANGUAGE'
+      puts 'CODE |  LANGUAGE'
       LANGS.each do |l|
-        STDOUT.puts "  #{l[0]}  | #{l[1]}"
+        puts "  #{l[0]}  | #{l[1]}"
       end
     end
 
     def self.write_out(filename, dump)
       if File.exist?(filename) && !@force
-        STDOUT.puts "File exist: #{filename}".red
+        puts "File exist: #{filename}".red
       else
         File.open(filename, 'w') { |f| f.write(dump) }
-        STDOUT.puts "Done: #{filename}".yellow
+        puts "Done: #{filename}".yellow
       end
     end
   end
