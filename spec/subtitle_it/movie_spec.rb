@@ -22,4 +22,13 @@ describe Movie do
     expect(File).to receive(:size).with('pulpfiction')
     @movie.size
   end
+
+  it 'should generate a beatiful hash for us' do
+    expect(Movie::CHUNK_SIZE).to eql(65_536)
+
+    expect(File).to receive(:size).with('onefile').and_return(1020)
+    expect(File).to receive(:open).with('onefile', 'rb')
+
+    expect(Movie.new('onefile').haxx).to eql('00000000000003fc')
+  end
 end
