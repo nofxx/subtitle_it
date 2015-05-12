@@ -25,10 +25,13 @@ module BinspecHelper
   def sub_info
     {
       'SubLanguageID'   => 'eng',
+      'LanguageName'    => 'English',
       'MovieName'       => 'Resevoir Dogs',
       'MovieYear'       => '1992',
       'SubFileName'     => 'Cool sub',
+      'MovieFPS'        => '29.0',
       'MovieImdbRating' => '10.0',
+      'SubAddDate'      => '12-12-2012 00:01:01',
       'SubDownloadsCnt' => '310',
       'SubRating'       => '9.5',
       'SubFormat'       => 'srt',
@@ -80,8 +83,8 @@ describe Subdownloader do
     expect(STDOUT).to receive(:puts).with(/You can choose multiple ones/)
     expect(STDOUT).to receive(:puts).with("Found #{'2'.yellow} results:\n")
     expect(STDOUT).to receive(:print).with(/Choose/)
-    expect(STDOUT).to receive(:puts).with("  #{'1'.yellow}. #{'Eng'.green} | #{'SRT'.blue} | #{'Resevoir Dogs'.cyan} / #{'1992'.cyan} | #{'9.5'.yellow} | CDs: 2")
-    expect(STDOUT).to receive(:puts).with("  #{'2'.yellow}. #{'Eng'.green} | #{'SRT'.blue} | #{'Resevoir Dogs'.cyan} / #{'1992'.cyan} | #{'9.5'.yellow} | CDs: 2")
+    expect(STDOUT).to receive(:puts).with("  #{'1'.yellow}. #{'Eng'.green} | #{'SRT'.blue} | #{'Resevoir Dogs'.cyan} / #{'1992'.cyan} | #{'9.5'.yellow} | FPS 29.0 | 2 CDs | 2012-12-12")
+    expect(STDOUT).to receive(:puts).with("  #{'2'.yellow}. #{'Eng'.green} | #{'SRT'.blue} | #{'Resevoir Dogs'.cyan} / #{'1992'.cyan} | #{'9.5'.yellow} | FPS 29.0 | 2 CDs | 2012-12-12")
     expect(STDOUT).to receive(:puts).with('Downloading 1 subtitle...')
     expect(STDOUT).to receive(:puts).with('Done: Beavis Butthead Do America.eng.srt'.yellow)
 
@@ -116,7 +119,8 @@ describe Subdownloader do
   it 'should print choice' do
     @sub = double(Subtitle, info: sub_info)
     @subd = Subdownloader.new
-    expect(@subd.print_option(@sub, 1)).to eql("  #{'2'.yellow}. #{'Eng'.green} | #{'SRT'.blue} | #{'Resevoir Dogs'.cyan} / #{'1992'.cyan} | #{'9.5'.yellow} | CDs: 2")
+    expect(@subd.print_option(@sub.info, 1)).
+      to eql("  #{'2'.yellow}. #{'Eng'.green} | #{'SRT'.blue} | #{'Resevoir Dogs'.cyan} / #{'1992'.cyan} | #{'9.5'.yellow} | FPS 29.0 | 2 CDs | 2012-12-12")
   end
 end
 
