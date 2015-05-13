@@ -75,7 +75,10 @@ module SubtitleIt
       @format = format
 
       # TODO: generate_rsb
-      return unless File.exist?(argv[0])
+      unless File.exist?(argv[0])
+        puts "Can't find '#{argv.join}'".yellow
+        exit 1
+      end
 
       @file_in = argv[0]
       @file_in_ext = Bin.get_extension(@file_in)
