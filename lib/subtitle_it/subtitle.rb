@@ -34,7 +34,9 @@ module SubtitleIt
         @download_url      = @info['SubDownloadLink'].to_s
       end
       @fps = args[:fps] || 23.976
-      parse_dump(args[:dump], args[:format]) if args[:dump]
+      return unless dump = args[:dump]
+
+      parse_dump(dump, args[:format])
     end
 
     attr_writer :style
@@ -52,9 +54,17 @@ module SubtitleIt
 
     private
 
+    # Force subtitles to be UTF-8
+    def encode_dump(dump)
+      dump = dump.read unless dump.is_a?(String)
+      return dump if dump.encoding == Encoding::UTF_8
+      puts "Encoding subtitle as UTF-8".yellow
+      dump.encode("UTF-8")
+    end
+
     def parse_dump(dump, format)
       fail unless SUB_EXTS.include?(format)
-      @raw = dump.is_a?(String) ? dump : dump.read
+      @raw = encode_dump(dump)
       @format = format
       parse_lines!
     end
