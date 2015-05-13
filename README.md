@@ -8,7 +8,7 @@
 Ruby tool to download, create, convert and fix subtitles.
 
 
-# FEATURES
+# Features
 
 * Automatic Download on the terminal
 * To and from: SRT, SUB, XML(TT), YML, MPL2, RSB and ASS.
@@ -16,19 +16,19 @@ Ruby tool to download, create, convert and fix subtitles.
 * Compatibility with "sube" (http://github.com/vic/sube)
 
 
-# SYNOPSIS
+# Synopsis
 
 Download subtitle:
 
-  subtitle_it Cool-Video.avi
+    subtitle_it Cool-Video.avi
 
 This will search all languages for the video. You can filter:
 
-  subtitle_it -l Eng Cool-Video.avi
+    subtitle_it -l Eng Cool-Video.avi
 
 You can use -c option. It convert subtitles to given format:
 
-  subtitle_it -l Eng -c srt Cool-Video.avi
+    subtitle_it -l Eng -c srt Cool-Video.avi
 
 ## Bash tool
 
@@ -44,12 +44,12 @@ Create a template
   subtitle_it unexistent.file
 
 
-# INSTALL
+## Install
 
  gem install subtitle_it
 
 
-## THE "Ruby Subtitle" Format - RSB
+## The "Ruby Subtitle" Format - RSB
 
 It`s just a easy way, proof of concept to edit subtitles.
 Here is what it looks like:
@@ -67,14 +67,14 @@ Create a template to check it out.
 ## Automatic Download
 
 * OpenSubtitles.org   -  WORK SubtitleIt Agent
-* addic7ed.com        -  EVIL NOAPI
+* addic7ed.com        -  `gem install addic7ed`
 * legendas.tv         -  EVIL NOAPI
 
 
 *NOAPI = Mechanize playground...
 
 
-## DEV
+## Dev
 
 To run tests:
 
@@ -84,7 +84,11 @@ Documentation => doc
 Subtitle examples => spec/fixtures
 
 
-## SUBTITLE EDITORS
+## Others
+
+Series: https://github.com/michaelbaudino/addic7ed-ruby
+
+## Editors
 
 Try those nice editors too, if SubtitleIt does not fit your need:
 
