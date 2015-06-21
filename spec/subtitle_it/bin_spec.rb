@@ -45,7 +45,7 @@ describe Bin do
   include BinspecHelper
 
   it 'should require ARGV' do
-    expect { Bin.run!(nil) }.to raise_error
+    expect { Bin.run!(nil) }.to raise_error RuntimeError
   end
 
   # Having a hard time testing the command line tool...
@@ -104,7 +104,7 @@ describe Subdownloader do
 
   it 'should get extension files' do
     expect(Bin.get_extension('Lots.of.dots.happen')).to eql('happen')
-    expect { Bin.get_extension('Nodotstoo') }.to raise_error
+    expect { Bin.get_extension('Nodotstoo') }.to raise_error RuntimeError
   end
 
   it 'should swap extensions' do

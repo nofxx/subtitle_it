@@ -44,7 +44,7 @@ describe Subdown do
                                                                                                                      'seconds' => 0.004,
                                                                                                                      'token' => '')
     @down = Subdown.new
-    expect { @down.log_in! }.to raise_error
+    expect { @down.log_in! }.to raise_error XMLRPC::FaultException
     expect(@down).not_to be_logged_in
   end
 
