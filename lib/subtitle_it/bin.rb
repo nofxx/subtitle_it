@@ -40,7 +40,7 @@ module SubtitleIt
       dst_format ||= sub.format
       dump = @down.download_subtitle(sub)
       if sub.format != dst_format
-        subt = Subtitle.new(dump: dump, format: dst_format)
+        subt = Subtitle.new(dump: dump, format: sub.format)
         dump = subt.send :"to_#{dst_format}"
       end
       fname = @movie.filename[0..-4] + sub.info['SubLanguageID']
