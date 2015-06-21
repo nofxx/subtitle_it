@@ -44,6 +44,8 @@ BANNER
   opts.on("-d", "--delay=DELAY", Float,
           "Delay to add/remove") { |o| OPTIONS[:delay] = o }
 
+  opts.on("-1", "--first") { OPTIONS[:first] = true }
+
   opts.on("-f", "--force", "Force overwrite") { OPTIONS[:force] = true }
 
   opts.on("-h", "--help",
@@ -63,5 +65,5 @@ if ARGV.empty?
   puts parser
   exit
 else
-  SubtitleIt::Bin.run! ARGV, OPTIONS[:lang], OPTIONS[:format], OPTIONS[:force], OPTIONS[:delay]
+  SubtitleIt::Bin.run! ARGV, OPTIONS[:lang], OPTIONS[:format], OPTIONS[:force], OPTIONS[:delay], OPTIONS[:first]
 end
