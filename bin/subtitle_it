@@ -29,7 +29,7 @@ BANNER
 
   opts.separator " Options are:"
 
-  opts.on("-l", "--language [LANGUAGE]", String,
+  opts.on("-l", "--language=LANGUAGE", String,
           "Language to search subtitles for, try it empty to see the supported ones.") do |ol|
     if ol.nil?
       puts Subdown.subtitle_languages
