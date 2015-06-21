@@ -13,7 +13,7 @@ module SubtitleIt
   end
 
   class Subdownloader
-    def run!(movie, lang = nil, dst_format = nil)
+    def run!(movie, lang = nil, dst_format = nil, first = false)
       @movie = Movie.new(movie)
       @down = Subdown.new
       @down.log_in!
@@ -22,13 +22,17 @@ module SubtitleIt
         puts 'No results found.'
         return
       end
-      puts 'You can choose multiple ones separated with spaces '\
-                  'or a range separated with a hifen.'
-      puts "Found #{res.size.to_s.yellow} result#{'s' if res.size > 1}:\n"
-      res.each_with_index { |r, i| puts print_option(r.info, i) }
-      STDOUT.print "Choose (1-#{res.size}): "
-      choose = parse_input(STDIN.gets.chomp)
-      choose = choose.map { |c| res[c.to_i - 1] }
+      unless first
+        puts 'You can choose multiple ones separated with spaces '\
+          'or a range separated with a hifen.'
+        puts "Found #{res.size.to_s.yellow} result#{'s' if res.size > 1}:\n"
+        res.each_with_index { |r, i| puts print_option(r.info, i) }
+        STDOUT.print "Choose (1-#{res.size}): "
+        choose = parse_input(STDIN.gets.chomp)
+        choose = choose.map { |c| res[c.to_i - 1] }
+      else
+        choose = [res.first]
+      end
       puts "Downloading #{choose.size} subtitle#{'s' if choose.size > 1}..."
       choose.each do |sub|
         down_a_sub(sub, dst_format)
@@ -69,10 +73,13 @@ module SubtitleIt
   end
 
   class Bin
-    def self.run!(argv, lang = nil, format = nil, force = false, _delay = nil)
+    def self.run!(argv, lang = nil, format = nil, force = false, _delay = nil, first = false)
       fail unless argv
+
+      @lang = lang
       @force = force
       @format = format
+      @first = first
 
       # TODO: generate_rsb
       unless File.exist?(argv[0])
@@ -89,7 +96,7 @@ module SubtitleIt
       end
 
       if MOVIE_EXTS.include? @file_in_ext
-        Subdownloader.new.run!(@file_in, lang, @format)
+        Subdownloader.new.run!(@file_in, @lang, @format, @first)
       elsif SUB_EXTS.include? @file_in_ext
         Subwork.new.run!(@file_in, @format)
       else
