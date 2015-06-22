@@ -12,9 +12,9 @@ Gem::Specification.new do |s|
   s.date = Time.now.strftime("%Y-%m-%d")
   s.default_executable = 'subtitle_it'
 
-  s.homepage = 'http://github.com/nofxx/subtitle_it'
+  s.homepage    = 'http://github.com/nofxx/subtitle_it'
   s.description = 'Download, edit and create subtitles. Supports various formats.'
-  s.summary = 'Download, edit and create subtitles.'
+  s.summary     = 'Download, edit and create subtitles.'
   s.license     = 'MIT'
 
   s.files         = `git ls-files`.split("\n")
