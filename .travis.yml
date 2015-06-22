@@ -11,12 +11,12 @@ jdk:
   - oraclejdk7
   - openjdk7
 
-env: CI="travis" JRUBY_OPTS="--server -Xcompile.invokedynamic=false -J-XX:+TieredCompilation -J-XX:TieredStopAtLevel=1 -J-noverify -J-Xms512m -J-Xmx1024m"
+env: CI="travis" JRUBY_OPTS="--2.0 --server -Xcompile.invokedynamic=false -J-XX:+TieredCompilation -J-XX:TieredStopAtLevel=1 -J-noverify -J-Xms512m -J-Xmx1024m"
 
 matrix:
   allow_failures:
     - rvm: ruby-head
-    - rvm: jruby-head
+    - rvm: jruby
 
 services:
   - mongodb
