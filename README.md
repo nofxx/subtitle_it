@@ -5,6 +5,9 @@
     _(____/___(___(__(___/_(_ __/___(_ __/___(___ _ _/_ __(_ __
 
 
+[![Build Status](https://travis-ci.org/nofxx/subtitle_it.svg?branch=master)](https://travis-ci.org/nofxx/subtitle_it)
+
+
 Ruby tool to download, create, convert and fix subtitles.
 
 
