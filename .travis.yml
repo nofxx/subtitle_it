@@ -18,5 +18,4 @@ matrix:
     - rvm: ruby-head
     - rvm: jruby
 
-services:
-  - mongodb
+env: CI="travis"
