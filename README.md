@@ -5,9 +5,9 @@
     _(____/___(___(__(___/_(_ __/___(_ __/___(___ _ _/_ __(_ __
 
 
-[![Gem Version](https://badge.fury.io/rb/subtitle_it.svg)](http://badge.fury.io/rb/mongoid-ids)
+[![Gem Version](https://badge.fury.io/rb/subtitle_it.svg)](http://badge.fury.io/rb/subtitle_it)
 [![Build Status](https://travis-ci.org/nofxx/subtitle_it.svg?branch=master)](https://travis-ci.org/nofxx/subtitle_it)
-[![Dependency Status](https://gemnasium.com/nofxx/subtitle_it.svg)](https://gemnasium.com/nofxx/mongoid-ids)
+[![Dependency Status](https://gemnasium.com/nofxx/subtitle_it.svg)](https://gemnasium.com/nofxx/subtitle_it)
 
 
 Ruby tool to download, create, convert and fix subtitles.
