@@ -23,11 +23,11 @@ module SubtitleIt
         return
       end
       unless first
-        puts 'You can choose multiple ones separated with spaces '\
-          'or a range separated with a hifen.'
         puts "Found #{res.size.to_s.yellow} result#{'s' if res.size > 1}:\n"
         res.each_with_index { |r, i| puts print_option(r.info, i) }
-        STDOUT.print "Choose (1-#{res.size}): "
+        puts 'You can choose multiple ones separated with spaces: 1 3 5 '
+        puts 'Or a range separated with a hifen: 3-5'
+        STDOUT.print "Choose (1..#{res.size}): "
         choose = parse_input(STDIN.gets.chomp)
         choose = choose.map { |c| res[c.to_i - 1] }
       else
@@ -53,8 +53,9 @@ module SubtitleIt
 
     def print_option(r, index)
       date = Date.parse(r['SubAddDate'])
-      "  #{(index + 1).to_s.yellow}. #{r['LanguageName'][0,3].green}"\
-      " | #{r['SubFormat'].upcase.blue} | #{r['MovieName'].cyan}"\
+      "  #{(index + 1).to_s.rjust(2, ' ').yellow}."\
+      " #{r['LanguageName'][0, 9].rjust(10, ' ').green}"\
+      " | #{r['SubFormat'].upcase.blue} | #{r['MovieName'][0, 20].cyan}"\
       " / #{r['MovieYear'].cyan} | #{r['SubRating'].yellow}"\
       " | FPS #{r['MovieFPS']} | #{r['SubSumCD']} CDs | #{date}"
     end
