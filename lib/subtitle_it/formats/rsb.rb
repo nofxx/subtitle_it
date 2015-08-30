@@ -11,7 +11,7 @@
 module Formats
   include PlatformEndLine
   def parse_rsb
-    inn = @raw.to_a
+    inn = @raw.lines
     @title = inn.delete_at(0).split(':')[1]
     @authors = inn.delete_at(0).split(':')[1]
     @version = inn.delete_at(0).split(':')[1]

@@ -8,7 +8,7 @@
 module Formats
   include PlatformEndLine
   def parse_mpl
-    @raw.to_a.inject([]) do |i, l|
+    @raw.lines.inject([]) do |i, l|
       line_data = l.scan(/^\[([0-9]{1,})\]\[([0-9]{1,})\](.+)$/)
       line_data = line_data.at 0
       time_on, time_off, text = line_data
