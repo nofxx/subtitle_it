@@ -13,21 +13,42 @@
 Ruby tool to download, create, convert and fix subtitles.
 
 
-# Features
+## Features
 
-* Automatic Download on the terminal
+* **Automatic Download** on the terminal
 * To and from: SRT, SUB, XML(TT), YML, MPL2, RSB and ASS.
 * Fixes delays. (SrtResync)
 * Compatibility with "sube" (http://github.com/vic/sube)
+* Detects and converts any encoding to `UTF-8`
 
 
-# Synopsis
+## Synopsis
 
 Download subtitle:
 
     subtitle_it Cool-Video.avi
 
-This will search all languages for the video. You can filter:
+This will search all languages for the video.
+
+```
+Found 88 results:
+
+   1.    Finnish | SRT | Movie / 2015 | 0.0 | FPS 23.976 | 1 CDs | 2015-05-18
+   2.    English | SRT | Movie / 2015 | 0.0 | FPS 23.976 | 1 CDs | 2015-05-18
+   3.   Romanian | SRT | Movie / 2015 | 0.0 | FPS 23.976 | 1 CDs | 2015-05-18
+   4.     Polish | SRT | Movie / 2015 | 0.0 | FPS 23.976 | 1 CDs | 2015-05-18
+   5.    Italian | SRT | Movie / 2015 | 0.0 | FPS 23.976 | 1 CDs | 2015-05-18
+   6.  Portugues | SRT | Movie / 2015 | 0.0 | FPS 23.976 | 1 CDs | 2015-05-18
+   7.  Bulgarian | SRT | Movie / 2015 | 0.0 | FPS 0.000  | 1 CDs | 2015-05-18
+   8.   Romanian | SRT | Movie / 2015 | 0.0 | FPS 25.000 | 1 CDs | 2015-05-18
+   9.   Japanese | SRT | Movie / 2015 | 0.0 | FPS 23.976 | 1 CDs | 2015-05-18
+
+You can choose multiple ones separated with spaces: 1 3 5
+Or a range separated with a hifen: 3-5
+Choose (1..88): _
+```
+
+You can filter by language:
 
     subtitle_it -l Eng Cool-Video.avi
 
@@ -35,7 +56,7 @@ You can use -c option. It convert subtitles to given format:
 
     subtitle_it -l Eng -c srt Cool-Video.avi
 
-## Bash tool
+### Bash tool
 
 Convert a srt to sub:
 
