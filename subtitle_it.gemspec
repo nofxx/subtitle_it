@@ -26,4 +26,5 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'colorize'
   s.add_dependency 'nokogiri'
+  s.add_dependency 'charlock_holmes'
 end

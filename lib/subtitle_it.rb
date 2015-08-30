@@ -1,6 +1,8 @@
 $LOAD_PATH.unshift(File.dirname(__FILE__)) unless
 $LOAD_PATH.include?(File.dirname(__FILE__)) || $LOAD_PATH.include?(File.expand_path(File.dirname(__FILE__)))
 require 'yaml'
+require 'nokogiri'
+require 'charlock_holmes'
 
 require 'subtitle_it/version'
 require 'subtitle_it/languages'
@@ -22,10 +24,10 @@ class Numeric
   end
 end
 
-if RUBY_PLATFORM >= '1.9'
+if RUBY_PLATFORM <= '1.9'
   class String
-    def to_a
-      lines.to_a
+    def lines
+      to_a
     end
   end
 end

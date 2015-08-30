@@ -13,9 +13,11 @@ module SubtitleIt
   SUB_EXTS = %w(srt sub smi txt ssa ass mpl xml yml rsb)
 
   class Subtitle
+    include Comparable
     include Formats
     attr_reader :id, :raw, :format, :lines, :style, :info, :filename, :rating, :language, :user, :release_name,
                 :osdb_id, :download_count, :download_url, :original_filename
+    attr_writer :style, :lines, :fps
 
     def initialize(args = {})
       # Looks like opensubtitle is the only provider around..
@@ -35,13 +37,8 @@ module SubtitleIt
       end
       @fps = args[:fps] || 23.976
       return unless dump = args[:dump]
-
-      parse_dump(dump, args[:format])
+      parse_dump(args[:dump], args[:format])
     end
-
-    attr_writer :style
-
-    attr_writer :fps
 
     def data=(data)
       @raw = data
@@ -50,16 +47,19 @@ module SubtitleIt
     def <=>(other)
       rating <=> other.rating
     end
-    include Comparable
 
     private
 
     # Force subtitles to be UTF-8
     def encode_dump(dump)
-      dump = dump.read unless dump.is_a?(String)
-      return dump if dump.encoding == Encoding::UTF_8
-      puts "Encoding subtitle as UTF-8".yellow
-      dump.encode("UTF-8")
+      dump = dump.read unless dump.kind_of?(String)
+
+      enc = CharlockHolmes::EncodingDetector.detect(dump)
+      if enc[:encoding] != 'UTF-8'
+        puts "Converting `#{enc[:encoding]}` to `UTF-8`".yellow
+        dump = CharlockHolmes::Converter.convert dump, enc[:encoding], 'UTF-8'
+      end
+      dump
     end
 
     def parse_dump(dump, format)
@@ -72,7 +72,5 @@ module SubtitleIt
     def parse_lines!
       self.lines = send :"parse_#{@format}"
     end
-
-    attr_writer :lines
   end
 end
