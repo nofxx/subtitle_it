@@ -33,15 +33,15 @@ This will search all languages for the video.
 ```
 Found 88 results:
 
-   1.    Finnish | SRT | Movie / 2015 | 0.0 | FPS 23.976 | 1 CDs | 2015-05-18
-   2.    English | SRT | Movie / 2015 | 0.0 | FPS 23.976 | 1 CDs | 2015-05-18
-   3.   Romanian | SRT | Movie / 2015 | 0.0 | FPS 23.976 | 1 CDs | 2015-05-18
-   4.     Polish | SRT | Movie / 2015 | 0.0 | FPS 23.976 | 1 CDs | 2015-05-18
-   5.    Italian | SRT | Movie / 2015 | 0.0 | FPS 23.976 | 1 CDs | 2015-05-18
-   6.  Portugues | SRT | Movie / 2015 | 0.0 | FPS 23.976 | 1 CDs | 2015-05-18
-   7.  Bulgarian | SRT | Movie / 2015 | 0.0 | FPS 0.000  | 1 CDs | 2015-05-18
-   8.   Romanian | SRT | Movie / 2015 | 0.0 | FPS 25.000 | 1 CDs | 2015-05-18
-   9.   Japanese | SRT | Movie / 2015 | 0.0 | FPS 23.976 | 1 CDs | 2015-05-18
+   1.    Finnish | SRT | Movie / 2015 | 0.0 | FPS 23.976 | 2015-05-18
+   2.    English | SRT | Movie / 2015 | 0.0 | FPS 23.976 | 2015-05-18
+   3.   Romanian | SRT | Movie / 2015 | 0.0 | FPS 23.976 | 2015-05-18
+   4.     Polish | SRT | Movie / 2015 | 0.0 | FPS 23.976 | 2015-05-18
+   5.    Italian | SRT | Movie / 2015 | 0.0 | FPS 23.976 | 2015-05-18
+   6.  Portugues | SRT | Movie / 2015 | 0.0 | FPS 23.976 | 2015-05-18
+   7.  Bulgarian | SRT | Movie / 2015 | 0.0 | FPS 0.000  | 2015-05-18
+   8.   Romanian | SRT | Movie / 2015 | 0.0 | FPS 25.000 | 2015-05-18
+   9.   Japanese | SRT | Movie / 2015 | 0.0 | FPS 23.976 | 2015-05-18
 
 You can choose multiple ones separated with spaces: 1 3 5
 Or a range separated with a hifen: 3-5

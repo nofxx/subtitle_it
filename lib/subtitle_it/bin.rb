@@ -57,7 +57,7 @@ module SubtitleIt
       " #{r['LanguageName'][0, 9].rjust(10, ' ').green}"\
       " | #{r['SubFormat'].upcase.blue} | #{r['MovieName'][0, 20].cyan}"\
       " / #{r['MovieYear'].cyan} | #{r['SubRating'].yellow}"\
-      " | FPS #{r['MovieFPS']} | #{r['SubSumCD']} CDs | #{date}"
+      " | FPS #{r['MovieFPS']} | #{date}"
     end
 
     def parse_input(input)
