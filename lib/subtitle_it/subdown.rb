@@ -44,12 +44,12 @@ module SubtitleIt
       args = {
         'sublanguageid' => lang_name || '',
         'moviehash'     => movie.haxx,
-        'moviebytesize' => movie.size
+        #  'moviebytesize' => movie.size
       }
 
       result = request('SearchSubtitles', [args])
       return [] unless result['data'] # if no results result['data'] == false
-      result['data'].inject([]) do |subs, sub_info|
+      result['data'].reduce([]) do |subs, sub_info|
         subs << Subtitle.new(info: sub_info)
         subs
       end
@@ -95,7 +95,7 @@ module SubtitleIt
 
     def request(method, *args)
       unless NO_TOKEN.include? method
-        fail 'Need to be logged in for this.' unless logged_in?
+        raise 'Need to be logged in for this.' unless logged_in?
         args = [@token, *args]
       end
 
@@ -103,8 +103,8 @@ module SubtitleIt
 
       unless self.class.result_status_ok?(result)
         # 'status' of the form 'XXX Message'
-        fail XMLRPC::FaultException.new(result['status'].to_i,
-                                        result['status'][4..-1])
+        raise XMLRPC::FaultException.new(result['status'].to_i,
+                                         result['status'][4..-1])
       end
 
       result

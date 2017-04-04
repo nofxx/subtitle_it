@@ -1,7 +1,11 @@
 module SubtitleIt
+  #
+  # Le Movie
+  #
   class Movie
     attr_reader :filename
     attr_accessor :info
+
     CHUNK_SIZE = 64 * 1024 # in bytes
 
     def initialize(filename)
