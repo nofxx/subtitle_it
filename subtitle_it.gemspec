@@ -6,10 +6,10 @@ Gem::Specification.new do |s|
   s.version     = SubtitleIt::VERSION
   s.platform    = Gem::Platform::RUBY
 
-  s.authors = ["Marcos Piccinini"]
+  s.authors = ['Marcos Piccinini']
   s.email = 'x@nofxx.com'
 
-  s.date = Time.now.strftime("%Y-%m-%d")
+  s.date = Time.now.strftime('%Y-%m-%d')
   s.default_executable = 'subtitle_it'
 
   s.homepage    = 'http://github.com/nofxx/subtitle_it'
@@ -21,7 +21,7 @@ Gem::Specification.new do |s|
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
   s.require_paths = ['lib']
 
-  s.executables  = s.files.grep(%r{^bin/}) { |f| File.basename(f) }
+  s.executables   = s.files.grep(%r{^bin/}) { |f| File.basename(f) }
   # s.extra_rdoc_files = s.files.grep(%r{^(rdoc)/})
 
   s.add_dependency 'colorize'
